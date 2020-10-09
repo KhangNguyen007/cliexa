@@ -10,7 +10,7 @@ class Circle extends React.Component {
     }
     render() {
         return (
-            <div style={{  left:this.props.horizon, top:this.props.vertical, position:"absolute", height: "25px",width: "25px", backgroundColor:"red", borderRadius:"50%"}}/>
+            <div style={{ cursor:"e-resize" ,left:this.props.horizon +"px", top:this.props.vertical + "px", position:"absolute", height: "10px",width: "10px", backgroundColor:"red", borderRadius:"50%"}}/>
         )
     }
 }

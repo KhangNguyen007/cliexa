@@ -19,6 +19,7 @@ html,body, #root, .App{
 }
 
 .innerRectangle{
+  position: absolute;
   width: 100%;
   height: 100%;
   background: white;
@@ -52,4 +53,11 @@ html,body, #root, .App{
   background: white;
   outline-style: solid;
   outline-width: 1px;
+}
+.Test{
+  border-style: dotted;
+
+}
+.white-tile{
+  background-color: red;
 }

@@ -92,7 +92,8 @@ class StackOfRectangle extends React.Component{
                             this.state.top.map((item, i) => {
                                 return (
                                     <div>
-                                        <Rectangle parentMethod={this.expand}
+                                        <Rectangle
+                                                   parentMethod={this.expand}
                                                    updateRectangleById={this.updateRectangleById}
                                                    mouseX={this.props.mouseX} mouseY={this.props.mouseY}
                                                    mousedown={this.props.mousedown} mouseup={this.props.mouseup}

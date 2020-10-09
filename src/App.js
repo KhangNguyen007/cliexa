@@ -3,6 +3,14 @@ import './App.css';
 import StackOfRectangle from "./StackOfRectangle";
 import DynamicRectangle from "./DynamicRectangle";
 import SearchBar from "./SearchBar";
+import { Scrollbars } from 'react-custom-scrollbars';
+import Test from "./Test";
+import { Button, Dropdown } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import TopPanel from "./TopPanel";
+import MiddlePanel from "./MiddlePanel";
+import LeftPanel from "./LeftPanel";
+import SplitLM from "./SplitLM";
 //This is just a prototype
 //
 class App extends React.Component{
@@ -11,7 +19,10 @@ class App extends React.Component{
         this.mouseDown  = this.mouseDown.bind(this)
         this.mouseUp    = this.mouseUp.bind(this)
         this.mouseMove  = this.mouseMove.bind(this)
-        this.state = {mousedown: false, mouseup: true, mousemove: false, x: 0, y: 0, p1:null,p2:null,p3:null,p4:null}
+        this.mouse_Down_Split_LM = this.mouse_Down_Split_LM.bind(this)
+        this.mouse_Up_Split_LM   = this.mouse_Up_Split_LM.bind(this)
+        this.mouseOnMotion = this.mouseOnMotion.bind(this)
+        this.state = {split_LM_active: false, split_LM_Left:470, hover:false, mousedown: false, mouseup: true, mousemove: false, x: 0, y: 0, p1:null,p2:null,p3:null,p4:null}
     }
     mouseDown(e){
         this.setState({mousedown:true,p2:{rect:{x:e.clientX,y:e.clientY,width:0,height:0}}})
@@ -31,17 +42,31 @@ class App extends React.Component{
         }
     }
 
+    mouse_Down_Split_LM(e){
+        e.preventDefault()
+        this.setState({split_LM_active: true})
+    }
+    mouse_Up_Split_LM(e){
+        e.preventDefault()
+        this.setState({split_LM_active: false})
+    }
+    mouseOnMotion(e){
+        e.preventDefault()
+        if(this.state.split_LM_active){
+            this.setState({split_LM_Left:e.clientX - 12.5})
+        }
+    }
     render() {
         return (
-      <div className="App">
-        <div className="container"  onMouseDown={this.mouseDown} onMouseMove={this.mouseMove} onMouseUp={this.mouseUp}>
-
-            <StackOfRectangle mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
-            <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>
+      <div className="App" onMouseMove={this.mouseOnMotion}>
+        <TopPanel/>
+        <LeftPanel width={this.state.split_LM_Left}/>
+        <div onMouseDown={this.mouse_Down_Split_LM} onMouseUp={this.mouse_Up_Split_LM}>
+            <SplitLM  height={1000} width={25} left={this.state.split_LM_Left}/>
         </div>
+        <MiddlePanel left={this.state.split_LM_Left} width={window.innerWidth - this.state.split_LM_Left - 50} height={1000}/>
 
       </div>
-
       )}
 
 }
