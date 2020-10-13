@@ -81,7 +81,7 @@ class StackOfRectangle extends React.Component{
 
     render() {
         return (
-            <div className="container">
+            <div className="StackOfRectangle">
                 { this.state.switch &&
                     <SearchBar data={this.state.data} clickOnSearch={this.clickOnSearch}/>
                 }

@@ -18,7 +18,30 @@ class MiddlePanel extends React.Component{
         this.onmousemove_middle_panel = this.onmousemove_middle_panel.bind(this)
         this.rightScroll_Down         = this.rightScroll_Down.bind(this)
         this.rightScroll_Up           = this.rightScroll_Up.bind(this)
-        this.state={bottomScroll_down: false,left: this.props.width/2, rightScroll_down: false,top:this.props.height/2}
+        this.mouseDown  = this.mouseDown.bind(this)
+        this.mouseUp    = this.mouseUp.bind(this)
+        this.mouseMove  = this.mouseMove.bind(this)
+        this.state={
+                    bottomScroll_down: false,left: this.props.width/2, rightScroll_down: false,top:this.props.height/2,
+                    mousedown: false, mouseup: true, mousemove: false, x: 0, y: 0, p1:null,p2:null,p3:null,p4:null
+                    }
+    }
+    mouseDown(e){
+        this.setState({mousedown:true,p2:{rect:{x:e.clientX,y:e.clientY,width:0,height:0}}})
+    }
+    mouseMove(e){
+        if(this.state.mousedown){
+            this.setState({mousemove:true,p1:{rect:{x:e.clientX,y:this.state.p2.rect.y,width:0,height:0}},p3:{rect:{x:this.state.p2.rect.x,y:e.clientY,width:0,height:0}},p4:{rect:{x:e.clientX,y:e.clientY,width:0,height:0}}})
+        }
+        else{
+            this.setState({mousemove:false, x:e.screenX,y:e.screenY})
+        }
+    }
+    mouseUp(e){
+        this.setState({mousedown:false})
+        if(this.state.mousemove) {
+            this.setState({mousedown: false, mousemove: false, mouseup:true,p1:{rect:{x:0,y:e.clientY,width:0,height:0}}, p2:{rect:{x:0,y:e.clientY,width:0,height:0}},p3:{rect:{x:0,y:e.clientY,width:0,height:0}} , p4:{rect:{x:0,y:e.clientY,width:0,height:0}}})
+        }
     }
 
     bottomScroll_Down(){
@@ -29,7 +52,6 @@ class MiddlePanel extends React.Component{
     }
 
     rightScroll_Down(){
-        console.log("Hello World")
         this.setState({rightScroll_down: true})
     }
     rightScroll_Up(){
@@ -46,8 +68,6 @@ class MiddlePanel extends React.Component{
                 }
         }
         if(this.state.rightScroll_down){
-                console.log("Client T:",e.clientY)
-                console.log("Total:",e.clientY - 50)
                 this.setState({top: e.clientY - 30})
         }
     }
@@ -64,8 +84,17 @@ class MiddlePanel extends React.Component{
                     height: this.props.height,
 
                 }}>
-                    {/*React-Konvas*/}
-                    <Test width={this.props.width} height={this.props.height} x={this.state.left}/>
+                    {/*Middle-Panel, basically you can draw rectangle and */}
+                    <div  onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
+                         onMouseUp={this.mouseUp}>
+
+                        <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
+                        <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>*
+                    </div>
+
+                    {/*React-Konvas
+                          <Test width={this.props.width} height={this.props.height} x={this.state.left}/>
+                    */}
 
                     {/*Slider holder in the bottom*/}
                     <div style={{
@@ -115,10 +144,6 @@ class MiddlePanel extends React.Component{
                     }}/>
                 </div>
 
-                {/*Bar in the right*/}
-                <div>
-
-                </div>
                 { /*
                   <div className="container" onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
                        onMouseUp={this.mouseUp}>
