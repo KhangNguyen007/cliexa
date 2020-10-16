@@ -84,19 +84,35 @@ class MiddlePanel extends React.Component{
                     height: window.innerHeight*.8,
 
                 }}>
-                    {/*Middle-Panel, basically you can draw rectangle and */}
+
+                    {/*Middle-Panel, basically you can draw rectangle and
                     <div  onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
                          onMouseUp={this.mouseUp}>
 
                         <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
                         <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>*
                     </div>
+                    */}
+
+                    <div  onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
+                          onMouseUp={this.mouseUp}>
+                        <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>
+                        <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
+                    </div>
+
+                    { /*
+                    <ScrollView horizontal={true}>
+                    <text>Test 1</text>
+                    <text>Test 2</text>
+                    <text>Test 3</text>
+                    </ScrollView>
+                    */}
 
                     {/*React-Konvas
                           <Test width={this.props.width} height={this.props.height} x={this.state.left}/>
                     */}
 
-                    {/*Slider holder in the bottom*/}
+                    {/* Horizontal Slider Holder, Controls the slider holder appearance and location */}
                     <div style={{
                         borderStyle: "groove",
                         position: "absolute",
@@ -107,7 +123,8 @@ class MiddlePanel extends React.Component{
                     }}>
 
                     </div>
-                    {/*Slider in the bottom*/}
+
+                    {/* Horizontal Slider Button itself */}
                     <div onMouseDown={this.bottomScroll_Down} onMouseUp={this.bottomScroll_Up} style={{
                         borderRadius: "25px",
                         cursor: "grab",
@@ -119,28 +136,29 @@ class MiddlePanel extends React.Component{
                         left: this.state.left + "px"
                     }}/>
 
-                    {/*Slider holder in the right*/}
+                    {/* Vertical Slider Holder, Controls the slider appearance and location */}
                     <div style={{
                         borderStyle: "groove",
                         position: "absolute",
                         top: 0 + "px",
-                        right: 0 +"px",
+                        right: -5 +"px",
                         backgroundColor: "#F5F5F5",
                         height: window.innerHeight*.8 + "px",
                         width: 30 + "px"
                     }}>
 
                     </div>
-                    {/*Slider in the right*/}
+
+                    {/* Vertical Sliders Button itself */}
                     <div onMouseDown={this.rightScroll_Down} onMouseUp={this.rightScroll_Up} style={{
                         borderRadius: "25px"    ,
                         cursor: "grab",
                         width: "30px",
-                        height: "100px",
+                        height: "200px",
                         position: "absolute",
                         backgroundColor: "#B2B2FB",
                         top: this.state.top  + "px",
-                        right: 0 + "px"
+                        right: -5 + "px"
                     }}/>
                 </div>
 
@@ -151,8 +169,8 @@ class MiddlePanel extends React.Component{
                       <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
                       <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>*
                   </div>
-
                 */}
+
             </div>
         )
     }
