@@ -84,12 +84,20 @@ class MiddlePanel extends React.Component{
                     height: this.props.height,
 
                 }}>
-                    {/*Middle-Panel, basically you can draw rectangle and */}
+
+                    {/*Middle-Panel, basically you can draw rectangle and
                     <div  onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
                          onMouseUp={this.mouseUp}>
 
                         <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
                         <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>*
+                    </div>
+                    */}
+
+                    <div  onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
+                          onMouseUp={this.mouseUp}>
+                        <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>
+                        <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
                     </div>
 
                     {/*React-Konvas

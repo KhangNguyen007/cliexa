@@ -12,7 +12,7 @@ class SearchBar extends Component {
         e.preventDefault()
         let newMatch = []
         for(let i = 0; i < this.props.data.length; i++){
-            if(e.target.value ===  this.props.data[i].q){
+            if((this.props.data[i].q.toLowerCase()).match(e.target.value.toLowerCase())){
                 newMatch.push(this.props.data[i])
             }
 

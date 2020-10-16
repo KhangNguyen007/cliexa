@@ -6,7 +6,6 @@ import SearchBar from "./SearchBar";
 //This is just a prototype
 //
 // data structure
-
 class StackOfRectangle extends React.Component{
     constructor(props) {
         super(props);

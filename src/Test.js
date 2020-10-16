@@ -3,23 +3,29 @@ import { render } from 'react-dom';
 import './App.css';
 import { Stage, Layer, Star, Text ,Rect,Line} from 'react-konva';
 import DynamicRectangle from "./DynamicRectangle";
+import SearchBar from "./SearchBar";
 
+let mainX = 3800
+let mainY = 1650
 let yAxis = []
-
-for(let i = -500; i <= 500; i += 100){
+let x_Axis_Left = -1500
+let x_Axis_Right = 1500
+let y_Axis_Top = 1500
+let y_Axis_Bottom = -1500
+for(let i = x_Axis_Left; i <= x_Axis_Right; i += 100){
     yAxis.push(i)
 }
 let xAxis = []
 
-for(let i = -500; i <= 500; i += 100){
+for(let i = y_Axis_Bottom; i <= y_Axis_Top; i += 100){
     xAxis.push(i)
 }
 
 const Test = (props) => {
 
     const [stagePos, setStagePos] = React.useState({ x: props.x, y:0 });
-    const [stageScale,setStageScale] = React.useState(1)
-
+    const [stageScale,setStageScale] = React.useState(0.30)
+    const [, forceUpdate] = React.useState(0);
 
     React.useEffect(() => {
         console.log("Receive new props")
@@ -40,7 +46,37 @@ const Test = (props) => {
             const newScale = e.evt.deltaY > 0 ? oldScale * scaleBy : oldScale / scaleBy;
             setStageScale(newScale)
         }
+    }
+    const testMouseMove = (e) =>{
+        console.log(e.evt.clientX)
+        if(false){
+            x_Axis_Left = -1000
+            yAxis = []
+            for(let i = x_Axis_Left; i <= x_Axis_Right; i += 100){
 
+                yAxis.push(i)
+            }
+
+            xAxis = []
+            for(let i =y_Axis_Bottom; i <= y_Axis_Top; i += 100){
+                xAxis.push(i)
+            }
+            forceUpdate(n => !n)
+        }
+        else if(false){
+            yAxis = []
+            x_Axis_Left = -1500
+            for(let i = y_Axis_Bottom; i <= y_Axis_Top; i += 100){
+
+                yAxis.push(i)
+            }
+            xAxis = []
+
+            for(let i =x_Axis_Left; i <= x_Axis_Right; i += 100){
+                xAxis.push(i)
+            }
+            forceUpdate(n => !n)
+        }
     }
     return (
         <div>
@@ -55,12 +91,14 @@ const Test = (props) => {
                // onDragStart={test}
                 //onContextMenu={test}
                 onWheel={zoomInAndOut}
+                onMouseMove={testMouseMove}
             >
                 <Layer>
+
                     {/*X axis main*/}
                     <Line
-                        x={1200}
-                        y={850}
+                        x={mainX}
+                        y={mainY}
                         points={[-500, 0, 500,0]}
                         stroke={"grey"}
                         tension={10}
@@ -70,9 +108,9 @@ const Test = (props) => {
                         xAxis.map( (item) => {
                             return (
                                 <Line
-                                    x={1200}
-                                    y={850}
-                                    points={[-500, item, 500, item]}
+                                    x={mainX}
+                                    y={mainY}
+                                    points={[x_Axis_Left, item, x_Axis_Right, item]}
                                     stroke={"grey"}
                                     tension={10}
                                 />
@@ -84,9 +122,9 @@ const Test = (props) => {
                         yAxis.map( (item) => {
                             return (
                                 <Line
-                                    x={1200}
-                                    y={850}
-                                    points={[item, -500, item, 500]}
+                                    x={mainX}
+                                    y={mainY}
+                                    points={[item, y_Axis_Bottom, item, y_Axis_Top]}
                                     stroke={"grey"}
                                     tension={10}
                                 />
@@ -95,8 +133,8 @@ const Test = (props) => {
                     }
                     {/*Y axis main*/}
                     <Line
-                        x={1200}
-                        y={850}
+                        x={mainX}
+                        y={mainY}
                         points={[0, -500, 0,500]}
                         stroke={"grey"}
                         tension={10}
