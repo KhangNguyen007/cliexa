@@ -81,7 +81,7 @@ class MiddlePanel extends React.Component{
                     left: this.props.left + 28 + "px",
                     top:  "100px",
                     width: this.props.width,
-                    height: this.props.height,
+                    height: window.innerHeight*.8,
 
                 }}>
                     {/*Middle-Panel, basically you can draw rectangle and */}
@@ -100,7 +100,7 @@ class MiddlePanel extends React.Component{
                     <div style={{
                         borderStyle: "groove",
                         position: "absolute",
-                        top: this.props.height - 30+ "px",
+                        top: window.innerHeight*.8 - 30+ "px",
                         backgroundColor: "#F5F5F5",
                         width: this.props.width + "px",
                         height: "30px",
@@ -115,7 +115,7 @@ class MiddlePanel extends React.Component{
                         height: "30px",
                         position: "absolute",
                         backgroundColor: "#B2B2FB",
-                        top: this.props.height - 30+ "px",
+                        top: window.innerHeight*.8 - 30+ "px",
                         left: this.state.left + "px"
                     }}/>
 
@@ -126,7 +126,7 @@ class MiddlePanel extends React.Component{
                         top: 0 + "px",
                         right: 0 +"px",
                         backgroundColor: "#F5F5F5",
-                        height: this.props.height + "px",
+                        height: window.innerHeight*.8 + "px",
                         width: 30 + "px"
                     }}>
 
