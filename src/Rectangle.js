@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import Circle from './Circle'
 //This is just a prototype
 //
+
 class Rectangle extends React.Component{
     constructor(props) {
         super(props);
@@ -39,7 +40,7 @@ class Rectangle extends React.Component{
         let answer = 0
         this.props.parentMethod(coordinate,answer)
     }
-    //Can improve below function further by click and drag but now just dragging the mouse around
+    // Can improve below function further by click and drag but now just dragging the mouse around
     mouseMove(e){
         if(this.props.mousedown && this.props.mousemove){
             let coordinate = {

@@ -26,17 +26,27 @@ class MiddlePanel extends React.Component{
                     mousedown: false, mouseup: true, mousemove: false, x: 0, y: 0, p1:null,p2:null,p3:null,p4:null
                     }
     }
-    mouseDown(e){
-        this.setState({mousedown:true,p2:{rect:{x:e.clientX,y:e.clientY,width:0,height:0}}})
+
+    // This will populate the red connective line when the questions are populated and answered
+    mouseDown(e) {
+        this.setState({mousedown: true, p2: {rect: {x: e.clientX, y: e.clientY, width: 0, height: 0}}})
     }
-    mouseMove(e){
-        if(this.state.mousedown){
-            this.setState({mousemove:true,p1:{rect:{x:e.clientX,y:this.state.p2.rect.y,width:0,height:0}},p3:{rect:{x:this.state.p2.rect.x,y:e.clientY,width:0,height:0}},p4:{rect:{x:e.clientX,y:e.clientY,width:0,height:0}}})
-        }
-        else{
-            this.setState({mousemove:false, x:e.screenX,y:e.screenY})
+
+    // This will populate the red connective line and moves with the boxes
+    mouseMove(e) {
+        if (this.state.mousedown) {
+            this.setState({
+                mousemove: true,
+                p1: {rect: {x: e.clientX, y: this.state.p2.rect.y, width: 0, height: 0}},
+                p3: {rect: {x: this.state.p2.rect.x, y: e.clientY, width: 0, height: 0}},
+                p4: {rect: {x: e.clientX, y: e.clientY, width: 0, height: 0}}
+            })
+        } else {
+            this.setState({mousemove: false, x: e.screenX, y: e.screenY})
         }
     }
+
+
     mouseUp(e){
         this.setState({mousedown:false})
         if(this.state.mousemove) {
@@ -44,6 +54,7 @@ class MiddlePanel extends React.Component{
         }
     }
 
+    // What is this used for
     bottomScroll_Down(){
         this.setState({bottomScroll_down: true})
     }
@@ -51,6 +62,7 @@ class MiddlePanel extends React.Component{
         this.setState({bottomScroll_down: false})
     }
 
+    // What is this used for?
     rightScroll_Down(){
         this.setState({rightScroll_down: true})
     }
@@ -84,13 +96,30 @@ class MiddlePanel extends React.Component{
                     height: this.props.height,
 
                 }}>
-                    {/*Middle-Panel, basically you can draw rectangle and */}
-                    <div  onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
-                         onMouseUp={this.mouseUp}>
+                    {/* Middle-Panel, basically you can draw rectangle and can move the rectangle */}
+                    {/* <MiddlePanel left={this.state.split_LM_Left} width={window.innerWidth - this.state.split_LM_Left - 50} height={1000}/> */ }
 
-                        <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
-                        <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>*
-                    </div>
+                    { /* The <div> below will populate the search bar and the questions onto the middle panel */ }
+                        <div onMouseDown={this.mouseDown} onMouseMove={this.mouseMove}
+                             onMouseUp={this.mouseUp}>
+
+                            {/*The StackofRectangle function will populate the search bar and the questions. */}
+                            {
+
+                                <StackOfRectangle mouseX={this.state.x} mouseY={this.state.y}
+                                                  mousedown={this.state.mousedown} mouseup={this.state.mouseup}
+                                                  mousemove={this.state.mousemove}/>
+                                                  /*
+                                <StackOfRectangle mouseX={this.clientX} mouseY={this.clientY} mousedown={this.state.mousedown} mouseup={this.state.mouseup}
+                                mousemove={this.state.mousemove}/>
+                                */
+                                // this.setState({mousedown: true, p2: {rect: {x: e.clientX, y: e.clientY, width: 0, height: 0}}})
+                            }
+
+                            <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup}
+                                              p1={this.state.p1} p2={this.state.p2} p3={this.state.p3}
+                                              p4={this.state.p4}/>*
+                        </div>
 
                     { /*
                     <ScrollView horizontal={true}>
@@ -161,6 +190,7 @@ class MiddlePanel extends React.Component{
                       <StackOfRectangle  mouseX={this.state.x} mouseY={this.state.y} mousedown={this.state.mousedown} mouseup={this.state.mouseup} mousemove={this.state.mousemove}/>
                       <DynamicRectangle mousedown={this.state.mousedown} mouseup={this.state.mouseup} p1={this.state.p1} p2={this.state.p2} p3={this.state.p3} p4={this.state.p4}/>*
                   </div>
+                  <MiddlePanel left={this.state.split_LM_Left} width={window.innerWidth - this.state.split_LM_Left - 50} height={1000}/>
                 */}
 
             </div>

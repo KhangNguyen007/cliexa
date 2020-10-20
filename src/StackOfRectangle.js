@@ -13,6 +13,7 @@ class StackOfRectangle extends React.Component{
         this.state = {
             switch: true,
             depth: - 1,
+            // The data will contain our first questionaire.
             data:[
                   {id:0,q:"Do you smoke?",yes:1,no:4},
                   {id:1,q:"How many packs do you smoke per day? Yes > 5 or No N 5", yes:2,no:3},
@@ -22,6 +23,16 @@ class StackOfRectangle extends React.Component{
                   {id:5,q:"Sorry to hear that?", goto:6},
                   {id:6,q:"We are finalizing your result",loading:1}
                 ],
+            // The data1 will contain our second questionnaire
+            data1:[
+                {id:0,q:"Are you a returning patient?",yes:4,no:1},
+                {id:1,q:"Are you enrolled in medicare?", yes:2,no:6},
+                {id:2,q:"Do you have two or more diagnoses shown below?",yes:4,no:6},
+                {id:3,q:"Are you enrolled in any Chronic Care Management with any other physician?",yes:6,no:4},
+                {id:4,q:"Did you sign the CCM consent form?",yes:5,no:6},
+                {id:5,q:"Is this your CCM plan worksheet?", yes:6,no:6},
+                {id:6,q:"We are finalizing your result",loading:1}
+            ],
             answer:null,top:[]}; //null for start, 1 for yes and 0 for no
         this.expand = this.expand.bind(this)
         this.updateRectangleById = this.updateRectangleById.bind(this)
@@ -73,6 +84,7 @@ class StackOfRectangle extends React.Component{
         }
     }
 
+/* This will allow you to search the question */
     clickOnSearch(data){
 
         let initData = {id:0,title: data,rect:{x:100,y:100}}
