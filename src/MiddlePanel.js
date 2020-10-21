@@ -96,6 +96,7 @@ class MiddlePanel extends React.Component{
                     height: this.props.height,
 
                 }}>
+
                     {/* Middle-Panel, basically you can draw rectangle and can move the rectangle */}
                     {/* <MiddlePanel left={this.state.split_LM_Left} width={window.innerWidth - this.state.split_LM_Left - 50} height={1000}/> */ }
 
@@ -120,6 +121,7 @@ class MiddlePanel extends React.Component{
                                               p1={this.state.p1} p2={this.state.p2} p3={this.state.p3}
                                               p4={this.state.p4}/>*
                         </div>
+
 
                     { /*
                     <ScrollView horizontal={true}>
