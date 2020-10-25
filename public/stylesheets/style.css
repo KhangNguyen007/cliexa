@@ -1,0 +1,103 @@
+html,body {
+  margin:0;
+  padding:0;
+  overflow: hidden;
+}
+.container{
+  width:95%;
+  height:100%;
+  margin: 0;
+  padding: 0;
+
+}
+a {
+  color: #00B7FF;
+}
+.topPanel{
+  position:absolute;
+  width: 100%;
+  background-color: white;
+  height:10%;
+  border-style: solid;
+  border-color: red;
+  left:0;
+}
+.topPanel > #button1{
+  position:relative;
+  top:20%;
+  left:10%;
+}
+.topPanel > #button2{
+  position:relative;
+  top:20%;
+  left:45%;
+}
+.topPanel > #button3{
+  position:relative;
+  top:20%;
+  left:70%;
+}
+.leftPanel{
+  background-color: #F5F5F5;
+  border-style: groove;
+  position:absolute;
+  top:10%;
+  width: 10%;
+  height: 90%;
+  left: 0;
+}
+.splitLM{
+  background-color:#F8CECC;
+  height: 90%;
+  width: 1.5%;
+  border-style: solid;
+  position:absolute;
+  left: 10%;
+  top: 10%;
+  cursor: all-scroll;
+}
+.mainPanel{
+  background-color:#F5F5F5;
+  border-style: ridge;
+  position:absolute;
+  left: 11.5%;
+  top:  10%;
+  width: 80%;
+  height: 90%;
+  overflow: scroll;
+}
+.svg{
+
+}
+.SearchBar-Container{
+  position: absolute;
+  left:3500px;
+  top: 3200px;
+  height: 200px;
+
+}
+.SearchBar-Container-Result{
+  overflow: auto;
+  width: 100%;
+  height: 100%;
+  background: white;
+  outline-style: solid;
+  outline-width: 1px;
+}
+.SearchBar-Container > input{
+  height: 50px;
+  width: 400px;
+  fone-size:25px;
+  border-radius: 50px 20px;
+
+}
+.rightPanel{
+  position:absolute;
+  top: 10%;
+  left: 91.5%;
+  width:10%;
+  background-color: white;
+  height:90%;
+  border-style: solid;
+  border-color: red;
+}
