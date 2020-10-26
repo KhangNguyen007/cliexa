@@ -20,7 +20,18 @@ var rects = [];
 function draw(){
     $("svg").empty();
     var svgns = "http://www.w3.org/2000/svg";
+    for(let i = 1; i < rects.length;i++){
+        var line = document.createElementNS(svgns, 'line'); //Create a path in SVG's namespace
+        line.setAttributeNS(null, 'x1', (rects[i-1].x + rects[i-1].width/2).toString());
+        line.setAttributeNS(null, 'y1', (rects[i-1].y + rects[i-1].height/2).toString());
+        line.setAttributeNS(null, 'x2', (rects[i].x + rects[i].width/2).toString());
+        line.setAttributeNS(null, 'y2', (rects[i].y + rects[i].height/2).toString());
+        line.setAttributeNS(null, 'style', 'stroke:rgb(255,0,0);stroke-width:2;z-index:-1');
+        $("svg").append(line);
+    }
     for(let i = 0; i < rects.length;i++) {
+
+
         var rect = document.createElementNS(svgns, 'rect'); //Create a path in SVG's namespace
         //Main rectangle
         rect.setAttributeNS(null, 'x', rects[i].x.toString());
@@ -51,19 +62,10 @@ function draw(){
         rect.setAttributeNS(null, 'onclick', "populateRec(1)");
         $("svg").append(rect)
 
-        //No rectangle
+        //No rectangle (Nick will work on this) 
 
 
-        //Draw the line in here as well
-        if(i>0) {
-            var line = document.createElementNS(svgns, 'line'); //Create a path in SVG's namespace
-            line.setAttributeNS(null, 'x1', (rects[i-1].x + rects[i-1].width/2).toString());
-            line.setAttributeNS(null, 'y1', (rects[i-1].y + rects[i-1].height/2).toString());
-            line.setAttributeNS(null, 'x2', (rects[i].x + rects[i].width/2).toString());
-            line.setAttributeNS(null, 'y2', (rects[i].y + rects[i].height/2).toString());
-            line.setAttributeNS(null, 'style', 'stroke:rgb(255,0,0);stroke-width:2');
-            $("svg").append(line);
-        }
+
     }
     console.log(rects[0].x,rects[0].y)
 }
