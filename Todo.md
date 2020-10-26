@@ -1,5 +1,6 @@
 Cliexa ALgo v1.0
 - Come up with an idea to structure the code (focus on object oriented) (Khang)
+- Implement a matrix holder to highlight the working area               (Khang)
 - Create a rectangle class to follow object oriented philosophy         (Khang)
 - Zoom in/out on SVG                                                    (Khang)
 - When drag a shape to the corner of SVG, the view should follow the moving shape.    (Khang)
