@@ -1,6 +1,6 @@
 let data =[
     {id:0,q:"Do you smoke?",yes:1,no:3},
-    {id:1,q:"How many packs do you smoke per day? Yes > 5 or No N 5", yes:2,no:3},
+    {id:1,q:"How many packs do you smoke per day? Yes > 5 or No < 5", yes:2,no:3},
     {id:2,q:"Did you have lungs surgery before?",yes:6,no:4},
     {id:3,q:"Do you cough often?",yes:5,no:4},
     {id:4,q:"Good for you",goto:6},

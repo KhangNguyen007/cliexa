@@ -20,13 +20,14 @@ var rects = [];
 function draw(){
     $("svg").empty();
     var svgns = "http://www.w3.org/2000/svg";
+
     for(let i = 1; i < rects.length;i++){
         var line = document.createElementNS(svgns, 'line'); //Create a path in SVG's namespace
         line.setAttributeNS(null, 'x1', (rects[i-1].x + rects[i-1].width/2).toString());
         line.setAttributeNS(null, 'y1', (rects[i-1].y + rects[i-1].height/2).toString());
         line.setAttributeNS(null, 'x2', (rects[i].x + rects[i].width/2).toString());
         line.setAttributeNS(null, 'y2', (rects[i].y + rects[i].height/2).toString());
-        line.setAttributeNS(null, 'style', 'stroke:rgb(255,0,0);stroke-width:2;z-index:-1');
+        line.setAttributeNS(null, 'style', 'stroke:rgb(255,0,0);stroke-width:2; z-index:-1');
         $("svg").append(line);
     }
     for(let i = 0; i < rects.length;i++) {
@@ -42,6 +43,7 @@ function draw(){
         rect.setAttributeNS(null, 'z-index', '1');
         $("svg").append(rect);
         //Text for main rectangle
+
         //Create text
         var text = document.createElementNS(svgns, 'text'); //Create a path in SVG's namespace
         //<text x="0" y="15" fill="red">I love SVG!</text>
@@ -62,9 +64,16 @@ function draw(){
         rect.setAttributeNS(null, 'onclick', "populateRec(1)");
         $("svg").append(rect)
 
-        //No rectangle (Nick will work on this) 
-
-
+        //No rectangle (Nick will work on this)
+        var rect = document.createElementNS(svgns, 'rect'); //Create a path in SVG's namespace
+        rect.setAttributeNS(null, 'x', (rects[i].x+rects[i].width-25).toString());
+        rect.setAttributeNS(null, 'y', (rects[i].y).toString());
+        rect.setAttributeNS(null, 'height', "25");
+        rect.setAttributeNS(null, 'width', "25");
+        rect.setAttributeNS(null, 'fill', 'blue');
+        rect.setAttributeNS(null, 'z-index', '1');
+        rect.setAttributeNS(null, 'onclick', "populateRec(0)");
+        $("svg").append(rect)
 
     }
     console.log(rects[0].x,rects[0].y)
