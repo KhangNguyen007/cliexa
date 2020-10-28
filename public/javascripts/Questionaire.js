@@ -14,3 +14,39 @@ let data =[
     {id:12,q:"Is this your CCM plan worksheet?", yes:13,no:13},
     {id:13,q:"We are finalizing your result for CCM",yes:13,loading:7}
 ]
+
+
+function populateRec(answer){
+    console.log("Expand new rectangle: ",answer)
+    let index
+    let title
+    //Here is the logic to expand question
+    if(answer){
+        index = data[prev].yes
+        console.log("Index:",index)
+        if(index === undefined) {
+            index = data[prev].goto
+        }
+        title = data[index].q
+    }
+    else{
+        index = data[prev].no
+
+        if(index === undefined) {
+            index = data[prev].goto
+        }
+        //Update title and index for the new rectangle
+        title = data[index].q
+    }
+    rects.push({
+        x: rects[rects.length-1].x + 100,
+        y: rects[rects.length-1].y + 100,
+        width: 100,
+        height: 100,
+        fill: "#444444",
+        isDragging: false,
+        title:  title
+    });
+    prev = index
+    draw()
+}
