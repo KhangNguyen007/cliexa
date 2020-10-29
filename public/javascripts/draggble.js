@@ -88,6 +88,7 @@ function myDown(e,svg) {
             // if yes, set that rects isDragging=true
             dragok = true;
             r.isDragging = true;
+            // Borderline function here
         }
     }
     // save the current mouse position
