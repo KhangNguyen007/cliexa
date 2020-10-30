@@ -1,33 +1,23 @@
+/*
+Draggble is a function to move object around SVG
+ */
+
+
+
 // get canvas related references
 // drag related variables
 var dragok = false;
 var startX;
 var startY;
 
-// an array of objects that define different rectangles
-var prev = -1 //To keep track of the question
-var rects = [];
-//Rects format example
-// x: 50,
-// y: 50,
-//             width: 100,
-//             height: 100,
-//             fill: "#444444",
-//             isDragging: false,
-//             title:  $(this).html()
-
-
 
 // handle mousedown events
 function myDown(e,svg) {
     // tell the browser we're handling this mouse event
     let ctx = svg.getBoundingClientRect();
-    e.preventDefault();
-    e.stopPropagation();
     // get the current mouse position
     var mx = Math.floor(e.clientX - ctx.left);
     var my = Math.floor(e.clientY - ctx.top);
-    console.log("Mouse down",mx,my)
     // test each rect to see if mouse is inside
     dragok = false;
     for (var i = 0; i < rects.length; i++) {
@@ -64,8 +54,6 @@ function myMove(e,svg) {
     let ctx = svg.getBoundingClientRect();
     if (dragok) {
         // tell the browser we're handling this mouse event
-        e.preventDefault();
-        e.stopPropagation();
         // get the current mouse position
         var mx = Math.floor(e.clientX - ctx.left);
         var my = Math.floor(e.clientY - ctx.top);
@@ -85,6 +73,19 @@ function myMove(e,svg) {
                 r.y += dy;
             }
         }
+
+        let left = $('#mainPanel').scrollLeft()
+
+        if(r.x >  left + $('#mainPanel').width() - r.width){
+            $('#mainPanel').scrollLeft(left + 30);
+           // $('#mainPanel').scrollTop(height);
+        }
+
+        else if( r.x < left + 5){
+            $('#mainPanel').scrollLeft(left - 30);
+        }
+
+
 
         // Redraw
         clear()

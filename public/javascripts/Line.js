@@ -1,3 +1,7 @@
+/*
+ A connector line between two shapes
+ */
+
 class Line{
     constructor() {
     }

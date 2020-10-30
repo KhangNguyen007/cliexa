@@ -1,4 +1,8 @@
 /*
+This file will be our main function
+ */
+
+/*
 function main(){
     let main_object = {'rectangle':[],'circle':[]}
     var prev = -1 //To keep track of the question
@@ -33,13 +37,14 @@ function main(){
 
 */
 function draw(){
-    for(let i = 0; i < rects.length;i++) {
 
-        //The line to connect rectangle
-        if(i>0) {
+    //The line to connect rectangle
+    for(let i = 1; i < rects.length;i++) {
             var newLine = new Line()
-            newLine.create(rects[i-1].x + rects[i-1].width/2,rects[i-1].y + rects[i-1].height/2,rects[i].x + rects[i].width/2,rects[i].y + rects[i].height/2,'stroke:rgb(255,0,0);stroke-width:2')
-        }
+            newLine.create(rects[i - 1].x + rects[i - 1].width / 2, rects[i - 1].y + rects[i - 1].height / 2, rects[i].x + rects[i].width / 2, rects[i].y + rects[i].height / 2, 'stroke:rgb(255,0,0);stroke-width:2')
+        
+    }
+    for(let i = 0; i < rects.length;i++) {
 
         //Main rectangle
         let newRect = new Rectangle()

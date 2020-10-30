@@ -15,7 +15,7 @@ let data =[
     {id:13,q:"We are finalizing your result for CCM",yes:13,loading:7}
 ]
 
-
+//Call from search question
 function populateRec(answer){
     console.log("Expand new rectangle: ",answer)
     let index

@@ -115,6 +115,28 @@
     $("body").on('mouseup',function(evt) {
         dragSplit = false
     })
+    //Listening move to previous state
+        $("body").on('keydown', function(event) {
+            if (event.ctrlKey && event.key === 'z') {
+                if(rects.length >= 1) {
+                    rects.pop()
+                    console.log(rects)
+                    clear()
+                    draw()
+                }
+                else{
+                    $("#SearchBar-Container").css("visibility","visible")
+                    $("#Search").css("visibility","visible")
+                    $("#Search-Result").css("visibility","visible")
+                    $("#SearchList").css("visibility","visible")
+                    $("#svg").css("visibility","hidden")
+                    $('#mainPanel').scrollLeft(3000);
+                    $('#mainPanel').scrollTop(3000);
+                    draw()
+                }
+            }
+        });
+
 
 </script>
 </html>
