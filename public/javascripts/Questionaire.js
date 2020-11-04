@@ -23,7 +23,6 @@ function populateRec(answer){
     //Here is the logic to expand question
     if(answer){
         index = data[prev].yes
-        console.log("Index:",index)
         if(index === undefined) {
             index = data[prev].goto
         }
@@ -38,15 +37,30 @@ function populateRec(answer){
         //Update title and index for the new rectangle
         title = data[index].q
     }
-    rects.push({
-        x: rects[rects.length-1].x + 100,
-        y: rects[rects.length-1].y + 100,
-        width: 100,
-        height: 100,
-        fill: "#444444",
-        isDragging: false,
-        title:  title
-    });
+    let newRect = new Rectangle(rects[rects.length-1].x + widthSize + 50,rects[rects.length-1].y,widthSize,heightSize,"#444444",false, title,rects.length)
+    let newRectSVG = new RectangleSVG()
+    let newTitleTextSVG = new Text()
+    let newYesRectSVG   = new RectangleSVG()
+    let newNoRectSVG    = new RectangleSVG()
+    newRectSVG.create(3000,3000,heightSize,widthSize,"#444444",0)
+    newTitleTextSVG.create(newRect.x, newRect.y, '#000', newRect.title)
+    newYesRectSVG.createWithOnClick(newRect.x, newRect.y, 25, 25, 'red', '1', "populateRec(1)")
+    newNoRectSVG.createWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'blue', '1', "populateRec(0)")
+    rects.push(newRect)
+    rectsSVG.push(newRectSVG)
+    titleTextSVG.push(newTitleTextSVG)
+    yesRectSVG.push(newYesRectSVG)
+    noRectSVG.push(newNoRectSVG)
+
+
     prev = index
-    draw()
+
+
+    //Should slide to the new rectangle position
+    slide()
+    draw(newRect.id)
+}
+function slide(){
+    let left = $('#mainPanel').scrollLeft();
+    $('#mainPanel').scrollLeft(left+widthSize);
 }

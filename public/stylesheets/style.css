@@ -57,7 +57,7 @@ a {
   cursor: all-scroll;
 }
 .mainPanel{
-  background-color:#F5F5F5;
+  background-color: #dbdbd0;
   border-style: ridge;
   position:absolute;
   left: 11.5%;
@@ -66,14 +66,13 @@ a {
   height: 90%;
   overflow: scroll;
 }
-.svg{
 
-}
 .SearchBar-Container{
   position: absolute;
   left:3500px;
   top: 3200px;
-  height: 200px;
+  height:50%;
+  width:50%;
 
 }
 .SearchBar-Container-Result{
@@ -85,8 +84,8 @@ a {
   outline-width: 1px;
 }
 .SearchBar-Container > input{
-  height: 50px;
-  width: 400px;
+  height: 50%;
+  width: 100%;
   fone-size:25px;
   border-radius: 50px 20px;
 
@@ -100,4 +99,17 @@ a {
   height:90%;
   border-style: solid;
   border-color: red;
+}
+#zoomIn{
+  width:70px;
+  height:70px;
+}
+#zoomOut{
+  width:70px;
+  height:70px;
+}
+.zoom{
+  position: absolute;
+  top:10%;
+  left:60%;
 }

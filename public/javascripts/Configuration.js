@@ -5,8 +5,15 @@ Position of scroller
  */
 
 // an array of objects that define different rectangles
+
 var prev = -1 //To keep track of the question
 var rects = [];
+var rectsSVG = [];
+var titleTextSVG = []
+var yesRectSVG = []
+var noRectSVG = []
+var widthSize = 100
+var heightSize = 100
 //Rects format example
 // x: 50,
 // y: 50,
@@ -26,5 +33,8 @@ class Configuration {
 
         console.log("Cal main panel from Set main panel")
     }
-
+    setSearchBar(left,top){
+        $('#SearchBar-Container').css('left',left)
+        $('#SearchBar-Container').css('top',top)
+    }
 }

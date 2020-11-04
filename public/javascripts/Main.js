@@ -34,35 +34,44 @@ function main(){
     //Draw
 
 }
-
 */
-function draw(){
 
-    //The line to connect rectangle
-    for(let i = 1; i < rects.length;i++) {
-            var newLine = new Line()
-            newLine.create(rects[i - 1].x + rects[i - 1].width / 2, rects[i - 1].y + rects[i - 1].height / 2, rects[i].x + rects[i].width / 2, rects[i].y + rects[i].height / 2, 'stroke:rgb(255,0,0);stroke-width:2')
-        
+function drawAll(){
+    console.log("Calling this function")
+    for(let i = 0 ; i < rects.length;i++){
+        rectsSVG[i].create(rects[i].x, rects[i].y, rects[i].height, rects[i].width, '#444444', '1')
+        titleTextSVG[i].create(rects[i].x, rects[i].y, '#444444', rects[i].title)
+        yesRectSVG[i].createWithOnClick(rects[i].x, rects[i].y, 25, 25, 'red', '1', "populateRec(1)")
+        noRectSVG[i].createWithOnClick(rects[i].x + rects[i].width - 25, rects[i].y, 25, 25, 'blue', '1', "populateRec(0)")
     }
-    for(let i = 0; i < rects.length;i++) {
-
-        //Main rectangle
-        let newRect = new Rectangle()
-        newRect.create(rects[i].x,rects[i].y,rects[i].height,rects[i].width,'#444444','1')
-        //Text for main rectangle
-        let newText = new Text()
-        newText.create(rects[i].x,rects[i].y,'#000',rects[i].title)
-        //Yes rectangle
-        let yesRect = new Rectangle()
-        yesRect.createWithOnClick(rects[i].x,rects[i].y,25,25,'red','1',"populateRec(1)")
-        //No rectangle
-        let noRect = new Rectangle()
-        noRect.createWithOnClick(rects[i].x+rects[i].width-25,rects[i].y,25,25,'blue','1',"populateRec(0)")
-
-    }
+}
+function draw(index){
+    console.log("My Index:",index)
+    rectsSVG[index].create(rects[index].x, rects[index].y, rects[index].height, rects[index].width, '#444444', '1')
+    titleTextSVG[index].create(rects[index].x, rects[index].y, '#444444', rects[index].title)
+    yesRectSVG[index].createWithOnClick(rects[index].x, rects[index].y, 25, 25, 'red', '1', "populateRec(1)")
+    noRectSVG[index].createWithOnClick(rects[index].x + rects[index].width - 25, rects[index].y, 25, 25, 'blue', '1', "populateRec(0)")
 }
 
 function clear(){
+    rects.pop()
+    rectsSVG[rectsSVG.length-1].remove()
+    titleTextSVG[titleTextSVG.length-1].remove()
+    yesRectSVG[yesRectSVG.length-1].remove()
+    noRectSVG[noRectSVG.length-1].remove()
+    rectsSVG.pop()
+    titleTextSVG.pop()
+    yesRectSVG.pop()
+    noRectSVG.pop()
+    console.log("Rects:",rects)
+}
+/*
+function clear(){
     $("svg").empty();
+}
+ */
+//Click the mousedown and will not touch any shape and will highlight the selected shape
+function selectShape(){
+
 }
 

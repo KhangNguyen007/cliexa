@@ -16,7 +16,7 @@
                 <div class="leftPanel" id="leftPanel"></div>
                 <div class="splitLM" id="splitLM"></div>
                 <div class="mainPanel" id="mainPanel">
-                    <div class="SearchBar-Container">
+                    <div class="SearchBar-Container" id="SearchBar-Container">
                         <input id="Search" />
                         <div class="SearchBar-Container-Result" id="Search-Result">
                             <ul id="SearchList">
@@ -24,9 +24,13 @@
                         </div>
 
                     </div>
-                    <svg id="svg" class="svg" width="6000" height="6000"  style="visibility: hidden">
+                    <svg id="svg" class="svg" width="6000" height="6000"   style="visibility: hidden">
                         <!-- Shape will go here -->
                     </svg>
+                </div>
+                <div class="zoom" id="zoom">
+                    <button id="zoomIn" >Zoom In</button><br/>
+                    <button id="zoomOut">Zoom Out</button>
                 </div>
                 <div class="rightPanel" id="rightPanel"></div>
             </div>
@@ -35,11 +39,18 @@
 <script src="javascripts/Draggble.js"></script>
 <script src="javascripts/Questionaire.js"></script>
 <script src="javascripts/Configuration.js"></script>
+
 <script src="javascripts/Main.js"></script>
 <script src="javascripts/Rectangle.js"></script>
+<script src="javascripts/RectangleSVG.js"></script>
 <script src="javascripts/Text.js"></script>
 <script src="javascripts/Line.js"></script>
+
 <script>
+    //This rectangle should be the first one ever
+    var selectedRectangle = new RectangleSVG()
+    selectedRectangle.create(0,0,0,0,"#FFC433",0)
+
     //Listening to events
     let svg = document.getElementById("svg")
     svg.onmousemove= (e) =>myMove(e,svg)
@@ -49,7 +60,7 @@
     //Config
     let config = new Configuration()
     config.setMainPanel(3000,3000)
-
+    config.setSearchBar(3000+1920/2.5,3000+645/2.5)
 
 
     //When click search from the search bar, will populate it here set prev to id
@@ -57,21 +68,32 @@
         //alert($(this).html());
         //Draw new rectagle here.
         prev = $(this).attr('id')
-        rects.push({
-            x: 3000,
-            y: 3000,
-            width: 100,
-            height: 100,
-            fill: "#444444",
-            isDragging: false,
-            title:  $(this).html()
-        });
+
+        //Init the first Rect
+        let newRect = new Rectangle(3000,3000,widthSize,heightSize,"#444444",false, $(this).html(),rects.length)
+        let newRectSVG = new RectangleSVG()
+        let newTitleTextSVG = new Text()
+        let newYesRectSVG   = new RectangleSVG()
+        let newNoRectSVG    = new RectangleSVG()
+        newRectSVG.create(3000,3000,heightSize,widthSize,"#444444",0)
+        newTitleTextSVG.create(newRect.x, newRect.y, '#000', newRect.title)
+        newYesRectSVG.createWithOnClick(newRect.x, newRect.y, 25, 25, 'red', '1', "populateRec(1)")
+        newNoRectSVG.createWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'blue', '1', "populateRec(0)")
+        rects.push(newRect)
+        rectsSVG.push(newRectSVG)
+        titleTextSVG.push(newTitleTextSVG)
+        yesRectSVG.push(newYesRectSVG)
+        noRectSVG.push(newNoRectSVG)
+
+        draw(newRect.id)
+
+
         $("#SearchBar-Container").css("visibility","hidden")
         $("#Search").css("visibility","hidden")
         $("#Search-Result").css("visibility","hidden")
         $("#SearchList").css("visibility","hidden")
         $("#svg").css("visibility","visible")
-        draw()
+
         return false;
     });
 
@@ -119,10 +141,11 @@
         $("body").on('keydown', function(event) {
             if (event.ctrlKey && event.key === 'z') {
                 if(rects.length >= 1) {
-                    rects.pop()
-                    console.log(rects)
+                    let left = $('#mainPanel').scrollLeft();
+                    $('#mainPanel').scrollLeft(left-widthSize);
+
                     clear()
-                    draw()
+                    drawAll()
                 }
                 else{
                     $("#SearchBar-Container").css("visibility","visible")
@@ -132,11 +155,56 @@
                     $("#svg").css("visibility","hidden")
                     $('#mainPanel').scrollLeft(3000);
                     $('#mainPanel').scrollTop(3000);
-                    draw()
                 }
             }
         });
 
 
+
+    //Zoom in/out of the main panel
+    // Default
+    //Check the position of scroll
+    /*
+    $("#mainPanel").on('wheel', function(event) {
+        event.preventDefault();
+        console.log(event.originalEvent.detail)
+        if (event.ctrlKey &&  event.originalEvent.detail >= 0)
+        {
+            console.log('scrolling up');
+        }
+        else {
+                console.log('Scroll down');
+            }
+
+
+    });
+     */
+
+    $("#zoomIn").on('click',function (event) {
+
+        selectedRect = ""
+        console.log(selectedRect)
+        if(widthSize <= 1400){
+            widthSize += 100
+        }
+        if(heightSize <= 500) {
+            heightSize += 100
+        }
+        for (var i = 0; i < rects.length; i++) {
+            rects[i].width = widthSize
+            rects[i].height = heightSize
+        }
+        drawAll()
+    })
+
+    $("#zoomOut").on('click',function (event) {
+        widthSize -= 100
+        heightSize -= 100
+        for (var i = 0; i < rects.length; i++) {
+            rects[i].width = widthSize
+            rects[i].height = heightSize
+        }
+        drawAll()
+    })
 </script>
 </html>
