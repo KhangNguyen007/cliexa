@@ -24,14 +24,16 @@
                         </div>
 
                     </div>
-                    <svg id="svg" class="svg" width="6000" height="6000"   style="visibility: hidden">
+                    <svg id="svg" class="shadow" width="6000" height="6000"   style="visibility: hidden;background-color: #F6F8F9">
                         <!-- Shape will go here -->
                     </svg>
                 </div>
+                <!--
                 <div class="zoom" id="zoom">
                     <button id="zoomIn" >Zoom In</button><br/>
                     <button id="zoomOut">Zoom Out</button>
                 </div>
+                -->
                 <div class="rightPanel" id="rightPanel"></div>
             </div>
 </body>
@@ -49,7 +51,7 @@
 <script>
     //This rectangle should be the first one ever
     var selectedRectangle = new RectangleSVG()
-    selectedRectangle.create(0,0,0,0,"#FFC433",0)
+    selectedRectangle.update(0,0,0,0,"#FFC433",0)
 
     //Listening to events
     let svg = document.getElementById("svg")
@@ -59,26 +61,28 @@
 
     //Config
     let config = new Configuration()
-    config.setMainPanel(3000,3000)
-    config.setSearchBar(3000+1920/2.5,3000+645/2.5)
+    config.setMainPanel(0,0)
+
+    config.setSearchBar($('#mainPanel').width()/2 - $('#SearchBar-Container').width()/2,$('#mainPanel').height()/2 -  $('#SearchBar-Container').height()/2)
 
 
     //When click search from the search bar, will populate it here set prev to id
     $('ul').on('click',"li",function(){
+        console.log("Hello World")
         //alert($(this).html());
         //Draw new rectagle here.
         prev = $(this).attr('id')
 
         //Init the first Rect
-        let newRect = new Rectangle(3000,3000,widthSize,heightSize,"#444444",false, $(this).html(),rects.length)
+        let newRect = new Rectangle($('#mainPanel').width()/10,$('#mainPanel').height()/10,widthSize,heightSize,"#FFFFFF",false, $(this).html(),rects.length)
         let newRectSVG = new RectangleSVG()
         let newTitleTextSVG = new Text()
         let newYesRectSVG   = new RectangleSVG()
         let newNoRectSVG    = new RectangleSVG()
-        newRectSVG.create(3000,3000,heightSize,widthSize,"#444444",0)
-        newTitleTextSVG.create(newRect.x, newRect.y, '#000', newRect.title)
-        newYesRectSVG.createWithOnClick(newRect.x, newRect.y, 25, 25, 'red', '1', "populateRec(1)")
-        newNoRectSVG.createWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'blue', '1', "populateRec(0)")
+        newRectSVG.update(newRect.x,newRect.y,heightSize,widthSize,newRect.fill,0)
+        newTitleTextSVG.update(newRect.x, newRect.y+ 50, '#000', newRect.title)
+        newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + heightSize/2, 25, 25, 'red', '1', "populateRec(1)")
+        newNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'blue', '1', "populateRec(0)")
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         titleTextSVG.push(newTitleTextSVG)
@@ -142,8 +146,7 @@
             if (event.ctrlKey && event.key === 'z') {
                 if(rects.length >= 1) {
                     let left = $('#mainPanel').scrollLeft();
-                    $('#mainPanel').scrollLeft(left-widthSize);
-
+                    $('#mainPanel').scrollLeft(left - $('#mainPanel').width());
                     clear()
                     drawAll()
                 }
@@ -153,8 +156,8 @@
                     $("#Search-Result").css("visibility","visible")
                     $("#SearchList").css("visibility","visible")
                     $("#svg").css("visibility","hidden")
-                    $('#mainPanel').scrollLeft(3000);
-                    $('#mainPanel').scrollTop(3000);
+                    $('#mainPanel').scrollLeft(0);
+                    $('#mainPanel').scrollTop(0);
                 }
             }
         });

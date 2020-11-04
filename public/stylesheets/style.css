@@ -16,10 +16,9 @@ a {
 .topPanel{
   position:absolute;
   width: 100%;
-  background-color: white;
+  background-color: #F7F7F7;
+  box-shadow: 1px 1px 5px #aaaaaa;
   height:10%;
-  border-style: solid;
-  border-color: red;
   left:0;
 }
 .topPanel > #button1{
@@ -38,32 +37,31 @@ a {
   left:70%;
 }
 .leftPanel{
-  background-color: #F5F5F5;
-  border-style: groove;
+  background-color: #F7F7F7;
   position:absolute;
-  top:10%;
+  top:10.5%;
   width: 10%;
   height: 90%;
   left: 0;
+  opacity: 0.1;
 }
 .splitLM{
-  background-color:#F8CECC;
   height: 90%;
-  width: 1.5%;
-  border-style: solid;
+  width: 0.1%;
   position:absolute;
   left: 10%;
-  top: 10%;
-  cursor: all-scroll;
+  top: 10.5%;
+  cursor: e-resize;
+  box-shadow: 2px 2px 5px #aaaaaa
 }
 .mainPanel{
-  background-color: #dbdbd0;
-  border-style: ridge;
+  background-color: #cbc9c9;
   position:absolute;
-  left: 11.5%;
-  top:  10%;
-  width: 80%;
+  left: 10.1%;
+  top:  10.5%;
+  width: 90%;
   height: 90%;
+  opacity: 0.6;
   overflow: scroll;
 }
 
@@ -92,13 +90,13 @@ a {
 }
 .rightPanel{
   position:absolute;
-  top: 10%;
+  top: 10.5%;
   left: 91.5%;
   width:10%;
-  background-color: white;
+  background-color: #F7F7F7;
   height:90%;
-  border-style: solid;
-  border-color: red;
+  box-shadow: 2px 2px 5px #aaaaaa
+
 }
 #zoomIn{
   width:70px;
@@ -112,4 +110,10 @@ a {
   position: absolute;
   top:10%;
   left:60%;
+}
+
+.shadow {
+  -webkit-filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+  filter: drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7));
+  /* Similar syntax to box-shadow */
 }

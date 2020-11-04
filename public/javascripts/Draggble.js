@@ -64,7 +64,7 @@ function myUp(e) {
         rects[i].isDragging = false;
     }
 
-    selectedRectangle.create(0,0,0,0,"#FFC433",'1')
+    selectedRectangle.update(0,0,0,0,"#FFC433",'1')
 }
 
 
@@ -104,10 +104,8 @@ function myMove(e,svg) {
             $('#mainPanel').scrollLeft(left - 30);
         }
 
-
         // Redraw
         draw(index);
-
         // reset the starting mouse position for the next mousemove
         startX = mx;
         startY = my;
@@ -124,7 +122,7 @@ function myMove(e,svg) {
 
         //current mouse on the 4/4 quarter
         if(rectX <= mx && rectY <= my) {
-            selectedRectangle.create(rectX.toString(),rectY.toString(),(dy).toString(),(dx).toString(),"#FFC433",'1')
+            selectedRectangle.update(rectX.toString(),rectY.toString(),(dy).toString(),(dx).toString(),"#FFC433",'1')
             for (var i = 0; i < rects.length; i++) {
                 var r = rects[i];
                 if ( r.x > rectX && r.x < mx && r.y > rectY && r.y <my && r.y + r.height < my && r.width < mx) {
@@ -136,15 +134,15 @@ function myMove(e,svg) {
         }
         //current mouse on the 3/4 quarter
         else if(rectX >= mx && rectY < my){
-            selectedRectangle.create((mx).toString(),(rectY).toString(),(my-rectY).toString(),(rectX-mx).toString(),"#FFC433",'1')
+            selectedRectangle.update((mx).toString(),(rectY).toString(),(my-rectY).toString(),(rectX-mx).toString(),"#FFC433",'1')
         }
         //current mouse on the 2/4 quarter
         else if(rectX > mx && rectY > my){
-            selectedRectangle.create((mx).toString(),(my).toString(),(rectY-my).toString(),(rectX-mx).toString(),"#FFC433",'1')
+            selectedRectangle.update((mx).toString(),(my).toString(),(rectY-my).toString(),(rectX-mx).toString(),"#FFC433",'1')
         }
         //current mouse on the 1/4 quarter
         else if(rectX < mx && rectY > my){
-            selectedRectangle.create((mx-(mx-rectX)).toString(),(my).toString(), (rectY-my).toString(),(mx-rectX).toString(),"#FFC433",'1')
+            selectedRectangle.update((mx-(mx-rectX)).toString(),(my).toString(), (rectY-my).toString(),(mx-rectX).toString(),"#FFC433",'1')
         }
         //While doing this should highlight all the rectangle within the range
 

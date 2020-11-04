@@ -9,12 +9,13 @@ class Text{
         this.text = document.createElementNS(svgns, 'text'); //Create a path in SVG's namespace
         $("svg").append(this.text)
     }
-    create(x,y,fill,title){
+    update(x,y,fill,title){
         //Create text
         //<text x="0" y="15" fill="red">I love SVG!</text>
         this.text.setAttributeNS(null,'x',x);
         this.text.setAttributeNS(null,'y',y);
         this.text.setAttributeNS(null,'fill',fill);
+        this.text.setAttributeNS(null,"font-size","2em")
         this.text.textContent = title;
     }
     remove(){
@@ -24,5 +25,4 @@ class Text{
         this.text.textContent = null
         this.text = null
     }
-
 }

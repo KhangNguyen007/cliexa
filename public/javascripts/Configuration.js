@@ -12,8 +12,10 @@ var rectsSVG = [];
 var titleTextSVG = []
 var yesRectSVG = []
 var noRectSVG = []
-var widthSize = 100
-var heightSize = 100
+
+var widthSize = $('#mainPanel').width()*7/10
+var heightSize = $('#mainPanel').height()*8/10
+
 //Rects format example
 // x: 50,
 // y: 50,

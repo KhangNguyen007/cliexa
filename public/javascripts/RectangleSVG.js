@@ -11,23 +11,31 @@ class RectangleSVG{
 
     }
     //Update without onClick
-    create(x,y,height,width,fill,zIndex){
+    update(x,y,height,width,fill,zIndex){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
+        this.rect.setAttributeNS(null, 'rx',"10");
+        this.rect.setAttributeNS(null, 'ry',"10");
         this.rect.setAttributeNS(null, 'height', height.toString());
         this.rect.setAttributeNS(null, 'width', width.toString());
         this.rect.setAttributeNS(null, 'fill', fill);
         this.rect.setAttributeNS(null, 'z-index', zIndex);
+        this.rect.setAttributeNS(null,"stroke", "#707070");
+        this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
     //Update with onClick
-    createWithOnClick(x,y,height,width,fill,zIndex,onclick){
+    updateWithOnClick(x,y,height,width,fill,zIndex,onclick){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
+        this.rect.setAttributeNS(null, 'rx',"5");
+        this.rect.setAttributeNS(null, 'ry',"5");
         this.rect.setAttributeNS(null, 'height', height.toString());
         this.rect.setAttributeNS(null, 'width', width.toString());
         this.rect.setAttributeNS(null, 'fill', fill);
         this.rect.setAttributeNS(null, 'z-index', zIndex);
         this.rect.setAttributeNS(null, 'onclick', onclick);
+        this.rect.setAttributeNS(null,"stroke", "#707070");
+        this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
 
     resize(x,y,height,width,fill,zIndex){
@@ -48,11 +56,11 @@ class RectangleSVG{
         this.rect  = null
     }
     highlight(){
-        this.rect.setAttribute("stroke", "blue");
-        this.rect.setAttribute("stroke-width", "4");
+        this.rect.setAttributeNS(null,"stroke", "blue");
+        this.rect.setAttributeNS(null,"stroke-width", "1");
     }
     offHighlight(){
-        this.rect.setAttribute("stroke", null);
-        this.rect.setAttribute("stroke-width", null);
+        this.rect.setAttributeNS(null,"stroke", "#707070");
+        this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
 }
