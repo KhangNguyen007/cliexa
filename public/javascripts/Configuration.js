@@ -6,6 +6,7 @@ Position of scroller
 
 // an array of objects that define different rectangles
 
+
 var prev = -1 //To keep track of the question
 var rects = [];
 var rectsSVG = [];
