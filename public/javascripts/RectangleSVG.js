@@ -7,7 +7,7 @@ class RectangleSVG{
     constructor() {
         let svgns = "http://www.w3.org/2000/svg"
         this.rect = document.createElementNS(svgns, 'rect'); //Create a path in SVG's namespace
-        $("svg").append(this.rect);
+        $(".svg-pan-zoom_viewport").append(this.rect);
 
     }
     //Update without onClick

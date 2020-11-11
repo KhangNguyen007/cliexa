@@ -3,11 +3,11 @@
 
  */
 
-class Text{
+class TextSVG{
     constructor() {
         var svgns = "http://www.w3.org/2000/svg";
         this.text = document.createElementNS(svgns, 'text'); //Create a path in SVG's namespace
-        $("svg").append(this.text)
+        $(".svg-pan-zoom_viewport").append(this.text)
     }
     update(x,y,fill,title){
         //Create text

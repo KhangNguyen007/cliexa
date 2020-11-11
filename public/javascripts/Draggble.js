@@ -13,17 +13,22 @@ var rectY
 
 // handle mousedown events
 function myDown(e,svg) {
-
     // tell the browser we're handling this mouse event
     let ctx = svg.getBoundingClientRect();
+
     // get the current mouse position
-    var mx = Math.floor(e.clientX - ctx.left);
-    var my = Math.floor(e.clientY - ctx.top);
+    var mx = Math.floor((e.clientX - ctx.left - translateX)/x_scale);
+    var my = Math.floor((e.clientY - ctx.top - translateY)/y_scale);
+
     // test each rect to see if mouse is inside
     dragok = false;
     for (var i = rects.length - 1; i >=0; i--) {
         var r = rects[i];
-        if (mx > r.x && mx < r.x + r.width && my > r.y && my < r.y + r.height) {
+        let x = r.x
+        let width = r.width
+        let height = r.height
+        let y = r.y
+        if (mx > x && mx < x + width && my > y && my < y + height) {
             // if yes, set that rects isDragging=true
             dragok = true;
             index = i
@@ -46,7 +51,7 @@ function myDown(e,svg) {
     // save the current mouse position
     startX = mx;
     startY = my;
-    console.log("StartX,StartY:",startX,startY)
+    console.log("Mouse down:",startX,startY)
 }
 
 
@@ -72,11 +77,13 @@ function myUp(e) {
 function myMove(e,svg) {
     // if we're dragging anything...
     let ctx = svg.getBoundingClientRect();
+
+
     if (dragok) {
         // tell the browser we're handling this mouse event
         // get the current mouse position
-        var mx = Math.floor(e.clientX - ctx.left);
-        var my = Math.floor(e.clientY - ctx.top);
+        var mx = Math.floor((e.clientX - ctx.left -translateX)/x_scale);
+        var my = Math.floor((e.clientY - ctx.top - translateY)/y_scale);
 
         // calculate the distance the mouse has moved
         // since the last mousemove
@@ -95,6 +102,7 @@ function myMove(e,svg) {
         }
 
         //Move scroll left only
+        /*
         let left = $('#mainPanel').scrollLeft()
         if(r.x >  left + $('#mainPanel').width() - r.width){
             $('#mainPanel').scrollLeft(left + 30);
@@ -103,7 +111,7 @@ function myMove(e,svg) {
         else if( r.x < left + 5){
             $('#mainPanel').scrollLeft(left - 30);
         }
-
+        */
         // Redraw
         draw(index);
         // reset the starting mouse position for the next mousemove
@@ -113,35 +121,35 @@ function myMove(e,svg) {
     //For selectedRectangle only
     else if(mousedown){
         //Calculate new mouse position
-        var mx = Math.floor(e.clientX - ctx.left);
-        var my = Math.floor(e.clientY - ctx.top);
+        var mx = Math.floor(e.clientX - ctx.left - translateX)/x_scale;
+        var my = Math.floor(e.clientY - ctx.top - translateY)/y_scale;
         // calculate the distance the mouse has moved
         // since the last mousemove
         var dx = mx - startX;
         var dy = my - startY;
 
+
         //current mouse on the 4/4 quarter
-        if(rectX <= mx && rectY <= my) {
-            selectedRectangle.update(rectX.toString(),rectY.toString(),(dy).toString(),(dx).toString(),"#FFC433",'1')
+        if(startX <= mx && startY <= my) {
+            selectedRectangle.update(startX.toString(),startY.toString(),dy.toString(),dx.toString(),"#FFC433",'1')
             for (var i = 0; i < rects.length; i++) {
                 var r = rects[i];
-                if ( r.x > rectX && r.x < mx && r.y > rectY && r.y <my && r.y + r.height < my && r.width < mx) {
-                    // if yes, set that rects isDragging=true
+                if ( r.x > startX && r.x < mx && r.y > startY && r.y <my && r.y + r.height < my && r.width < mx) {
                     console.log("")
                     rectsSVG[i].highlight()
                 }
             }
         }
         //current mouse on the 3/4 quarter
-        else if(rectX >= mx && rectY < my){
+        else if(startX >= mx && startY < my){
             selectedRectangle.update((mx).toString(),(rectY).toString(),(my-rectY).toString(),(rectX-mx).toString(),"#FFC433",'1')
         }
         //current mouse on the 2/4 quarter
-        else if(rectX > mx && rectY > my){
+        else if(startX > mx && startY > my){
             selectedRectangle.update((mx).toString(),(my).toString(),(rectY-my).toString(),(rectX-mx).toString(),"#FFC433",'1')
         }
         //current mouse on the 1/4 quarter
-        else if(rectX < mx && rectY > my){
+        else if(startX < mx && startY > my){
             selectedRectangle.update((mx-(mx-rectX)).toString(),(my).toString(), (rectY-my).toString(),(mx-rectX).toString(),"#FFC433",'1')
         }
         //While doing this should highlight all the rectangle within the range
@@ -149,4 +157,14 @@ function myMove(e,svg) {
 
 
     }
+}
+
+function myWheel(e,panZoom){
+
+    let value = ($('.svg-pan-zoom_viewport').css('transform'));
+    let matrix = value.substring(value.lastIndexOf("(") + 1, value.lastIndexOf(")")).split(',')
+    x_scale=matrix[0]
+    y_scale=matrix[3]
+    translateX=matrix[4]
+    translateY=matrix[5]
 }

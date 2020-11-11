@@ -10,13 +10,18 @@ Position of scroller
 var prev = -1 //To keep track of the question
 var rects = [];
 var rectsSVG = [];
+var linesSVG = []
 var titleTextSVG = []
 var yesRectSVG = []
 var noRectSVG = []
-
 var widthSize = $('#mainPanel').width()*7/10
 var heightSize = $('#mainPanel').height()*8/10
-
+var maxWidth =  $('#mainPanel').width()*8/10
+var maxHeight =  $('#mainPanel').height()*8/10
+var minWidth = 100
+var minHeight = 100
+var x_scale = 1,y_scale=1,translateX=0,translateY=0
+var ctrlKey = false
 //Rects format example
 // x: 50,
 // y: 50,

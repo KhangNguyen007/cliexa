@@ -24,19 +24,22 @@
                         </div>
 
                     </div>
-                    <svg id="svg" class="shadow" width="6000" height="6000"   style="visibility: hidden;background-color: #F6F8F9">
-                        <!-- Shape will go here -->
+
+                    <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 6000 6000" width="6000" height="6000" style="visibility: hidden;background-color: #F6F8F9; display: inline;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+                        <!-- Using Jquery to add shape -->
                     </svg>
                 </div>
-                <!--
+
                 <div class="zoom" id="zoom">
-                    <button id="zoomIn" >Zoom In</button><br/>
-                    <button id="zoomOut">Zoom Out</button>
+                    <button id="zoomIn" >Reset</button><br/>
                 </div>
-                -->
+
                 <div class="rightPanel" id="rightPanel"></div>
             </div>
 </body>
+
+<script src="http://ariutta.github.io/svg-pan-zoom/dist/svg-pan-zoom.min.js"></script>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="javascripts/Draggble.js"></script>
 <script src="javascripts/Questionaire.js"></script>
@@ -45,11 +48,32 @@
 <script src="javascripts/Main.js"></script>
 <script src="javascripts/Rectangle.js"></script>
 <script src="javascripts/RectangleSVG.js"></script>
-<script src="javascripts/Text.js"></script>
-<script src="javascripts/Line.js"></script>
+<script src="javascripts/TextSVG.js"></script>
+<script src="javascripts/LineSVG.js"></script>
 
 <script>
     //This rectangle should be the first one ever
+
+    var panZoom = window.panZoom = svgPanZoom('#svg', {
+        zoomEnabled: true,
+        controlIconsEnabled: true,
+        dblClickZoomEnabled: false,
+        panEnabled: false,
+        mouseWheelZoomEnabled: true,
+        minZoom: 0.1,
+        beforeZoom: function(e){
+                    if(ctrlKey) {
+
+                    }
+
+        }
+    });
+    /*
+    var svgDropPoint = $("svg")[0].createSVGPoint();
+    svgDropPoint.matrixTransform($("#svg")[0].getCTM().inverse());
+
+    console.log("Get SVG Drop Point:",svgDropPoint)
+    */
     var selectedRectangle = new RectangleSVG()
     selectedRectangle.update(0,0,0,0,"#FFC433",0)
 
@@ -58,7 +82,7 @@
     svg.onmousemove= (e) =>myMove(e,svg)
     svg.onmouseup= myUp
     svg.onmousedown= (e)=>myDown(e,svg)
-
+    svg.onwheel=(e) => myWheel(e,panZoom)
     //Config
     let config = new Configuration()
     config.setMainPanel(0,0)
@@ -76,13 +100,13 @@
         //Init the first Rect
         let newRect = new Rectangle($('#mainPanel').width()/10,$('#mainPanel').height()/10,widthSize,heightSize,"#FFFFFF",false, $(this).html(),rects.length)
         let newRectSVG = new RectangleSVG()
-        let newTitleTextSVG = new Text()
+        let newTitleTextSVG = new TextSVG()
         let newYesRectSVG   = new RectangleSVG()
         let newNoRectSVG    = new RectangleSVG()
         newRectSVG.update(newRect.x,newRect.y,heightSize,widthSize,newRect.fill,0)
         newTitleTextSVG.update(newRect.x, newRect.y+ 50, '#000', newRect.title)
-        newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + heightSize/2, 25, 25, 'red', '1', "populateRec(1)")
-        newNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'blue', '1', "populateRec(0)")
+        newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + heightSize/2, 25, 25, 'green', '1', "populateRec(1)")
+        newNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'red', '1', "populateRec(0)")
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         titleTextSVG.push(newTitleTextSVG)
@@ -100,7 +124,7 @@
 
         return false;
     });
-
+    $(".SearchBar-Container-Result").css("visibility","hidden")
 
     //Search input here
     let click = false
@@ -112,6 +136,12 @@
             if((data[i].q.toLowerCase()).match(this.value.toLowerCase())){
                 searchSelector.append( "<li id="+data[i].id+">" + data[i].q + "</li>" );
             }
+        }
+        if(this.value === ""){
+            $(".SearchBar-Container-Result").css("visibility","hidden")
+        }
+        else{
+            $(".SearchBar-Container-Result").css("visibility","visible")
         }
         //If click on one of the question then hide search and searchSelector
         if(click) {
@@ -183,31 +213,28 @@
     });
      */
 
-    $("#zoomIn").on('click',function (event) {
 
-        selectedRect = ""
-        console.log(selectedRect)
-        if(widthSize <= 1400){
-            widthSize += 100
-        }
-        if(heightSize <= 500) {
-            heightSize += 100
-        }
-        for (var i = 0; i < rects.length; i++) {
-            rects[i].width = widthSize
-            rects[i].height = heightSize
-        }
-        drawAll()
+    $("#zoomIn").on('click',function (event) {
+        console.log(panZoom.getZoom())
+        // drawAll()
     })
 
     $("#zoomOut").on('click',function (event) {
-        widthSize -= 100
-        heightSize -= 100
-        for (var i = 0; i < rects.length; i++) {
-            rects[i].width = widthSize
-            rects[i].height = heightSize
-        }
-        drawAll()
+
+        //drawAll()
     })
+
+    document.addEventListener ("keydown", function (zEvent) {
+        if (zEvent.ctrlKey ) {  // case sensitive
+            ctrlKey = true
+        }
+        else{
+            ctrlKey = false
+        }
+    } );
+    document.addEventListener ("keyup", function (zEvent) {
+            ctrlKey = false
+    } );
+
 </script>
 </html>
