@@ -124,6 +124,7 @@ function populateRec(answer){
         let width = $('#svg').width()
         $('#svg').width(width+width)
     }
+<<<<<<< HEAD
     //Update progress bar
     test_progress_bar += 25
     $('#progress-bar').width(test_progress_bar + '%')
@@ -132,6 +133,16 @@ function populateRec(answer){
     drawTheShape(title)
     prev = index
     slide(0)
+=======
+        //Update progress bar
+        test_progress_bar += 25
+        $('#progress-bar').width(test_progress_bar + '%')
+        $('#progress-bar').text(test_progress_bar +'%')
+        //Should change to focus and not focus
+        drawTheShape(title)
+        prev = index
+        slide(0)
+>>>>>>> 30434fc173548a300555d9e3430d6bc79120d9e2
 }
 function slide(slide){
     if(mode === false) {

@@ -131,7 +131,7 @@ function myMove(e,svg) {
 
         //current mouse on the 4/4 quarter
         if(startX <= mx && startY <= my) {
-            selectedRectangle.update(startX.toString(),startY.toString(),dy.toString(),dx.toString(),"#FFC433",'1')
+            selectedRectangle.update(startX.toString(),startY.toString(),dx.toString(),dy.toString(),"#FFC433",'1')
             for (var i = 0; i < rects.length; i++) {
                 var r = rects[i];
                 if ( r.x > startX && r.x < mx && r.y > startY && r.y <my && r.y + r.height < my && r.width < mx) {
@@ -142,15 +142,15 @@ function myMove(e,svg) {
         }
         //current mouse on the 3/4 quarter
         else if(startX >= mx && startY < my){
-            selectedRectangle.update((mx).toString(),(rectY).toString(),(my-rectY).toString(),(rectX-mx).toString(),"#FFC433",'1')
+            selectedRectangle.update((mx).toString(),(rectY).toString(),(rectX-mx).toString(),(my-rectY).toString(),"#FFC433",'1')
         }
         //current mouse on the 2/4 quarter
         else if(startX > mx && startY > my){
-            selectedRectangle.update((mx).toString(),(my).toString(),(rectY-my).toString(),(rectX-mx).toString(),"#FFC433",'1')
+            selectedRectangle.update((mx).toString(),(my).toString(),(rectX-mx).toString(),(rectY-my).toString(),"#FFC433",'1')
         }
         //current mouse on the 1/4 quarter
         else if(startX < mx && startY > my){
-            selectedRectangle.update((mx-(mx-rectX)).toString(),(my).toString(), (rectY-my).toString(),(mx-rectX).toString(),"#FFC433",'1')
+            selectedRectangle.update((mx-(mx-rectX)).toString(),(my).toString(), (mx-rectX).toString(),(rectY-my).toString(),"#FFC433",'1')
         }
         //While doing this should highlight all the rectangle within the range
 
@@ -160,7 +160,7 @@ function myMove(e,svg) {
 }
 
 function myWheel(e,panZoom){
-
+    console.log("Mouse wheel")
     let value = ($('.svg-pan-zoom_viewport').css('transform'));
     let matrix = value.substring(value.lastIndexOf("(") + 1, value.lastIndexOf(")")).split(',')
     x_scale=matrix[0]

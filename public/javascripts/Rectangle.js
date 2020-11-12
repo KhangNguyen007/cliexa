@@ -16,5 +16,11 @@ class Rectangle{
         this.title = title
         this.id = id
     }
+    update(x,y,width,height){
+        this.x = x
+        this.y = y
+        this.width = width
+        this.height = height
+    }
 
 }
