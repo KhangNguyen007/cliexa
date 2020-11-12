@@ -8,10 +8,12 @@
 </head>
 <body>
             <div class="container">
-                <div class="topPanel">
-                    <button id="button1" type="button" class="btn btn-primary">Primary</button>
-                    <button id="button2" type="button" class="btn btn-danger">Secondary</button>
-                    <button id="button3" type="button" class="btn btn-success">Success</button>
+
+
+                <div class="topPanel" id="topPanel">
+                    <div class="progress" style="position:absolute;width:50%;right:10%;bottom:0">
+                        <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                 </div>
                 <div class="leftPanel" id="leftPanel"></div>
                 <div class="splitLM" id="splitLM"></div>
@@ -25,15 +27,16 @@
 
                     </div>
 
-                    <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 6000 6000" width="6000" height="6000" style="visibility: hidden;background-color: #F6F8F9; display: inline;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+                    <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 100000 100000" width="100000" height="100000" style="visibility: hidden;background-color: #F6F8F9; display: inline;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
                         <!-- Using Jquery to add shape -->
                     </svg>
                 </div>
 
+                <!--
                 <div class="zoom" id="zoom">
                     <button id="zoomIn" >Reset</button><br/>
                 </div>
-
+                -->
                 <div class="rightPanel" id="rightPanel"></div>
             </div>
 </body>
@@ -59,11 +62,10 @@
         controlIconsEnabled: true,
         dblClickZoomEnabled: false,
         panEnabled: false,
-        mouseWheelZoomEnabled: true,
+        mouseWheelZoomEnabled: false,
         minZoom: 0.1,
         beforeZoom: function(e){
                     if(ctrlKey) {
-
                     }
 
         }
@@ -79,51 +81,44 @@
 
     //Listening to events
     let svg = document.getElementById("svg")
-    svg.onmousemove= (e) =>myMove(e,svg)
+    svg.onmousemove= (e) => {
+        if (mode){
+            myMove(e, svg)
+        }
+    }
     svg.onmouseup= myUp
-    svg.onmousedown= (e)=>myDown(e,svg)
-    svg.onwheel=(e) => myWheel(e,panZoom)
+    svg.onmousedown= (e)=> {
+        if(mode) {
+            myDown(e, svg)
+        }
+    }
+    svg.onwheel=(e) => {
+        if(mode) {
+            myWheel(e, panZoom)
+        }
+    }
     //Config
     let config = new Configuration()
     config.setMainPanel(0,0)
 
     config.setSearchBar($('#mainPanel').width()/2 - $('#SearchBar-Container').width()/2,$('#mainPanel').height()/2 -  $('#SearchBar-Container').height()/2)
 
-
+    //When click on a question => should populate this shape
     //When click search from the search bar, will populate it here set prev to id
     $('ul').on('click',"li",function(){
-        console.log("Hello World")
         //alert($(this).html());
         //Draw new rectagle here.
         prev = $(this).attr('id')
 
-        //Init the first Rect
-        let newRect = new Rectangle($('#mainPanel').width()/10,$('#mainPanel').height()/10,widthSize,heightSize,"#FFFFFF",false, $(this).html(),rects.length)
-        let newRectSVG = new RectangleSVG()
-        let newTitleTextSVG = new TextSVG()
-        let newYesRectSVG   = new RectangleSVG()
-        let newNoRectSVG    = new RectangleSVG()
-        newRectSVG.update(newRect.x,newRect.y,heightSize,widthSize,newRect.fill,0)
-        newTitleTextSVG.update(newRect.x, newRect.y+ 50, '#000', newRect.title)
-        newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + heightSize/2, 25, 25, 'green', '1', "populateRec(1)")
-        newNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'red', '1', "populateRec(0)")
-        rects.push(newRect)
-        rectsSVG.push(newRectSVG)
-        titleTextSVG.push(newTitleTextSVG)
-        yesRectSVG.push(newYesRectSVG)
-        noRectSVG.push(newNoRectSVG)
-
-        draw(newRect.id)
-
-
+        drawTheShape($(this).html())
         $("#SearchBar-Container").css("visibility","hidden")
         $("#Search").css("visibility","hidden")
         $("#Search-Result").css("visibility","hidden")
         $("#SearchList").css("visibility","hidden")
         $("#svg").css("visibility","visible")
-
         return false;
     });
+
     $(".SearchBar-Container-Result").css("visibility","hidden")
 
     //Search input here
@@ -139,9 +134,14 @@
         }
         if(this.value === ""){
             $(".SearchBar-Container-Result").css("visibility","hidden")
+            $("#SearchList").css("visibility","hidden")
         }
         else{
+            $("#SearchBar-Container").css("visibility","visible")
+            $("#Search").css("visibility","visible")
             $(".SearchBar-Container-Result").css("visibility","visible")
+            $("#SearchList").css("visibility","visible")
+
         }
         //If click on one of the question then hide search and searchSelector
         if(click) {
@@ -157,6 +157,16 @@
     $("#splitLM").on('mousedown',function(evt){
         dragSplit = true
     })
+
+    $("#splitLM").on('mouseup',function(evt){
+        if(dragSplit){
+            if(!mode) {
+                //Call realign to focus on one rectangle at a time
+                reAlign()
+            }
+        }
+    })
+
     //Change the view of the main panel when move the left and main panel
     $("body").on('mousemove',function(evt) {
         if (dragSplit) {
@@ -175,43 +185,28 @@
         $("body").on('keydown', function(event) {
             if (event.ctrlKey && event.key === 'z') {
                 if(rects.length >= 1) {
+                    test_progress_bar -= 25
                     let left = $('#mainPanel').scrollLeft();
                     $('#mainPanel').scrollLeft(left - $('#mainPanel').width());
                     clear()
                     drawAll()
                 }
                 else{
+                    console.log("Inside keydown")
+                    test_progress_bar=0
                     $("#SearchBar-Container").css("visibility","visible")
                     $("#Search").css("visibility","visible")
-                    $("#Search-Result").css("visibility","visible")
-                    $("#SearchList").css("visibility","visible")
+                    $("#Search-Result").css("visibility","hidden")
+                    $("#SearchList").css("visibility","hidden")
                     $("#svg").css("visibility","hidden")
                     $('#mainPanel').scrollLeft(0);
                     $('#mainPanel').scrollTop(0);
                 }
+                $('#progress-bar').width(test_progress_bar + '%')
+                $('#progress-bar').text(test_progress_bar +'%')
             }
         });
 
-
-
-    //Zoom in/out of the main panel
-    // Default
-    //Check the position of scroll
-    /*
-    $("#mainPanel").on('wheel', function(event) {
-        event.preventDefault();
-        console.log(event.originalEvent.detail)
-        if (event.ctrlKey &&  event.originalEvent.detail >= 0)
-        {
-            console.log('scrolling up');
-        }
-        else {
-                console.log('Scroll down');
-            }
-
-
-    });
-     */
 
 
     $("#zoomIn").on('click',function (event) {
@@ -224,16 +219,22 @@
         //drawAll()
     })
 
-    document.addEventListener ("keydown", function (zEvent) {
-        if (zEvent.ctrlKey ) {  // case sensitive
-            ctrlKey = true
-        }
-        else{
+
+    document.addEventListener ("keyup", function (event) {
             ctrlKey = false
-        }
     } );
-    document.addEventListener ("keyup", function (zEvent) {
-            ctrlKey = false
+
+    document.addEventListener ("keydown", function (event) {
+        if(event.code === "KeyG"){
+            if(!mode) {
+                mode = true
+                panZoom.enableMouseWheelZoom()
+            }
+            else{
+                mode = false
+                panZoom.disableMouseWheelZoom()
+            }
+        }
     } );
 
 </script>

@@ -10,8 +10,14 @@ class RectangleSVG{
         $(".svg-pan-zoom_viewport").append(this.rect);
 
     }
+    updatePosition(x,y,width,height){
+        this.rect.setAttributeNS(null, 'x', x.toString());
+        this.rect.setAttributeNS(null, 'y', y.toString());
+        this.rect.setAttributeNS(null, 'width', width.toString());
+        this.rect.setAttributeNS(null, 'height', height.toString());
+    }
     //Update without onClick
-    update(x,y,height,width,fill,zIndex){
+    update(x,y,width,height,fill,zIndex){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
         this.rect.setAttributeNS(null, 'rx',"10");
@@ -24,7 +30,7 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
     //Update with onClick
-    updateWithOnClick(x,y,height,width,fill,zIndex,onclick){
+    updateWithOnClick(x,y,width,height,fill,zIndex,onclick){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
         this.rect.setAttributeNS(null, 'rx',"5");
@@ -38,7 +44,7 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
 
-    resize(x,y,height,width,fill,zIndex){
+    resize(x,y,width,height,fill,zIndex){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
         this.rect.setAttributeNS(null, 'height', height.toString());
