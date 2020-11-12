@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 </head>
 <body>
-<<<<<<< HEAD
 <div class="container">
 
 
@@ -25,39 +24,6 @@
             <div class="SearchBar-Container-Result" id="Search-Result">
                 <ul id="SearchList">
                 </ul>
-=======
-            <div class="container">
-
-
-                <div class="topPanel" id="topPanel">
-                    <div class="progress" style="position:absolute;width:50%;right:10%;bottom:0">
-                        <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                </div>
-                <div class="leftPanel" id="leftPanel"></div>
-                <div class="splitLM" id="splitLM"></div>
-                <div class="mainPanel" id="mainPanel">
-                    <div class="SearchBar-Container" id="SearchBar-Container">
-                        <input id="Search" />
-                        <div class="SearchBar-Container-Result" id="Search-Result">
-                            <ul id="SearchList">
-                            </ul>
-                        </div>
-
-                    </div>
-
-                    <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 100000 100000" width="100000" height="100000" style="visibility: hidden;background-color: #F6F8F9; display: inline;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
-                        <!-- Using Jquery to add shape -->
-                    </svg>
-                </div>
-
-                <!--
-                <div class="zoom" id="zoom">
-                    <button id="zoomIn" >Reset</button><br/>
-                </div>
-                -->
-                <div class="rightPanel" id="rightPanel"></div>
->>>>>>> 30434fc173548a300555d9e3430d6bc79120d9e2
             </div>
 
         </div>
@@ -100,13 +66,8 @@
         mouseWheelZoomEnabled: false,
         minZoom: 0.1,
         beforeZoom: function(e){
-<<<<<<< HEAD
             if(ctrlKey) {
             }
-=======
-                    if(ctrlKey) {
-                    }
->>>>>>> 30434fc173548a300555d9e3430d6bc79120d9e2
 
         }
     });
@@ -174,14 +135,9 @@
         }
         if(this.value === ""){
             $(".SearchBar-Container-Result").css("visibility","hidden")
-            $("#SearchList").css("visibility","hidden")
         }
         else{
-            $("#SearchBar-Container").css("visibility","visible")
-            $("#Search").css("visibility","visible")
             $(".SearchBar-Container-Result").css("visibility","visible")
-            $("#SearchList").css("visibility","visible")
-
         }
         //If click on one of the question then hide search and searchSelector
         if(click) {
@@ -222,7 +178,6 @@
         dragSplit = false
     })
     //Listening move to previous state
-<<<<<<< HEAD
     $("body").on('keydown', function(event) {
         if (event.ctrlKey && event.key === 'z') {
             if(rects.length >= 1) {
@@ -246,32 +201,6 @@
             $('#progress-bar').text(test_progress_bar +'%')
         }
     });
-=======
-        $("body").on('keydown', function(event) {
-            if (event.ctrlKey && event.key === 'z') {
-                if(rects.length >= 1) {
-                    test_progress_bar -= 25
-                    let left = $('#mainPanel').scrollLeft();
-                    $('#mainPanel').scrollLeft(left - $('#mainPanel').width());
-                    clear()
-                    drawAll()
-                }
-                else{
-                    console.log("Inside keydown")
-                    test_progress_bar=0
-                    $("#SearchBar-Container").css("visibility","visible")
-                    $("#Search").css("visibility","visible")
-                    $("#Search-Result").css("visibility","hidden")
-                    $("#SearchList").css("visibility","hidden")
-                    $("#svg").css("visibility","hidden")
-                    $('#mainPanel').scrollLeft(0);
-                    $('#mainPanel').scrollTop(0);
-                }
-                $('#progress-bar').width(test_progress_bar + '%')
-                $('#progress-bar').text(test_progress_bar +'%')
-            }
-        });
->>>>>>> 30434fc173548a300555d9e3430d6bc79120d9e2
 
 
 
@@ -287,11 +216,7 @@
 
 
     document.addEventListener ("keyup", function (event) {
-<<<<<<< HEAD
         ctrlKey = false
-=======
-            ctrlKey = false
->>>>>>> 30434fc173548a300555d9e3430d6bc79120d9e2
     } );
 
     document.addEventListener ("keydown", function (event) {
