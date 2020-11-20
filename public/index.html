@@ -11,10 +11,7 @@
 
 
     <div class="topPanel" id="topPanel">
-        <a href="/">
-            <img src="cliexa-logo.png" alt="test" width="150" height="75">
-        </a>
-
+        <a href="/"><img src="stylesheets/cliexa-logo.png" alt="test" width="150" height="75"></a>
         <div class="progress" style="position:absolute;width:50%;right:10%;bottom:0">
             <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -40,7 +37,6 @@
                 <ul id="SearchList">
                 </ul>
             </div>
-
         </div>
 
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 100000 100000" width="100000" height="100000" style="visibility: hidden;background-color: #F6F8F9; display: inline;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
@@ -81,8 +77,6 @@
         mouseWheelZoomEnabled: false,
         minZoom: 0.1,
         beforeZoom: function(e){
-            if(ctrlKey) {
-            }
 
         }
     });
@@ -98,23 +92,24 @@
     //Listening to events
     let svg = document.getElementById("svg")
     svg.onmousemove= (e) => {
-        if (mode){
+        if (config.getMode()){
             myMove(e, svg)
         }
     }
     svg.onmouseup= myUp
     svg.onmousedown= (e)=> {
-        if(mode) {
+        if(config.getMode()) {
             myDown(e, svg)
         }
     }
     svg.onwheel=(e) => {
-        if(mode) {
+        if(config.getMode()) {
             myWheel(e, panZoom)
         }
     }
     //Config
     let config = new Configuration()
+    let main   = new Main()
     config.setMainPanel(0,0)
 
     config.setSearchBar($('#mainPanel').width()/2 - $('#SearchBar-Container').width()/2,$('#mainPanel').height()/2 -  $('#SearchBar-Container').height()/2)
@@ -124,9 +119,9 @@
     $('ul').on('click',"li",function(){
         //alert($(this).html());
         //Draw new rectagle here.
-        prev = $(this).attr('id')
-
-        drawTheShape($(this).html())
+        config.updateQuestionPosition($(this).attr('id'))
+        console.log("From search click...")
+        main.drawTheShape($(this).html())
         $("#SearchBar-Container").css("visibility","hidden")
         $("#Search").css("visibility","hidden")
         $("#Search-Result").css("visibility","hidden")
@@ -171,9 +166,9 @@
 
     $("#splitLM").on('mouseup',function(evt){
         if(dragSplit){
-            if(!mode) {
+            if(!config.getMode()) {
                 //Call realign to focus on one rectangle at a time
-                reAlign()
+                main.reAlign()
             }
         }
     })
@@ -195,15 +190,19 @@
     //Listening move to previous state
     $("body").on('keydown', function(event) {
         if (event.ctrlKey && event.key === 'z') {
+            let rects = config.getRects()
             if(rects.length >= 1) {
-                test_progress_bar -= 25
+                let test_progress_bar = config.getTest_Progress_bar()
+                if(test_progress_bar >= 25) {
+                    test_progress_bar -= 25
+                }
+                config.updateTest_Progress_Bar(test_progress_bar)
                 let left = $('#mainPanel').scrollLeft();
                 $('#mainPanel').scrollLeft(left - $('#mainPanel').width());
-                clear()
-                drawAll()
+                main.clear()
+                main.drawAll()
             }
             else{
-                test_progress_bar=0
                 $("#SearchBar-Container").css("visibility","visible")
                 $("#Search").css("visibility","visible")
                 $("#Search-Result").css("visibility","visible")
@@ -212,8 +211,10 @@
                 $('#mainPanel').scrollLeft(0);
                 $('#mainPanel').scrollTop(0);
             }
-            $('#progress-bar').width(test_progress_bar + '%')
-            $('#progress-bar').text(test_progress_bar +'%')
+            if(config.getTest_Progress_bar() >= 0) {
+                $('#progress-bar').width(config.getTest_Progress_bar() + '%')
+                $('#progress-bar').text(config.getTest_Progress_bar() + '%')
+            }
         }
     });
 
@@ -228,6 +229,25 @@
 
         //drawAll()
     })
+
+
+    document.addEventListener ("keyup", function (event) {
+        config.setCtrlKey(false)
+    } );
+
+    document.addEventListener ("keydown", function (event) {
+        if(event.code === "KeyG"){
+            if(!config.getMode()) {
+               config.updateMode(true)
+                panZoom.enableMouseWheelZoom()
+            }
+            else{
+                config.updateMode(false)
+                panZoom.disableMouseWheelZoom()
+            }
+        }
+    } );
+
 
     //Detect click on component
     //Inside NHSPAIN
@@ -301,22 +321,6 @@
     });
 
 
-    document.addEventListener ("keyup", function (event) {
-        ctrlKey = false
-    } );
-
-    document.addEventListener ("keydown", function (event) {
-        if(event.code === "KeyG"){
-            if(!mode) {
-                mode = true
-                panZoom.enableMouseWheelZoom()
-            }
-            else{
-                mode = false
-                panZoom.disableMouseWheelZoom()
-            }
-        }
-    } );
 
 </script>
 </html>
