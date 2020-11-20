@@ -15,10 +15,12 @@ var rectY
 function myDown(e,svg) {
     // tell the browser we're handling this mouse event
     let ctx = svg.getBoundingClientRect();
-
+    let rectsSVG = config.getRectSVG()
+    let rects    = config.getRects()
+    let scale_and_translate = config.getScaleTranslate()
     // get the current mouse position
-    var mx = Math.floor((e.clientX - ctx.left - translateX)/x_scale);
-    var my = Math.floor((e.clientY - ctx.top - translateY)/y_scale);
+    var mx = Math.floor((e.clientX - ctx.left - scale_and_translate.translateX)/scale_and_translate.x_scale);
+    var my = Math.floor((e.clientY - ctx.top - scale_and_translate.translateY)/scale_and_translate.y_scale);
 
     // test each rect to see if mouse is inside
     dragok = false;
@@ -60,7 +62,7 @@ function myUp(e) {
     // tell the browser we're handling this mouse event
     e.preventDefault();
     e.stopPropagation();
-
+    let rects = config.getRects()
     // clear all the dragging flags
     dragok = false;
     mousedown = false
@@ -77,13 +79,14 @@ function myUp(e) {
 function myMove(e,svg) {
     // if we're dragging anything...
     let ctx = svg.getBoundingClientRect();
-
-
+    let rects = config.getRects()
+    let rectsSVG = config.getRectSVG()
+    let scale_and_translate = config.getScaleTranslate()
     if (dragok) {
         // tell the browser we're handling this mouse event
         // get the current mouse position
-        var mx = Math.floor((e.clientX - ctx.left -translateX)/x_scale);
-        var my = Math.floor((e.clientY - ctx.top - translateY)/y_scale);
+        var mx = Math.floor((e.clientX - ctx.left - scale_and_translate.translateX)/scale_and_translate.x_scale);
+        var my = Math.floor((e.clientY - ctx.top - scale_and_translate.translateY)/scale_and_translate.y_scale);
 
         // calculate the distance the mouse has moved
         // since the last mousemove
@@ -101,19 +104,8 @@ function myMove(e,svg) {
             }
         }
 
-        //Move scroll left only
-        /*
-        let left = $('#mainPanel').scrollLeft()
-        if(r.x >  left + $('#mainPanel').width() - r.width){
-            $('#mainPanel').scrollLeft(left + 30);
-           // $('#mainPanel').scrollTop(height);
-        }
-        else if( r.x < left + 5){
-            $('#mainPanel').scrollLeft(left - 30);
-        }
-        */
         // Redraw
-        draw(index);
+        main.draw(index);
         // reset the starting mouse position for the next mousemove
         startX = mx;
         startY = my;
@@ -121,8 +113,8 @@ function myMove(e,svg) {
     //For selectedRectangle only
     else if(mousedown){
         //Calculate new mouse position
-        var mx = Math.floor(e.clientX - ctx.left - translateX)/x_scale;
-        var my = Math.floor(e.clientY - ctx.top - translateY)/y_scale;
+        var mx = Math.floor(e.clientX - ctx.left - scale_and_translate.translateX)/scale_and_translate.x_scale;
+        var my = Math.floor(e.clientY - ctx.top - scale_and_translate.translateY)/scale_and_translate.y_scale;
         // calculate the distance the mouse has moved
         // since the last mousemove
         var dx = mx - startX;
@@ -160,11 +152,7 @@ function myMove(e,svg) {
 }
 
 function myWheel(e,panZoom){
-    console.log("Mouse wheel")
     let value = ($('.svg-pan-zoom_viewport').css('transform'));
     let matrix = value.substring(value.lastIndexOf("(") + 1, value.lastIndexOf(")")).split(',')
-    x_scale=matrix[0]
-    y_scale=matrix[3]
-    translateX=matrix[4]
-    translateY=matrix[5]
+    config.setScaleTranslate(matrix[0],matrix[3],matrix[4],matrix[5])
 }
