@@ -19,6 +19,18 @@
     <div class="leftPanel" id="leftPanel"></div>
     <div class="splitLM" id="splitLM"></div>
     <div class="mainPanel" id="mainPanel">
+        <div class="package" id="package">
+            <div class="sub-package" id="NHSPAIN">NHSPAIN</div>
+            <div class="sub-package" id="PHQ">PHQ9</div>
+            <div class="sub-package" id="GAD">GAD7</div>
+            <div class="sub-package" id="DAST">DAST10</div>
+
+            <div class="sub-package" id="NIDE">NIDE</div>
+            <div class="sub-package" id="AUDIT">AUDIT</div>
+            <div class="sub-package" id="DRAWING">DRAWING</div>
+            <div class="sub-package" id="PDI">PDI</div>
+        </div>
+
         <div class="SearchBar-Container" id="SearchBar-Container">
             <input id="Search" />
             <div class="SearchBar-Container-Result" id="Search-Result">
@@ -235,6 +247,80 @@
             }
         }
     } );
+
+
+    //Detect click on component
+    //Inside NHSPAIN
+    $("#NHSPAIN").click(function() {
+        //Hide all package
+        $("#package").hide()
+    }).mouseover(function(){
+        $("#NHSPAIN").css("width", "50%");
+        $("#NHSPAIN").css("height", "50%");
+    }).mouseout(function() {
+        $("#NHSPAIN").css("width", "23%");
+        $("#NHSPAIN").css("height", "25%");
+    });
+
+
+    $("#GAD").mouseover(function(){
+        $("#GAD").css("width", "0%");
+        $("#GAD").css("height", "0%");
+    }).mouseout(function() {
+        $("#GAD").css("width", "23%");
+        $("#GAD").css("height", "25%");
+    });
+
+    $("#PHQ").mouseover(function(){
+        $("#PHQ").css("width", "50%");
+        $("#PHQ").css("height", "50%");
+    }).mouseout(function() {
+        $("#PHQ").css("width", "23%");
+        $("#PHQ").css("height", "25%");
+    });
+
+
+    $("#DAST").mouseover(function(){
+        $("#DAST").css("width", "50%");
+        $("#DAST").css("height", "50%");
+    }).mouseout(function() {
+        $("#DAST").css("width", "23%");
+        $("#DAST").css("height", "25%");
+    });
+
+    $("#NIDE").mouseover(function(){
+        $("#NIDE").css("width", "50%");
+        $("#NIDE").css("height", "50%");
+    }).mouseout(function() {
+        $("#NIDE").css("width", "23%");
+        $("#NIDE").css("height", "25%");
+    });
+
+    $("#AUDIT").mouseover(function(){
+        $("#AUDIT").css("width", "50%");
+        $("#AUDIT").css("height", "50%");
+    }).mouseout(function() {
+        $("#AUDIT").css("width", "23%");
+        $("#AUDIT").css("height", "25%");
+    });
+
+    $("#DRAWING").mouseover(function(){
+        $("#DRAWING").css("width", "50%");
+        $("#DRAWING").css("height", "50%");
+    }).mouseout(function() {
+        $("#DRAWING").css("width", "23%");
+        $("#DRAWING").css("height", "25%");
+    });
+
+    $("#PDI").mouseover(function(){
+        $("#PDI").css("width", "50%");
+        $("#PDI").css("height", "50%");
+    }).mouseout(function() {
+        $("#PDI").css("width", "23%");
+        $("#PDI").css("height", "25%");
+    });
+
+
 
 </script>
 </html>
