@@ -203,13 +203,15 @@ class Main{
         this.slide(1)
     }
 
+    // Automatically draw the rectangle shape with the question and the yes or no button
     drawTheShape(title){
+        // Sets up the size of the rectangle
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
         let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
-        let x = 0.05*width
-        let shape_width = width-0.1*width
-        let y = 0.05 *height
-        let shape_height = height -0.1*height
+        let x = 0.05 * width
+        let shape_width = width - 0.1 * width
+        let y = 0.05 * height
+        let shape_height = height - 0.1 * height
         let rects = config.getRects()
         let linesSVG = config.getLinesSVG()
         let rectsSVG = config.getRectSVG()
@@ -219,41 +221,55 @@ class Main{
         let yesTextSVG   = config.getYesTextSVG()
         let noTextSVG    = config.getNoTextSVG()
 
+        // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
         let newRect
-
         if(rects.length === 0) {
-            newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF", false, title, rects.length)
+            newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
+                false, title, rects.length)
         }
+        // If the first rectangle is populated, all the rectangles after will have connective box
         else{
-            newRect = new Rectangle(rects[rects.length-1].x + width, rects[rects.length-1].y, shape_width, shape_height, "#FFFFFF", false, title, rects.length)
+            // Sets up the shape, size, and color, then creates the new Rectangle
+            newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
+                shape_width, shape_height, "#FFFFFF", false, title, rects.length)
+
+            // Creates a new line that connects the previous box to the next box
             let newLineSVG = new LineSVG()
             linesSVG.push(newLineSVG)
         }
 
-
+        // Creates a new instance of the rectangle
         let newRectSVG = new RectangleSVG()
-        let newTitleTextSVG = new TextSVG()
+        let newQuestionTextSVG = new TextSVG()
         let newYesRectSVG   = new RectangleSVG()
         let newYesTextSVG = new TextSVG()
         let newNoRectSVG    = new RectangleSVG()
         let newNoTextSVG = new TextSVG()
 
+        // Updates the new rectangle's size and question
+        // Includes a "yes" button colored green and a "no" button colored red, along with button location
+        // If no boolean is 0, if yes boolean is 1
+        newRectSVG.update(newRect.x, newRect.y, newRect.width, newRect.height, newRect.fill, 0)
+        newQuestionTextSVG.update(newRect.x, newRect.y+ 50, '#000', newRect.title)
+        newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + height/2, 25, 25,
+            'green', '1', "populateRec(1)")
+        newYesTextSVG.update(newRect.x, newRect.y + height / 2, '#000', "Yes")
+        newNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25,
+            'red', '1', "populateRec(0)")
+        newNoTextSVG.update(newRect.x + newRect.width - 25, newRect.y + height / 2,'#000', "No")
 
-        newRectSVG.update(newRect.x,newRect.y,newRect.width,newRect.height,newRect.fill,0)
-        newTitleTextSVG.update(newRect.x, newRect.y+ 50, '#000', newRect.title)
-        newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + height/2, 25, 25, 'green', '1', "populateRec(1)")
-        newYesTextSVG.update(newRect.x, newRect.y + height/2, '#000', "Yes")
-        newNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25, 'red', '1', "populateRec(0)")
-        newNoTextSVG.update(newRect.x + newRect.width - 25, newRect.y+ height/2,'#000', "No")
-
+        // Populates/draws the rectangle with the updated question to the screen
+        // Will create a new rectangle with updated question when patient answers "yes" or "no"
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
-        titleTextSVG.push(newTitleTextSVG)
+        titleTextSVG.push(newQuestionTextSVG)
         yesRectSVG.push(newYesRectSVG)
         noRectSVG.push(newNoRectSVG)
         yesTextSVG.push(newYesTextSVG)
         noTextSVG.push(newNoTextSVG)
 
+        // Populates/draws the rectangle with the updated question to the screen
+        // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
@@ -261,101 +277,6 @@ class Main{
         config.updateYesTextSVG(yesTextSVG)
         config.updateNoRectSVG(noRectSVG)
         config.updateNoTextSVG(noTextSVG)
-
         this.draw(newRect.id)
     }
 }
-<<<<<<< Updated upstream
-
-
-
-
-
-=======
-
-
-function reAlign(){
-    let width =  Math.floor(mainPanelWidth - $("#leftPanel").width() - $("#rightPanel").width());
-    let height = Math.floor(mainPanelHeight - $("#topPanel").height());
-    //Calculate the new position for the first shape, then go from there
-    let x = 0.05*width
-    let shape_width = width-0.1*width
-    let y = 0.05 *height
-    let shape_height = height -0.1*height
-    rects[0].update(x,y,shape_width,shape_height)
-    //Update new position for all when realign
-    for(let i = 1; i < rects.length; i++){
-        rects[i].update(rects[i-1].x + width,rects[i-1].y,shape_width,shape_height)
-    }
-    x_scale=1
-    y_scale=1
-    translateX=0
-    translateY=0
-    panZoom.reset()
-    panZoom.zoom(1)
-    drawAll()
-    // 1 means go back to
-    slide(1)
-}
-
-
-// Automatically draw the rectangle shape with the question and the yes or no button
-function drawTheShape(title){
-    // Sets up the size of the rectangle
-    let width =  Math.floor(mainPanelWidth - $("#leftPanel").width() - $("#rightPanel").width());
-    let height = Math.floor(mainPanelHeight - $("#topPanel").height());
-    let x = 0.05 * width
-    let shape_width = width - 0.1 * width
-    let y = 0.05 * height
-    let shape_height = height - 0.1 * height
-
-    // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
-    let newRect
-    if(rects.length == 0) {
-        newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
-            false, title, rects.length)
-    }
-
-    // If the first rectangle is populated, all the rectangles after will have connective box
-    else{
-        // Sets up the shape, size, and color, then creates the new Rectangle
-        newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
-            shape_width, shape_height, "#FFFFFF", false, title, rects.length)
-
-        // Creates a new line that connects the previous box to the next box
-        let newLineSVG = new LineSVG()
-        linesSVG.push(newLineSVG)
-    }
-
-    // Creates a new instance of the rectangle
-    let newRectSVG = new RectangleSVG()
-    let newQuestionTextSVG = new TextSVG()
-    let newYesRectSVG   = new RectangleSVG()
-    let newYesTextSVG = new TextSVG()
-    let newNoRectSVG    = new RectangleSVG()
-    let newNoTextSVG = new TextSVG()
-
-    // Updates the new rectangle's size and question
-    // Includes a "yes" button colored green and a "no" button colored red, along with button location
-    // If no boolean is 0, if yes boolean is 1
-    newRectSVG.update(newRect.x, newRect.y, newRect.width, newRect.height, newRect.fill, 0)
-    newQuestionTextSVG.update(newRect.x, newRect.y + 50, '#000', newRect.title)
-    newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + height / 2, 25, 25,
-        'green', '1', "populateRec(1)")
-    newYesTextSVG.update(newRect.x, newRect.y + height / 2, '#000', "Yes")
-    newNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 25, 25,
-        'red', '1', "populateRec(0)")
-    newNoTextSVG.update(newRect.x + newRect.width - 25, newRect.y + height / 2,'#000', "No")
-
-    // Populates/draws the rectangle with the updated question to the screen
-    // Will create a new rectangle with updated question when patient answers "yes" or "no"
-    rects.push(newRect)
-    rectsSVG.push(newRectSVG)
-    titleTextSVG.push(newQuestionTextSVG)
-    yesRectSVG.push(newYesRectSVG)
-    noRectSVG.push(newNoRectSVG)
-    yesTextSVG.push(newYesTextSVG)
-    noTextSVG.push(newNoTextSVG)
-    draw(newRect.id)
-}
->>>>>>> Stashed changes
