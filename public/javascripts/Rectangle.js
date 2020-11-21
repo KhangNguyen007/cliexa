@@ -2,7 +2,6 @@
 
  */
 
-
 //How to manage the i
 class Rectangle{
     //Set

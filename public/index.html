@@ -68,7 +68,12 @@
 
 <script>
     //This rectangle should be the first one ever
-
+    //Config
+    let config = new Configuration()
+    let main   = new Main()
+    let main_Draggble = new Draggble()
+    config.setMainPanel(0,0)
+    config.setSearchBar($('#mainPanel').width()/2 - $('#SearchBar-Container').width()/2,$('#mainPanel').height()/2 -  $('#SearchBar-Container').height()/2)
     var panZoom = window.panZoom = svgPanZoom('#svg', {
         zoomEnabled: true,
         controlIconsEnabled: true,
@@ -77,42 +82,28 @@
         mouseWheelZoomEnabled: false,
         minZoom: 0.1,
         beforeZoom: function(e){
-
         }
     });
-    /*
-    var svgDropPoint = $("svg")[0].createSVGPoint();
-    svgDropPoint.matrixTransform($("#svg")[0].getCTM().inverse());
-
-    console.log("Get SVG Drop Point:",svgDropPoint)
-    */
     var selectedRectangle = new RectangleSVG()
     selectedRectangle.update(0,0,0,0,"#FFC433",0)
-
     //Listening to events
     let svg = document.getElementById("svg")
     svg.onmousemove= (e) => {
         if (config.getMode()){
-            myMove(e, svg)
+            main_Draggble.myMove(e, svg)
         }
     }
-    svg.onmouseup= myUp
+    svg.onmouseup= (e) => {main_Draggble.myUp(e)}
     svg.onmousedown= (e)=> {
         if(config.getMode()) {
-            myDown(e, svg)
+            main_Draggble.myDown(e, svg)
         }
     }
     svg.onwheel=(e) => {
         if(config.getMode()) {
-            myWheel(e, panZoom)
+            main_Draggble.myWheel(e, panZoom)
         }
     }
-    //Config
-    let config = new Configuration()
-    let main   = new Main()
-    config.setMainPanel(0,0)
-
-    config.setSearchBar($('#mainPanel').width()/2 - $('#SearchBar-Container').width()/2,$('#mainPanel').height()/2 -  $('#SearchBar-Container').height()/2)
 
     //When click on a question => should populate this shape
     //When click search from the search bar, will populate it here set prev to id
