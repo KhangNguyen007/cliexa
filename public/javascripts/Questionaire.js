@@ -1,3 +1,5 @@
+
+// Contains the two questionnaires given to us by Cliexa.
 let data =[
     {id:0,q:"Do you smoke?",yes:1,no:3},
     {id:1,q:"How many packs do you smoke per day? Yes > 5 or No < 5", yes:2,no:3},
@@ -14,7 +16,7 @@ let data =[
     {id:12,q:"Did you sign the CCM consent form?",yes:13,no:15},
     {id:13,q:"Is this your CCM plan worksheet?", yes:14,no:15},
     {id:14,q:"Remote Patient Monitoring set up screen will populate here. Is this your RPM?",yes:15,no:15},
-    {id:15,q:"We are finalizing your result for CCM",yes:15,loading:7}
+    {id:15,q:"We are finalizing your result for CCM",loading:7}
 ]
 
 //Call from search question
