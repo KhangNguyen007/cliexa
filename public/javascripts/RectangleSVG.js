@@ -12,15 +12,12 @@ class RectangleSVG{
     }
 
     // Updates the position of the boxes
-    /* This is not really needed. Uncomment if it breaks for you guys.
     updatePosition(x,y,width,height){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
         this.rect.setAttributeNS(null, 'width', width.toString());
         this.rect.setAttributeNS(null, 'height', height.toString());
     }
-     */
-
 
     // Update without onClick
     // This allows the users to click on the boxes.

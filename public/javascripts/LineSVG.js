@@ -19,7 +19,7 @@ class LineSVG{
         this.line.setAttributeNS(null,"stroke", "blue");
         this.line.setAttributeNS(null,"stroke-width", "1");
     }
-    /* This remove function is not needed
+
     remove(){
         this.line.setAttributeNS(null, 'x1', "0");
         this.line.setAttributeNS(null, 'y1', "0");
@@ -27,6 +27,5 @@ class LineSVG{
         this.line.setAttributeNS(null, 'y2', "0");
         this.line  = null
     }
-    */
 
 }
