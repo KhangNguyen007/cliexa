@@ -22,11 +22,12 @@ class TextSVG{
         this.text.setAttributeNS(null,"font-size","2em")
         this.text.textContent = title;
     }
+    /* The remove function is not needed.
     remove(){
         this.text.setAttributeNS(null,'x',"0");
         this.text.setAttributeNS(null,'y',"0");
         this.text.setAttributeNS(null,'fill',"0");
         this.text.textContent = null
         this.text = null
-    }
+    }*/
 }

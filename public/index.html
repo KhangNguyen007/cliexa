@@ -20,8 +20,9 @@
     <div class="splitLM" id="splitLM"></div>
     <div class="mainPanel" id="mainPanel">
         <div class="package" id="package">
-            <div class="sub-package" id="NHSPAIN">NHSPAIN</div>
-            <div class="sub-package" id="PHQ">PHQ9</div>
+            <div class="sub-package" id="Smoking">Smoking Cessation</div>
+            <div class="sub-package" id="CCM">Chronic Care Management</div>
+            <!--
             <div class="sub-package" id="GAD">GAD7</div>
             <div class="sub-package" id="DAST">DAST10</div>
 
@@ -29,6 +30,7 @@
             <div class="sub-package" id="AUDIT">AUDIT</div>
             <div class="sub-package" id="DRAWING">DRAWING</div>
             <div class="sub-package" id="PDI">PDI</div>
+            -->
         </div>
 
         <div class="SearchBar-Container" id="SearchBar-Container">
@@ -211,6 +213,7 @@
                 $('#mainPanel').scrollLeft(0);
                 $('#mainPanel').scrollTop(0);
             }
+
             if(config.getTest_Progress_bar() >= 0) {
                 $('#progress-bar').width(config.getTest_Progress_bar() + '%')
                 $('#progress-bar').text(config.getTest_Progress_bar() + '%')
@@ -249,17 +252,26 @@
     } );
 
 
-    //Detect click on component
-    //Inside NHSPAIN
-    $("#NHSPAIN").click(function() {
+    // Detect click on components below
+    // Detect if mouse is over Smoking box
+    $("#Smoking").click(function() {
         //Hide all package
         $("#package").hide()
     }).mouseover(function(){
-        $("#NHSPAIN").css("width", "50%");
-        $("#NHSPAIN").css("height", "50%");
+        $("#Smoking").css("width", "50%");
+        $("#Smoking").css("height", "50%");
     }).mouseout(function() {
-        $("#NHSPAIN").css("width", "23%");
-        $("#NHSPAIN").css("height", "25%");
+        $("#Smoking").css("width", "23%");
+        $("#Smoking").css("height", "25%");
+    });
+
+    // Detect if mouse is over CCM box
+    $("#CCM").mouseover(function(){
+        $("#CCM").css("width", "50%");
+        $("#CCM").css("height", "50%");
+    }).mouseout(function() {
+        $("#CCM").css("width", "23%");
+        $("#CCM").css("height", "25%");
     });
 
 
@@ -269,14 +281,6 @@
     }).mouseout(function() {
         $("#GAD").css("width", "23%");
         $("#GAD").css("height", "25%");
-    });
-
-    $("#PHQ").mouseover(function(){
-        $("#PHQ").css("width", "50%");
-        $("#PHQ").css("height", "50%");
-    }).mouseout(function() {
-        $("#PHQ").css("width", "23%");
-        $("#PHQ").css("height", "25%");
     });
 
 

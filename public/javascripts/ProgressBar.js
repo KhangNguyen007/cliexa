@@ -10,6 +10,7 @@
 
 // Customize the way the progress bar looks with SVG embedded below
 
+/* This is repetitive for the function below.
 var ProgressBar = {
     init: function(el, options) {
         this.options = $.extend({}, ProgressBar.defaults, options);
@@ -82,6 +83,11 @@ var ProgressBar = {
         options.pill.attr('d', result);
     }
 }
+
+ */
+
+
+/* This does not work either.
 $.fn.progressBar = function(options) {
     var originalArguments = arguments;
     this.each(function() {
@@ -98,6 +104,10 @@ $.fn.progressBar = function(options) {
         progressBar[options](originalArguments[1]);
     });
 }
+
+ */
+
+/* This did not matter for the progress bar either
 $.cssHooks.progressBar = {
     get: function(el) {
         var progressBar = $.data(el, 'ProgressBar');
@@ -112,17 +122,25 @@ $.cssHooks.progressBar = {
     }
 }
 
+ */
+
+/* This makes no difference for the progress bar either=
 ProgressBar.supportSVGFilter = function() {
     return typeof SVGFEColorMatrixElement !== "undefined" && SVGFEColorMatrixElement.SVG_FECOLORMATRIX_TYPE_SATURATE==2;
 }
 
+ */
+
+/* This makes no difference for the progress bar either
 ProgressBar.defaults = {
     padding: 1,
     innerPadding: 4,
     progress: 0
 }
 
+ */
 
+/*
 $('.progress').progressBar({padding: 0, innerPadding: 5, progress: 0.5});
 $(window).resize(function() {
     $('.progress').progressBar('refresh');
@@ -130,3 +148,5 @@ $(window).resize(function() {
 $('.progress').progressBar('set', 0.75);
 $('.progress').css({progressBar: 0.25});
 $('.progress').animate({progressBar: 0.75}, 1000);
+
+ */
