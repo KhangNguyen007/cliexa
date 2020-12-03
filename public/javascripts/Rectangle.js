@@ -2,9 +2,10 @@
 
  */
 
-//How to manage the i
+// Defaults all the box created for simplicity
 class Rectangle{
-    //Set
+
+    // Set up the default box size that all our boxes will use
     constructor(x,y,width,height,fill,isDragging,title,id) {
         this.x = x
         this.y = y

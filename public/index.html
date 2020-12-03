@@ -231,6 +231,8 @@
         config.setCtrlKey(false)
     } );
 
+    // If the letter "G" is pushed, unlocks the feature to zoom in or out.
+    // If pressed again, locks the feature to zoom in or out.
     document.addEventListener ("keydown", function (event) {
         if(event.code === "KeyG"){
             if(!config.getMode()) {
@@ -265,7 +267,16 @@
     });
 
     // Detect if mouse is over CCM box
-    $("#CCM").mouseover(function(){
+    $("#CCM").click(function() {
+        //Hide all package
+        $("#package").hide()
+
+        config.updateQuestionPosition(7)
+        console.log("From search click...")
+        main.drawTheShape("Are you a returning patient?")
+        $("#svg").css("visibility","visible")
+
+    }).mouseover(function(){
         $("#CCM").css("width", "50%");
         $("#CCM").css("height", "50%");
     }).mouseout(function() {
@@ -274,6 +285,9 @@
     });
 
 
+    // Below will be used for future questionnaires.
+    // This is taken from the SOAPP Git package provided by Cliexa
+    /*
     $("#GAD").mouseover(function(){
         $("#GAD").css("width", "0%");
         $("#GAD").css("height", "0%");
@@ -322,6 +336,8 @@
         $("#PDI").css("width", "23%");
         $("#PDI").css("height", "25%");
     });
+
+     */
 
 
 

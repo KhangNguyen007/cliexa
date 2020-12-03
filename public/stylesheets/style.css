@@ -21,6 +21,9 @@ a {
   height:10%;
   left:0;
 }
+
+/* Took out the buttons from the top panel.
+// Can implement functions with the buttons in the future.
 .topPanel > #button1{
   position:relative;
   top:20%;
@@ -36,6 +39,9 @@ a {
   top:20%;
   left:70%;
 }
+
+*/
+
 .leftPanel{
   background-color: #F7F7F7;
   position:absolute;
@@ -140,11 +146,17 @@ a {
   /* Similar syntax to box-shadow */
 }
 
+
+/* One of the many questionnaires for our new starting interface
+// uncomment this if we plan to implement more questionnaires
 #GAD{
   background-image: url("images/GAD.png");
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+ */
+
 #Smoking{
   background-image: url("images/Smoking1.jpg");
   background-repeat: no-repeat;
@@ -155,6 +167,10 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+
+/* Many questionnaires for our new starting interface
+// uncomment this if we plan to implement more questionnaires
 #DAST{
   background-image: url("images/DAST10.jpg");
   background-repeat: no-repeat;
@@ -180,3 +196,5 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+ */

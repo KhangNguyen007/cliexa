@@ -9,30 +9,66 @@ function populateRec(answer){
     let test_progress_bar = config.getTest_Progress_bar()
     //Here is the logic to expand question
 
-    if (answer) {
-            index = data[config.getQuestionPosition()].yes
-            if (index === undefined) {
-                index = data[config.getQuestionPosition()].goto
-            }
-            title = data[index].q
-    } else {
-            index = data[config.getQuestionPosition()].no
-
-            if (index === undefined) {
-                index = data[config.getQuestionPosition()].goto
-            }
-            //Update title and index for the new rectangle
-            title = data[index].q
+    // Gets the answer from the user and will send them to the next question based off their answer
+    if (answer) { // If the user selects yes, go to next question corresponding to yes
+        index = data[config.getQuestionPosition()].yes
+        if (index === undefined) {
+            index = data[config.getQuestionPosition()].goto
+        }
+        // Update title and index for the new rectangle
+        title = data[index].q
     }
-    //
-    if(data[index].loading !== 0) {
-        if (index !== 0) {
+    else { // If the user selects no, go to the next question corresponding to no
+        index = data[config.getQuestionPosition()].no
+
+        if (index === undefined) {
+            index = data[config.getQuestionPosition()].goto
+        }
+        //Update title and index for the new rectangle
+        title = data[index].q
+    }
+
+    // If we reach the final box for smoking cessation questionnaire, populate the final box.
+    if(data[index].loading === 0) {
+        //Create a final box here
+        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
+            let width = $('#svg').width()
+            $('#svg').width(width + width)
+        }
+        // If we reach the final box, progress bar goes to 100%
+        let progress_bar = 100
+        config.updateTest_Progress_Bar(progress_bar)
+        console.log(progress_bar)
+        $('#progress-bar').width(progress_bar + '%')
+        $('#progress-bar').text(progress_bar + '%')
+        main.drawTheFinalBox(title)
+        main.slide(0)
+    }
+    // If we reach the final box for CCM questionnaire, populate the final box
+    else if(data[index].loading === 7) {
+        // Create a final box here
+        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
+            let width = $('#svg').width()
+            $('#svg').width(width + width)
+        }
+        // If we reach the final box, progress bar goes to 100%
+        let progress_bar = 100
+        config.updateTest_Progress_Bar(progress_bar)
+        console.log(progress_bar)
+        $('#progress-bar').width(progress_bar + '%')
+        $('#progress-bar').text(progress_bar + '%')
+        main.drawTheFinalBox(title)
+        main.slide(0)
+    }
+    // If we did not reach any of the final boxes, we will populate next question.
+    else{
+        if (index !== 0 || index !== 7) {
             if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
                 let width = $('#svg').width()
                 $('#svg').width(width + width)
             }
-            //Update progress bar
-            let progress_bar = config.getTest_Progress_bar() + 25
+            // Update progress bar
+            let progress_bar = config.getTest_Progress_bar() + 20
             config.updateTest_Progress_Bar(progress_bar)
             console.log(progress_bar)
             $('#progress-bar').width(progress_bar + '%')
@@ -42,21 +78,6 @@ function populateRec(answer){
             config.updateQuestionPosition(index)
             main.slide(0)
         }
-
-    }
-    else{
-        //Create a final box here
-        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
-            let width = $('#svg').width()
-            $('#svg').width(width + width)
-        }
-        let progress_bar = 100
-        config.updateTest_Progress_Bar(progress_bar)
-        console.log(progress_bar)
-        $('#progress-bar').width(progress_bar + '%')
-        $('#progress-bar').text(progress_bar + '%')
-        main.drawTheFinalBox(title)
-        main.slide(0)
     }
 
 }
@@ -187,6 +208,7 @@ class Main{
         config.updateLinesSVG(linesSVG)
     }
 
+    // When a question is answered, it will slide to the next question automatically.
     slide(slide){
         if(config.getMode() === false) {
             if(slide === 0) {
@@ -199,8 +221,8 @@ class Main{
         }
     }
 
+    // Stays in the focus of the current box.
     reAlign(){
-
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
         let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
         //Calculate the new position for the first shape, then go from there
@@ -223,7 +245,8 @@ class Main{
         //Slide to the last element
         this.slide(1)
     }
-    //To update the final box
+
+    // Update the final box.
     drawTheFinalBox(title){
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
         let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
@@ -238,6 +261,7 @@ class Main{
 
         // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
         let newRect
+
         if(rects.length === 0) {
             newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
                 false, title, rects.length)
@@ -252,6 +276,7 @@ class Main{
             let newLineSVG = new LineSVG()
             linesSVG.push(newLineSVG)
         }
+
 
         // Creates a new instance of the rectangle
         let newRectSVG = new RectangleSVG()
@@ -275,6 +300,7 @@ class Main{
         config.updateTitleTextSVG(titleTextSVG)
         this.draw(newRect.id)
     }
+
     // Automatically draw the rectangle shape with the question and the yes or no button
     drawTheShape(title){
         // Sets up the size of the rectangle
