@@ -32,7 +32,7 @@
             <div class="sub-package" id="PDI">PDI</div>
             -->
         </div>
-
+        <!-- Remove search bar for now
         <div class="SearchBar-Container" id="SearchBar-Container">
             <input id="Search" />
             <div class="SearchBar-Container-Result" id="Search-Result">
@@ -40,7 +40,7 @@
                 </ul>
             </div>
         </div>
-
+        -->
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 100000 100000" width="100000" height="100000" style="visibility: hidden;background-color: #F6F8F9; display: inline;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
             <!-- Using Jquery to add shape -->
         </svg>
@@ -55,7 +55,7 @@
 </div>
 </body>
 
-<script src="http://ariutta.github.io/svg-pan-zoom/dist/svg-pan-zoom.min.js"></script>
+<script src="https://ariutta.github.io/svg-pan-zoom/dist/svg-pan-zoom.min.js"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script src="javascripts/Draggble.js"></script>
@@ -112,20 +112,20 @@
     $('ul').on('click',"li",function(){
         //alert($(this).html());
         //Draw new rectagle here.
-        config.updateQuestionPosition($(this).attr('id'))
-        console.log("From search click...")
-        main.drawTheShape($(this).html())
-        $("#SearchBar-Container").css("visibility","hidden")
-        $("#Search").css("visibility","hidden")
-        $("#Search-Result").css("visibility","hidden")
-        $("#SearchList").css("visibility","hidden")
-        $("#svg").css("visibility","visible")
+
+        //$("#SearchBar-Container").css("visibility","hidden")
+        //$("#Search").css("visibility","hidden")
+        //$("#Search-Result").css("visibility","hidden")
+        //$("#SearchList").css("visibility","hidden")
+
+
         return false;
     });
 
-    $(".SearchBar-Container-Result").css("visibility","hidden")
+    //$(".SearchBar-Container-Result").css("visibility","hidden")
 
     //Search input here
+    /*
     let click = false
     $("input").on('input', function (evt) {
         $("input").val(this.value)
@@ -149,7 +149,7 @@
         }
         return false;
     });
-
+    */
 
     //Move SPLIT LM
     let dragSplit = false
@@ -196,11 +196,13 @@
                 main.drawAll()
             }
             else{
+                /*
                 $("#SearchBar-Container").css("visibility","visible")
                 $("#Search").css("visibility","visible")
                 $("#Search-Result").css("visibility","visible")
                 $("#SearchList").css("visibility","visible")
                 $("#svg").css("visibility","hidden")
+                 */
                 $('#mainPanel').scrollLeft(0);
                 $('#mainPanel').scrollTop(0);
             }
@@ -248,8 +250,14 @@
     $("#Smoking").click(function() {
         //Hide all package
         $("#package").hide()
+
+        config.updateQuestionPosition(0)
+        console.log("From search click...")
+        main.drawTheShape("Do you smoke?")
+        $("#svg").css("visibility","visible")
+
     }).mouseover(function(){
-        $("#Smoking").css("width", "50%");
+        $("#Smoking").css("width", "50%");+
         $("#Smoking").css("height", "50%");
     }).mouseout(function() {
         $("#Smoking").css("width", "23%");

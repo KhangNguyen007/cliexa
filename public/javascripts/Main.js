@@ -8,45 +8,56 @@ function populateRec(answer){
     let rects = config.getRects()
     let test_progress_bar = config.getTest_Progress_bar()
     //Here is the logic to expand question
-    if(answer){
-        index = data[config.getQuestionPosition()].yes
-        if(index === undefined) {
-            index = data[config.getQuestionPosition()].goto
+
+    if (answer) {
+            index = data[config.getQuestionPosition()].yes
+            if (index === undefined) {
+                index = data[config.getQuestionPosition()].goto
+            }
+            title = data[index].q
+    } else {
+            index = data[config.getQuestionPosition()].no
+
+            if (index === undefined) {
+                index = data[config.getQuestionPosition()].goto
+            }
+            //Update title and index for the new rectangle
+            title = data[index].q
+    }
+    //
+    if(data[index].loading !== 0) {
+        if (index !== 0) {
+            if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
+                let width = $('#svg').width()
+                $('#svg').width(width + width)
+            }
+            //Update progress bar
+            let progress_bar = config.getTest_Progress_bar() + 25
+            config.updateTest_Progress_Bar(progress_bar)
+            console.log(progress_bar)
+            $('#progress-bar').width(progress_bar + '%')
+            $('#progress-bar').text(progress_bar + '%')
+            //Should change to focus and not focus
+            main.drawTheShape(title)
+            config.updateQuestionPosition(index)
+            main.slide(0)
         }
-        title = data[index].q
+
     }
     else{
-        index = data[config.getQuestionPosition()].no
-
-        if(index === undefined) {
-            index = data[config.getQuestionPosition()].goto
-        }
-        //Update title and index for the new rectangle
-        title = data[index].q
-    }
-
-    if(index !== 13){
-        if(rects[rects.length-1].x + $('#mainPanel').width() >= $('#svg').width()){
+        //Create a final box here
+        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
-            $('#svg').width(width+width)
+            $('#svg').width(width + width)
         }
-
-        console.log("populate:")
-        //Update progress bar
-        let progress_bar = config.getTest_Progress_bar() + 25
+        let progress_bar = 100
         config.updateTest_Progress_Bar(progress_bar)
         console.log(progress_bar)
         $('#progress-bar').width(progress_bar + '%')
-        $('#progress-bar').text(progress_bar +'%')
-        //Should change to focus and not focus
-        main.drawTheShape(title)
-        config.updateQuestionPosition(index)
+        $('#progress-bar').text(progress_bar + '%')
+        main.drawTheFinalBox(title)
         main.slide(0)
     }
-    else{
-        alert("You hit the final wall")
-    }
-
 
 }
 
@@ -102,14 +113,24 @@ class Main{
         let heightSize = config.getHeight()
         let widthSize  = config.getWidth()
 
-
-        rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width,rects[index].height, "#FFFFFF", '1')
-        titleTextSVG[index].update(rects[index].x, rects[index].y + 50, '#444444', rects[index].title)
-        yesRectSVG[index].updateWithOnClick(rects[index].x, rects[index].y + heightSize / 3, widthSize / 3,heightSize / 3, 'green', '1', "populateRec(1)")
-        yesTextSVG[index].update(rects[index].x, rects[index].y + rects[index].height/2, '#000', "Yes")
-        noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width - widthSize / 3, rects[index].y + heightSize / 3, widthSize / 3,heightSize / 3, 'red', '1', "populateRec(0)")
-        noTextSVG[index].update(rects[index].x + rects[index].width - 25, rects[index].y+ rects[index].height/2,'#000', "No")
-
+        if(rectsSVG.length > index) {
+            rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
+        }
+        if(titleTextSVG.length > index) {
+            titleTextSVG[index].update(rects[index].x, rects[index].y + 50, '#444444', rects[index].title)
+        }
+        if(yesRectSVG.length > index) {
+            yesRectSVG[index].updateWithOnClick(rects[index].x, rects[index].y + heightSize / 3, widthSize / 3, heightSize / 3, 'green', '1', "populateRec(1)")
+        }
+        if(yesTextSVG.length > index) {
+            yesTextSVG[index].update(rects[index].x, rects[index].y + rects[index].height / 2, '#000', "Yes")
+        }
+        if(noRectSVG.length > index) {
+            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width - widthSize / 3, rects[index].y + heightSize / 3, widthSize / 3, heightSize / 3, 'red', '1', "populateRec(0)")
+        }
+        if(noTextSVG.length > index) {
+            noTextSVG[index].update(rects[index].x + rects[index].width - 25, rects[index].y + rects[index].height / 2, '#000', "No")
+        }
 
         for(let i = 1 ; i < rects.length;i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red")
@@ -202,7 +223,58 @@ class Main{
         //Slide to the last element
         this.slide(1)
     }
+    //To update the final box
+    drawTheFinalBox(title){
+        let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
+        let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
+        let x = 0.05 * width
+        let shape_width = width - 0.1 * width
+        let y = 0.05 * height
+        let shape_height = height - 0.1 * height
+        let rects = config.getRects()
+        let linesSVG = config.getLinesSVG()
+        let rectsSVG = config.getRectSVG()
+        let titleTextSVG = config.getTitleTextSVG()
 
+        // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
+        let newRect
+        if(rects.length === 0) {
+            newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
+                false, title, rects.length)
+        }
+        // If the first rectangle is populated, all the rectangles after will have connective box
+        else{
+            // Sets up the shape, size, and color, then creates the new Rectangle
+            newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
+                shape_width, shape_height, "#FFFFFF", false, title, rects.length)
+
+            // Creates a new line that connects the previous box to the next box
+            let newLineSVG = new LineSVG()
+            linesSVG.push(newLineSVG)
+        }
+
+        // Creates a new instance of the rectangle
+        let newRectSVG = new RectangleSVG()
+        let newQuestionTextSVG = new TextSVG()
+        // Updates the new rectangle's size and question
+        // Includes a "yes" button colored green and a "no" button colored red, along with button location
+        // If no boolean is 0, if yes boolean is 1
+        newRectSVG.update(newRect.x, newRect.y, newRect.width, newRect.height, newRect.fill, 0)
+        newQuestionTextSVG.update(newRect.x, newRect.y+ 50, '#000000', newRect.title)
+
+        // Populates/draws the rectangle with the updated question to the screen
+        // Will create a new rectangle with updated question when patient answers "yes" or "no"
+        rects.push(newRect)
+        rectsSVG.push(newRectSVG)
+        titleTextSVG.push(newQuestionTextSVG)
+
+        // Populates/draws the rectangle with the updated question to the screen
+        // Will create a new rectangle with updated question when patient answers "yes" or "no"
+        config.updateRects(rects)
+        config.updateRectsSVG(rectsSVG)
+        config.updateTitleTextSVG(titleTextSVG)
+        this.draw(newRect.id)
+    }
     // Automatically draw the rectangle shape with the question and the yes or no button
     drawTheShape(title){
         // Sets up the size of the rectangle
