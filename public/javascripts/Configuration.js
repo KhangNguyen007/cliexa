@@ -62,12 +62,15 @@ class Configuration {
         return this.scale_and_translate
     }
 
+    // checks to see if the control key is pushed. Used to help us debug code.
     setCtrlKey(boolean){
         this.ctrlkey=boolean
     }
     getCtrlKey(){
         return this.ctrlkey
     }
+
+    // we check the question and make sure we populate the correct question
     updateQuestionPosition(prev){
         this.prev.push(prev)
     }
@@ -89,18 +92,24 @@ class Configuration {
     getRectSVG(){
         return this.rectsSVG
     }
+
+    // creates the connective line for the box
     updateLinesSVG(lineSVG){
         return this.linesSVG
     }
     getLinesSVG(){
         return this.linesSVG
     }
+
+    // this will display the questions on the boxes.
     updateTitleTextSVG(textSVG){
         this.titleTextSVG = textSVG
     }
     getTitleTextSVG(){
         return this.titleTextSVG
     }
+
+    // if the user clicks yes, we populate the next corresponding question
     updateYesRectSVG(yesRectSVG){
         this.yesRectSVG = yesRectSVG
     }
@@ -113,6 +122,8 @@ class Configuration {
     getYesTextSVG(){
         return this.yesTextSVG
     }
+
+    // if the user clicks no, we will populate the next corresponding question
     updateNoRectSVG(noRectSVG){
         this.noRectSVG = noRectSVG
     }
@@ -128,18 +139,19 @@ class Configuration {
     updateMainPanelWidth(mainPanelWidth){
         this.mainPanelWidth = mainPanelWidth
     }
+
+    // the main panel that our questionnaire boxes will be in
     getMainPanelWidth(){
         return this.mainPanelWidth
     }
-
     updateMainPanelHeight(mainPanelHeight){
         this.mainPanelHeight = mainPanelHeight
     }
-
     getMainPanelHeight(){
         return this.mainPanelHeight
     }
 
+    //
     updateWidthSize(width){
         this.widthSize = width
     }
@@ -152,12 +164,16 @@ class Configuration {
     getHeight(){
         return this.heightSize
     }
+
+    // needed to create our hybrid mode. this is the zoom in/out function
     updateMode(mode){
         this.mode = mode
     }
     getMode(){
         return this.mode
     }
+
+    // progress bar to see how far along the user is in.
     updateTest_Progress_Bar(test_progress_bar){
         this.test_progress_bar = test_progress_bar
     }

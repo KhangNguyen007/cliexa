@@ -122,7 +122,7 @@ class Main{
     }
 
     draw(index) {
-
+        // draws the instance of the rectangle.
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
@@ -134,6 +134,8 @@ class Main{
         let heightSize = config.getHeight()
         let widthSize  = config.getWidth()
 
+        // builds the rectangles with the question text, yes and no answer buttons.
+        // inserts a connective line for the rectangles
         if(rectsSVG.length > index) {
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
@@ -152,11 +154,11 @@ class Main{
         if(noTextSVG.length > index) {
             noTextSVG[index].update(rects[index].x + rects[index].width - 25, rects[index].y + rects[index].height / 2, '#000', "No")
         }
-
         for(let i = 1 ; i < rects.length;i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red")
         }
 
+        // continuously updates the questionnaire based on user answer.
         config.updateLinesSVG(linesSVG)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
