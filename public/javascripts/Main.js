@@ -1,12 +1,13 @@
 /*
 This file will be our main function
  */
-
+let score = 0
 function populateRec(answer){
     let index
     let title
     let rects = config.getRects()
     let test_progress_bar = config.getTest_Progress_bar()
+
     //Here is the logic to expand question
 
     // Gets the answer from the user and will send them to the next question based off their answer
@@ -15,6 +16,8 @@ function populateRec(answer){
         if (index === undefined) {
             index = data[config.getQuestionPosition()].goto
         }
+        score += 1
+        // alert(score)
         // Update title and index for the new rectangle
         title = data[index].q
     }
@@ -41,7 +44,15 @@ function populateRec(answer){
         console.log(progress_bar)
         $('#progress-bar').width(progress_bar + '%')
         $('#progress-bar').text(progress_bar + '%')
-        main.drawTheFinalBox(title,"CPT code:1990")
+        if(score < 3)
+        {
+            main.drawTheFinalBox(title,"CPT code:19940")
+        }
+        else
+        {
+            main.drawTheFinalBox(title,"CPT code:12345")
+        }
+
         main.slide(0)
     }
     // If we reach the final box for CCM questionnaire, populate the final box
@@ -57,7 +68,15 @@ function populateRec(answer){
         console.log(progress_bar)
         $('#progress-bar').width(progress_bar + '%')
         $('#progress-bar').text(progress_bar + '%')
-        main.drawTheFinalBox(title,"CPT code:2000")
+
+        if(score < 3)
+        {
+            main.drawTheFinalBox(title,"CPT code:63833")
+        }
+        else
+        {
+            main.drawTheFinalBox(title,"CPT code:17490")
+        }
         main.slide(0)
     }
     // If we did not reach any of the final boxes, we will populate next question.
