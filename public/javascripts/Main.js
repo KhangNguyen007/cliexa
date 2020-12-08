@@ -41,7 +41,7 @@ function populateRec(answer){
         console.log(progress_bar)
         $('#progress-bar').width(progress_bar + '%')
         $('#progress-bar').text(progress_bar + '%')
-        main.drawTheFinalBox(title)
+        main.drawTheFinalBox(title,"CPT code:1990")
         main.slide(0)
     }
     // If we reach the final box for CCM questionnaire, populate the final box
@@ -57,7 +57,7 @@ function populateRec(answer){
         console.log(progress_bar)
         $('#progress-bar').width(progress_bar + '%')
         $('#progress-bar').text(progress_bar + '%')
-        main.drawTheFinalBox(title)
+        main.drawTheFinalBox(title,"CPT code:2000")
         main.slide(0)
     }
     // If we did not reach any of the final boxes, we will populate next question.
@@ -122,7 +122,7 @@ class Main{
     }
 
     draw(index) {
-        // draws the instance of the rectangle.
+
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
@@ -134,8 +134,6 @@ class Main{
         let heightSize = config.getHeight()
         let widthSize  = config.getWidth()
 
-        // builds the rectangles with the question text, yes and no answer buttons.
-        // inserts a connective line for the rectangles
         if(rectsSVG.length > index) {
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
@@ -154,11 +152,11 @@ class Main{
         if(noTextSVG.length > index) {
             noTextSVG[index].update(rects[index].x + rects[index].width - 25, rects[index].y + rects[index].height / 2, '#000', "No")
         }
+
         for(let i = 1 ; i < rects.length;i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red")
         }
 
-        // continuously updates the questionnaire based on user answer.
         config.updateLinesSVG(linesSVG)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
@@ -249,7 +247,7 @@ class Main{
     }
 
     // Update the final box.
-    drawTheFinalBox(title){
+    drawTheFinalBox(title,cptcode_){
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
         let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
         let x = 0.05 * width
@@ -260,6 +258,7 @@ class Main{
         let linesSVG = config.getLinesSVG()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+
 
         // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
         let newRect
@@ -289,12 +288,14 @@ class Main{
         newRectSVG.update(newRect.x, newRect.y, newRect.width, newRect.height, newRect.fill, 0)
         newQuestionTextSVG.update(newRect.x, newRect.y+ 50, '#000000', newRect.title)
 
+        let cptCode = new TextSVG()
+        cptCode.update(newRect.x+newRect.width/2, newRect.y + newRect.height/2, '\'#000000',cptcode_)
         // Populates/draws the rectangle with the updated question to the screen
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         titleTextSVG.push(newQuestionTextSVG)
-
+        titleTextSVG.push(cptCode)
         // Populates/draws the rectangle with the updated question to the screen
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
