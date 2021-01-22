@@ -6,4 +6,5 @@ Cliexa ALgo v1.1
 - And the line gotta be behind the rectangle
 - When on the off mode, turn off infinity space/ When on the on mode, turn on the infinity space
 - The Yes/No need to be in the center
+- Fix percentage
 
