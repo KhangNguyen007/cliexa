@@ -10,6 +10,16 @@ function populateRec(answer){
 
     //Here is the logic to expand question
 
+    // This will set the predefine levels for the questionnaires. This is used to display the progress bar value
+    if(config.getQuestionPosition() === 0)
+    {
+        questionnaireLevel = 5
+    }
+    else if(config.getQuestionPosition() === 7)
+    {
+        questionnaireLevel = 8
+    }
+
     // Gets the answer from the user and will send them to the next question based off their answer
     if (answer) { // If the user selects yes, go to next question corresponding to yes
         index = data[config.getQuestionPosition()].yes
@@ -86,8 +96,9 @@ function populateRec(answer){
                 let width = $('#svg').width()
                 $('#svg').width(width + width)
             }
+
             // Update progress bar
-            let progress_bar = config.getTest_Progress_bar() + 20
+            let progress_bar = config.getTest_Progress_bar() + (100/questionnaireLevel)
             config.updateTest_Progress_Bar(progress_bar)
             console.log(progress_bar)
             $('#progress-bar').width(progress_bar + '%')
