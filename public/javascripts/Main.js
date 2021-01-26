@@ -14,10 +14,34 @@ function populateRec(answer){
     if(config.getQuestionPosition() === 0)
     {
         questionnaireLevel = 5
+        update_progress = (100/questionnaireLevel)
     }
     else if(config.getQuestionPosition() === 7)
     {
         questionnaireLevel = 8
+        update_progress = (100/questionnaireLevel)
+    }
+    else if(config.getQuestionPosition() === 16)
+    {
+        questionnaireLevel = 10
+        update_progress = (100/questionnaireLevel)
+    }
+    else if(config.getQuestionPosition() === 27)
+    {
+        questionnaireLevel = 8
+        update_progress = (100/questionnaireLevel)
+    }
+    else if(config.getQuestionPosition() === 36)
+    {
+        questionnaireLevel = 11
+        new_progress = (100/questionnaireLevel) // Equals to about 9.09
+        update_progress = 9.25
+    }
+    else if(config.getQuestionPosition() === 48)
+    {
+        questionnaireLevel = 11
+        new_progress = (100/questionnaireLevel) // Equals to about 9.09
+        update_progress = 9.25
     }
 
     // Gets the answer from the user and will send them to the next question based off their answer
@@ -65,6 +89,7 @@ function populateRec(answer){
 
         main.slide(0)
     }
+
     // If we reach the final box for CCM questionnaire, populate the final box
     else if(data[index].loading === 7) {
         // Create a final box here
@@ -89,6 +114,107 @@ function populateRec(answer){
         }
         main.slide(0)
     }
+
+    // If we reach the final box for the depression questionnaire
+    else if(data[index].loading === 16) {
+        // Create a final box here
+        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
+            let width = $('#svg').width()
+            $('#svg').width(width + width)
+        }
+        // If we reach the final box, progress bar goes to 100%
+        let progress_bar = 100
+        config.updateTest_Progress_Bar(progress_bar)
+        console.log(progress_bar)
+        $('#progress-bar').width(progress_bar + '%')
+        $('#progress-bar').text(progress_bar + '%')
+
+        if(score < 4)
+        {
+            main.drawTheFinalBox(title,"CPT code:38592")
+        }
+        else
+        {
+            main.drawTheFinalBox(title,"CPT code:84919")
+        }
+        main.slide(0)
+    }
+
+    // If we reach the final box for the anxiety questionnaire
+    else if(data[index].loading === 27) {
+        // Create a final box here
+        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
+            let width = $('#svg').width()
+            $('#svg').width(width + width)
+        }
+        // If we reach the final box, progress bar goes to 100%
+        let progress_bar = 100
+        config.updateTest_Progress_Bar(progress_bar)
+        console.log(progress_bar)
+        $('#progress-bar').width(progress_bar + '%')
+        $('#progress-bar').text(progress_bar + '%')
+
+        if(score < 4)
+        {
+            main.drawTheFinalBox(title,"CPT code:38491")
+        }
+        else
+        {
+            main.drawTheFinalBox(title,"CPT code:99944")
+        }
+        main.slide(0)
+    }
+
+    // If we reach the final box for the alcohol questionnaire
+    else if(data[index].loading === 36) {
+        // Create a final box here
+        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
+            let width = $('#svg').width()
+            $('#svg').width(width + width)
+        }
+        // If we reach the final box, progress bar goes to 100%
+        let progress_bar = 100
+        config.updateTest_Progress_Bar(progress_bar)
+        console.log(progress_bar)
+        $('#progress-bar').width(progress_bar + '%')
+        $('#progress-bar').text(progress_bar + '%')
+
+        if(score < 5)
+        {
+            main.drawTheFinalBox(title,"CPT code:64829")
+        }
+        else
+        {
+            main.drawTheFinalBox(title,"CPT code:38485")
+        }
+        main.slide(0)
+    }
+
+    // If we reach the final box for the drug questionnaire
+    else if(data[index].loading === 48) {
+        // Create a final box here
+        if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
+            let width = $('#svg').width()
+            $('#svg').width(width + width)
+        }
+        // If we reach the final box, progress bar goes to 100%
+        let progress_bar = 100
+        config.updateTest_Progress_Bar(progress_bar)
+        console.log(progress_bar)
+        $('#progress-bar').width(progress_bar + '%')
+        $('#progress-bar').text(progress_bar + '%')
+
+        if(score < 5)
+        {
+            main.drawTheFinalBox(title,"CPT code:93836")
+        }
+        else
+        {
+            main.drawTheFinalBox(title,"CPT code:76547")
+        }
+        main.slide(0)
+    }
+
     // If we did not reach any of the final boxes, we will populate next question.
     else{
         if (index !== 0 || index !== 7) {
@@ -98,7 +224,11 @@ function populateRec(answer){
             }
 
             // Update progress bar
-            let progress_bar = config.getTest_Progress_bar() + (100/questionnaireLevel)
+            let progress_bar = config.getTest_Progress_bar() + update_progress//(100/questionnaireLevel)
+
+            //let update_progress = config.getTest_Progress_bar() + (100/questionnaireLevel)
+            //let progress_bar = update_bar.toPrecision(3)
+
             config.updateTest_Progress_Bar(progress_bar)
             console.log(progress_bar)
             $('#progress-bar').width(progress_bar + '%')
