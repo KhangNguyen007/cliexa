@@ -22,6 +22,10 @@
         <div class="package" id="package">
             <div class="sub-package" id="Smoking">Smoking Cessation</div>
             <div class="sub-package" id="CCM">Chronic Care Management</div>
+            <div class="sub-package" id="PHQ9">Depression Assessment</div>
+            <div class="sub-package" id="GAD7">Anxiety Assessment</div>
+            <div class="sub-package" id="AUDIT">Alcohol Assessment</div>
+            <div class="sub-package" id="DAST-10">Drug Assessment</div>
             <!--
             <div class="sub-package" id="GAD">GAD7</div>
             <div class="sub-package" id="DAST">DAST10</div>
@@ -41,9 +45,10 @@
             </div>
         </div>
         -->
-        <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 100000 100000" width="100000" height="100000" style="visibility: hidden;background-color: #F6F8F9; display: inline;" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ev="http://www.w3.org/2001/xml-events">
+        <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 100000 100000" width="100000" height="100000" style="visibility: hidden;background-color: #f6f8f9; display: inline;" version="1.1">
             <!-- Using Jquery to add shape -->
         </svg>
+
     </div>
 
     <!--
@@ -259,8 +264,8 @@
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
-        $("#Smoking").css("width", "50%");+
-        $("#Smoking").css("height", "50%");
+        $("#Smoking").css("width", "30%");+
+        $("#Smoking").css("height", "30%");
     }).mouseout(function() {
         $("#Smoking").css("width", "23%");
         $("#Smoking").css("height", "25%");
@@ -270,32 +275,94 @@
     $("#CCM").click(function() {
         //Hide all package
         $("#package").hide()
-
         config.updateQuestionPosition(7)
         console.log("From search click...")
         main.drawTheShape("Are you a returning patient?")
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
-        $("#CCM").css("width", "50%");
-        $("#CCM").css("height", "50%");
+        $("#CCM").css("width", "30%");
+        $("#CCM").css("height", "30%");
     }).mouseout(function() {
         $("#CCM").css("width", "23%");
         $("#CCM").css("height", "25%");
     });
 
+    // Detect if mouse is over Depression
+    $("#PHQ9").click(function() {
+        //Hide all package
+        $("#package").hide()
+        config.updateQuestionPosition(16)
+        console.log("From search click...")
+        main.drawTheShape("Are you experiencing any symptoms of depression?")
+        $("#svg").css("visibility","visible")
+
+    }).mouseover(function(){
+        $("#PHQ9").css("width", "30%");
+        $("#PHQ9").css("height", "30%");
+    }).mouseout(function() {
+        $("#PHQ9").css("width", "23%");
+        $("#PHQ9").css("height", "25%");
+    });
+
+    // Detect if mouse is over anxiety
+    $("#GAD7").click(function() {
+        //Hide all package
+        $("#package").hide()
+        config.updateQuestionPosition(27)
+        console.log("From search click...")
+        main.drawTheShape("Are you experiencing any symptoms of anxiety?")
+        $("#svg").css("visibility","visible")
+
+    }).mouseover(function(){
+        $("#GAD7").css("width", "30%");
+        $("#GAD7").css("height", "30%");
+    }).mouseout(function() {
+        $("#GAD7").css("width", "23%");
+        $("#GAD7").css("height", "25%");
+    });
+
+
+    // Detect if mouse is over alcohol assessment
+    $("#AUDIT").click(function() {
+        //Hide all package
+        $("#package").hide()
+        config.updateQuestionPosition(36)
+        console.log("From search click...")
+        main.drawTheShape("Do you drink alcohol?")
+        $("#svg").css("visibility","visible")
+
+    }).mouseover(function(){
+        $("#AUDIT").css("width", "30%");
+        $("#AUDIT").css("height", "30%");
+    }).mouseout(function() {
+        $("#AUDIT").css("width", "23%");
+        $("#AUDIT").css("height", "25%");
+    });
+
+    // Detect if mouse is over drug assessment
+    $("#DAST-10").click(function() {
+        //Hide all package
+        $("#package").hide()
+        config.updateQuestionPosition(48)
+        console.log("From search click...")
+        main.drawTheShape("Do you use drugs?")
+        $("#svg").css("visibility","visible")
+
+    }).mouseover(function(){
+        $("#DAST-10").css("width", "30%");
+        $("#DAST-10").css("height", "30%");
+    }).mouseout(function() {
+        $("#DAST-10").css("width", "23%");
+        $("#DAST-10").css("height", "25%");
+    });
 
     // Below will be used for future questionnaires.
     // This is taken from the SOAPP Git package provided by Cliexa
-    /*
-    $("#GAD").mouseover(function(){
-        $("#GAD").css("width", "0%");
-        $("#GAD").css("height", "0%");
-    }).mouseout(function() {
-        $("#GAD").css("width", "23%");
-        $("#GAD").css("height", "25%");
-    });
 
+
+
+    /*
 
     $("#DAST").mouseover(function(){
         $("#DAST").css("width", "50%");

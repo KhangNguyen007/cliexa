@@ -1,14 +1,10 @@
-Cliexa ALgo v1.0
-- Come up with an idea to structure the code (focus on object oriented) (Khang)
-- Implement a matrix holder to highlight the working area               (Khang)
-- Create a rectangle class to follow object oriented philosophy         (Khang)
-- Zoom in/out on SVG                                                    (Ben)
-- When drag a shape to the corner of SVG, the view should follow the moving shape.    (Khang)
-- Implement Yes, No on the rectangle (Nick)
-- Ability to change color, size     (Nick)
-- When click on a rectangle, should hightlight with a borderline (blue for now) (Nick)
-- Ability to choose different shape ( For now Rectangle and Circle) on the left panel   (Ben)
-- Create a template for the final box                                                   (Nick)
-- Ability to go back to previous state (box)                                            (Khang)
-
+Cliexa ALgo v1.1
+- Fix go to previous state ( ctrl Z )
+- Improve UX/UI experience on Zoom in/out functionality
+- Investigate freaking scroll up/down button
+- Whenver zoom out need to increase visibility for the title of the rectangle
+- And the line gotta be behind the rectangle
+- When on the off mode, turn off infinity space/ When on the on mode, turn on the infinity space
+- The Yes/No need to be in the center
+- Fix percentage progress bar
 

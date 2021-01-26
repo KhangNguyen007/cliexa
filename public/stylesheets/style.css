@@ -167,6 +167,27 @@ a {
   background-repeat: no-repeat;
   background-size: cover;
 }
+#PHQ9{
+  background-image: url("images/Depression_Fading.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#GAD7{
+  background-image: url("images/GAD-Symptom.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#AUDIT{
+  background-image: url("images/Alcohol.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#DAST-10{
+  background-image: url("images/DAST10.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 
 
 /* Many questionnaires for our new starting interface
