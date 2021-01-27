@@ -5,6 +5,7 @@ let score = 0
 function populateRec(answer){
     let index
     let title
+    let progress_bar
     let rects = config.getRects()
     let test_progress_bar = config.getTest_Progress_bar()
 
@@ -13,35 +14,41 @@ function populateRec(answer){
     // This will set the predefine levels for the questionnaires. This is used to display the progress bar value
     if(config.getQuestionPosition() === 0)
     {
-        questionnaireLevel = 5
-        update_progress = (100/questionnaireLevel)
+        progress_bar = 0
+        config.updateTest_Progress_Bar(progress_bar)
+        config.questionnaireLevel = 8
+        config.update_progress = (100/config.questionnaireLevel)
     }
-    else if(config.getQuestionPosition() === 7)
+    else if(config.getQuestionPosition() === 8)
     {
-        questionnaireLevel = 8
-        update_progress = (100/questionnaireLevel)
+        config.questionnaireLevel = 8
+        config.update_progress = (100/config.questionnaireLevel)
     }
-    else if(config.getQuestionPosition() === 16)
+    else if(config.getQuestionPosition() === 17)
     {
-        questionnaireLevel = 10
-        update_progress = (100/questionnaireLevel)
+        progress_bar = 0
+        config.updateTest_Progress_Bar(progress_bar)
+        config.questionnaireLevel = 10
+        config.update_progress = (100/config.questionnaireLevel)
     }
-    else if(config.getQuestionPosition() === 27)
+    else if(config.getQuestionPosition() === 28)
     {
-        questionnaireLevel = 8
-        update_progress = (100/questionnaireLevel)
+        progress_bar = 0
+        config.updateTest_Progress_Bar(progress_bar)
+        config.questionnaireLevel = 8
+        config.update_progress = (100/config.questionnaireLevel)
     }
-    else if(config.getQuestionPosition() === 36)
+    else if(config.getQuestionPosition() === 37)
     {
-        questionnaireLevel = 11
-        new_progress = (100/questionnaireLevel) // Equals to about 9.09
-        update_progress = 9.25
+        config.questionnaireLevel = 11
+        // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
+        config.update_progress = 9.25
     }
-    else if(config.getQuestionPosition() === 48)
+    else if(config.getQuestionPosition() === 49)
     {
-        questionnaireLevel = 11
-        new_progress = (100/questionnaireLevel) // Equals to about 9.09
-        update_progress = 9.25
+        config.questionnaireLevel = 11
+        // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
+        config.update_progress = 9.25
     }
 
     // Gets the answer from the user and will send them to the next question based off their answer
@@ -57,7 +64,6 @@ function populateRec(answer){
     }
     else { // If the user selects no, go to the next question corresponding to no
         index = data[config.getQuestionPosition()].no
-
         if (index === undefined) {
             index = data[config.getQuestionPosition()].goto
         }
@@ -91,7 +97,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for CCM questionnaire, populate the final box
-    else if(data[index].loading === 7) {
+    else if(data[index].loading === 8) {
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -116,7 +122,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the depression questionnaire
-    else if(data[index].loading === 16) {
+    else if(data[index].loading === 17) {
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -141,7 +147,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the anxiety questionnaire
-    else if(data[index].loading === 27) {
+    else if(data[index].loading === 28) {
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -166,7 +172,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the alcohol questionnaire
-    else if(data[index].loading === 36) {
+    else if(data[index].loading === 37) {
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -191,7 +197,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the drug questionnaire
-    else if(data[index].loading === 48) {
+    else if(data[index].loading === 49) {
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -217,15 +223,22 @@ function populateRec(answer){
 
     // If we did not reach any of the final boxes, we will populate next question.
     else{
-        if (index !== 0 || index !== 7) {
+        if (index !== 0 || index !== 8) {
             if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
                 let width = $('#svg').width()
                 $('#svg').width(width + width)
             }
 
-            // Update progress bar
-            let progress_bar = config.getTest_Progress_bar() + update_progress//(100/questionnaireLevel)
+            if(index == 0 || index == 17 || index == 28 || index == 37 || index == 49 || index == 8){
+                progress_bar = 0
+            }
+            else
+            {
+                progress_bar = config.getTest_Progress_bar() + config.update_progress
+            }
 
+            // Update progress bar
+            //alert(progress_bar)
             //let update_progress = config.getTest_Progress_bar() + (100/questionnaireLevel)
             //let progress_bar = update_bar.toPrecision(3)
 

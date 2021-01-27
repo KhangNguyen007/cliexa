@@ -42,6 +42,9 @@ class Configuration {
             translateY:0
         }
         this.test_progress_bar = 0
+        this.questionnaireLevel = 0
+        this.update_progress = 0
+        //this.progress_bar = 0
     }
 
     setMainPanel(width, height){
