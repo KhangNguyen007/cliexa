@@ -2,6 +2,9 @@
 This file will be our main function
  */
 let score = 0
+let line1 = ""
+let line2 = ""
+let firstQuestion = 0
 function populateRec(answer){
     let index
     let title
@@ -17,12 +20,14 @@ function populateRec(answer){
         progress_bar = 0
         config.updateTest_Progress_Bar(progress_bar)
         config.questionnaireLevel = 8
-        config.update_progress = (100/config.questionnaireLevel)
+        // config.update_progress = (100/config.questionnaireLevel) // This brings it to 12.5 percent
+        config.update_progress = 12
     }
     else if(config.getQuestionPosition() === 8)
     {
         config.questionnaireLevel = 8
-        config.update_progress = (100/config.questionnaireLevel)
+        // config.update_progress = (100/config.questionnaireLevel) // This brings it to 12.5 percent
+        config.update_progress = 12
     }
     else if(config.getQuestionPosition() === 17)
     {
@@ -36,19 +41,20 @@ function populateRec(answer){
         progress_bar = 0
         config.updateTest_Progress_Bar(progress_bar)
         config.questionnaireLevel = 8
-        config.update_progress = (100/config.questionnaireLevel)
+        // config.update_progress = (100/config.questionnaireLevel) // Ths bring it up to 12.5 percent
+        config.update_progress = 12
     }
     else if(config.getQuestionPosition() === 37)
     {
         config.questionnaireLevel = 11
         // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
-        config.update_progress = 9.25
+        config.update_progress = 9
     }
     else if(config.getQuestionPosition() === 49)
     {
         config.questionnaireLevel = 11
         // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
-        config.update_progress = 9.25
+        config.update_progress = 9
     }
 
     // Gets the answer from the user and will send them to the next question based off their answer
@@ -237,11 +243,6 @@ function populateRec(answer){
                 progress_bar = config.getTest_Progress_bar() + config.update_progress
             }
 
-            // Update progress bar
-            //alert(progress_bar)
-            //let update_progress = config.getTest_Progress_bar() + (100/questionnaireLevel)
-            //let progress_bar = update_bar.toPrecision(3)
-
             config.updateTest_Progress_Bar(progress_bar)
             console.log(progress_bar)
             $('#progress-bar').width(progress_bar + '%')
@@ -264,6 +265,7 @@ class Main{
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+        let titleTextSVGLine2 = config.getTitleTextSVGLine2()
         let yesRectSVG = config.getYesRectSVG()
         let noRectSVG = config.getNoRectSVG()
         let linesSVG = config.getLinesSVG()
@@ -278,6 +280,7 @@ class Main{
 
         for(let i = 0 ; i < rects.length;i++){
             titleTextSVG[i].update(rects[i].x, rects[i].y + 50, '#444444', rects[i].title)
+            titleTextSVGLine2[i].update(rects[i].x, rects[i].y + 75, '#444444', rects[i].title)
             rectsSVG[i].update(rects[i].x, rects[i].y, rects[i].width,rects[i].height, "#FFFFFF", '1')
             yesRectSVG[i].updateWithOnClick(rects[i].x, rects[i].y + heightSize/3, widthSize/3,heightSize/3, 'green', '1', "populateRec(1)")
             noRectSVG[i].updateWithOnClick(rects[i].x + rects[i].width - widthSize/3, rects[i].y + heightSize/3, widthSize/3,heightSize/3, 'red', '1', "populateRec(0)")
@@ -285,9 +288,12 @@ class Main{
             noTextSVG[i].update(rects[i].x + rects[i].width - 25, rects[i].y+ rects[i].height/2,'#000', "No")
         }
 
+        //onmouse
+
         config.updateLinesSVG(linesSVG)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
+        config.updateTitleTextSVGLine2(titleTextSVGLine2)
         config.updateYesRectSVG(yesRectSVG)
         config.updateNoRectSVG(noRectSVG)
         config.updateYesTextSVG(yesTextSVG)
@@ -299,6 +305,7 @@ class Main{
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+        let titleTextSVGLine2 = config.getTitleTextSVGLine2()
         let yesRectSVG = config.getYesRectSVG()
         let noRectSVG = config.getNoRectSVG()
         let linesSVG = config.getLinesSVG()
@@ -311,7 +318,9 @@ class Main{
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
         if(titleTextSVG.length > index) {
-            titleTextSVG[index].update(rects[index].x, rects[index].y + 50, '#444444', rects[index].title)
+             titleTextSVG[index].update(rects[index].x+45, rects[index].y + 50, '#444444', rects[index].title)
+            //  alert(rects[index].title) // Contains the question in the box. How to separate it to two lines
+
         }
         if(yesRectSVG.length > index) {
             yesRectSVG[index].updateWithOnClick(rects[index].x, rects[index].y + heightSize / 3, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)")
@@ -333,6 +342,7 @@ class Main{
         config.updateLinesSVG(linesSVG)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
+        config.updateTitleTextSVGLine2(titleTextSVGLine2)
         config.updateYesRectSVG(yesRectSVG)
         config.updateNoRectSVG(noRectSVG)
         config.updateYesTextSVG(yesTextSVG)
@@ -346,6 +356,7 @@ class Main{
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+        let titleTextSVGLine2 = config.getTitleTextSVGLine2()
         let yesRectSVG = config.getYesRectSVG()
         let noRectSVG = config.getNoRectSVG()
         let linesSVG = config.getLinesSVG()
@@ -355,6 +366,7 @@ class Main{
         rects.pop()
         rectsSVG[rectsSVG.length-1].remove()
         titleTextSVG[titleTextSVG.length-1].remove()
+        titleTextSVGLine2[titleTextSVGLine2.length-1].remove()
         yesRectSVG[yesRectSVG.length-1].remove()
         noRectSVG[noRectSVG.length-1].remove()
         yesTextSVG[yesTextSVG.length-1].remove()
@@ -365,6 +377,7 @@ class Main{
         yesTextSVG.pop()
         noTextSVG.pop()
         titleTextSVG.pop()
+        titleTextSVGLine2.pop()
         yesRectSVG.pop()
         noRectSVG.pop()
         if(linesSVG.length >= 1)
@@ -374,6 +387,7 @@ class Main{
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
+        config.updateTitleTextSVGLine2(titleTextSVGLine2)
         config.updateYesRectSVG(yesRectSVG)
         config.updateNoRectSVG(noRectSVG)
         config.updateYesTextSVG(yesTextSVG)
@@ -431,6 +445,7 @@ class Main{
         let linesSVG = config.getLinesSVG()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+        let titleTextSVGLine2 = config.getTitleTextSVGLine2()
 
 
         // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
@@ -469,11 +484,14 @@ class Main{
         rectsSVG.push(newRectSVG)
         titleTextSVG.push(newQuestionTextSVG)
         titleTextSVG.push(cptCode)
+        titleTextSVGLine2.push(newQuestionTextSVG)
+        titleTextSVGLine2.push(cptCode)
         // Populates/draws the rectangle with the updated question to the screen
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
+        config.updateTitleTextSVGLine2(titleTextSVGLine2)
         this.draw(newRect.id)
     }
 
@@ -490,6 +508,7 @@ class Main{
         let linesSVG = config.getLinesSVG()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+        let titleTextSVGLine2 = config.getTitleTextSVGLine2()
         let yesRectSVG   = config.getYesRectSVG()
         let noRectSVG    = config.getNoRectSVG()
         let yesTextSVG   = config.getYesTextSVG()
@@ -520,11 +539,31 @@ class Main{
         let newNoRectSVG    = new RectangleSVG()
         let newNoTextSVG = new TextSVG()
 
+
+        // Below is needed to create a second line on the table if it is needed.
+        let newSecondLine = new TextSVG()
+        let questionTitle = newRect.title
+        if(firstQuestion != 0){
+            line1 = ""
+            line2 = ""
+            if(questionTitle.length > 75){
+                this.createSecondLine(questionTitle) // Calls the function to split the question into 2 lines
+                newRect.title = line1
+            }
+        }
+        else
+        {
+            firstQuestion = 1
+        }
+        // This is the end of the creation of the new line
+
+
         // Updates the new rectangle's size and question
         // Includes a "yes" button colored green and a "no" button colored red, along with button location
         // If no boolean is 0, if yes boolean is 1
         newRectSVG.update(newRect.x, newRect.y, newRect.width, newRect.height, newRect.fill, 0)
-        newQuestionTextSVG.update(newRect.x, newRect.y+ 50, '#000', newRect.title)
+        newQuestionTextSVG.update(newRect.x+45, newRect.y + 50, '#444444', newRect.title)
+        newSecondLine.update(newRect.x+45, newRect.y + 80, '#444444', line2)
         newYesRectSVG.updateWithOnClick(newRect.x, newRect.y + height/2, 25, 25,
             'green', '1', "populateRec(1)")
         newYesTextSVG.update(newRect.x, newRect.y + height / 2, '#000', "Yes")
@@ -532,11 +571,13 @@ class Main{
             'red', '1', "populateRec(0)")
         newNoTextSVG.update(newRect.x + newRect.width - 25, newRect.y + height / 2,'#000', "No")
 
+
         // Populates/draws the rectangle with the updated question to the screen
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         titleTextSVG.push(newQuestionTextSVG)
+        //titleTextSVG.push(secondline)
         yesRectSVG.push(newYesRectSVG)
         noRectSVG.push(newNoRectSVG)
         yesTextSVG.push(newYesTextSVG)
@@ -547,10 +588,50 @@ class Main{
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
+        config.updateTitleTextSVGLine2(titleTextSVGLine2)
         config.updateYesRectSVG(yesRectSVG)
         config.updateYesTextSVG(yesTextSVG)
         config.updateNoRectSVG(noRectSVG)
         config.updateNoTextSVG(noTextSVG)
         this.draw(newRect.id)
+    }
+
+    // This will read through the question title and split it into two lines
+    // The lines will be displayed in the same position as before and the other line will be below it.
+    createSecondLine(title){
+        //alert("IM IN NEW FUNCTION")
+        let count = title.length;
+        if(count >= 75){
+            //alert("Over 75 character count!! \n Create a new line")
+            let counter = 0
+            for(let i = 0; i < count; i++){
+                if(i > 67 && i < 80){
+                    //alert("FIRST IF")
+                    if(title[i] == " "){
+                        line1 += title[i]
+                        counter++
+                        break
+                    }
+                    else{
+                        line1 += title[i]
+                        counter++
+                    }
+                }
+                else
+                {
+                    line1 += title[i]
+                    counter++
+                }
+            }
+            for(let i = counter; i < count; i++)
+            {
+                line2 += title[i]
+            }
+            title = line1
+        }
+        else{
+            titleTextSVG[index].update(rects[index].x, rects[index].y + 50, '#444444', rects[index].title)
+        }
+        //alert("PART 1")
     }
 }

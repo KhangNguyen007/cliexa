@@ -22,6 +22,7 @@ class Configuration {
         this.rectsSVG = [];
         this.linesSVG = []
         this.titleTextSVG = []
+        this.titleTextSVGLine2 = []
         this.yesRectSVG = []
         this.yesTextSVG = []
         this.noRectSVG = []
@@ -112,6 +113,14 @@ class Configuration {
         return this.titleTextSVG
     }
 
+    // this will display the questions on the boxes.
+    updateTitleTextSVGLine2(textSVGLine2){
+        this.titleTextSVGLine2 = textSVGLine2
+    }
+    getTitleTextSVGLine2(){
+        return this.titleTextSVGLine2
+    }
+
     // if the user clicks yes, we populate the next corresponding question
     updateYesRectSVG(yesRectSVG){
         this.yesRectSVG = yesRectSVG
@@ -183,5 +192,4 @@ class Configuration {
     getTest_Progress_bar(){
         return this.test_progress_bar
     }
-
 }
