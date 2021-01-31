@@ -546,7 +546,7 @@ class Main{
         if(firstQuestion != 0){
             line1 = ""
             line2 = ""
-            if(questionTitle.length > 75){
+            if(questionTitle.length > 60){
                 this.createSecondLine(questionTitle) // Calls the function to split the question into 2 lines
                 newRect.title = line1
             }
@@ -599,14 +599,11 @@ class Main{
     // This will read through the question title and split it into two lines
     // The lines will be displayed in the same position as before and the other line will be below it.
     createSecondLine(title){
-        //alert("IM IN NEW FUNCTION")
         let count = title.length;
-        if(count >= 75){
-            //alert("Over 75 character count!! \n Create a new line")
+        if(count >= 60){
             let counter = 0
             for(let i = 0; i < count; i++){
-                if(i > 64 && i < 80){
-                    //alert("FIRST IF")
+                if(i > 60 && i < 80){
                     if(title[i] == " "){
                         line1 += title[i]
                         counter++
@@ -632,6 +629,5 @@ class Main{
         else{
             titleTextSVG[index].update(rects[index].x, rects[index].y + 50, '#444444', rects[index].title)
         }
-        //alert("PART 1")
     }
 }
