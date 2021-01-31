@@ -605,7 +605,7 @@ class Main{
             //alert("Over 75 character count!! \n Create a new line")
             let counter = 0
             for(let i = 0; i < count; i++){
-                if(i > 67 && i < 80){
+                if(i > 64 && i < 80){
                     //alert("FIRST IF")
                     if(title[i] == " "){
                         line1 += title[i]
