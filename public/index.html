@@ -12,9 +12,21 @@
 
     <div class="topPanel" id="topPanel">
         <a href="/"><img src="cliexa-logo.png" alt="test" width="150" height="75"></a>
-        <div class="progress" style="position:absolute;width:50%;right:10%;bottom:0">
+        <div class="progress" style="position:absolute;width:50%;right:10%;bottom:5px">
             <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
+        <br>
+        <div class="zoom" style="position:absolute;width:10%;height:25px;right:0%;background-color: red">
+
+            <button type="button" class="btn btn-default btn-sm" >
+                <span class="glyphicon glyphicon-zoom-in" style="width:5%"></span> Zoom-in
+            </button>
+            <button type="button" class="btn btn-default btn-sm" >
+                <span class="glyphicon glyphicon-zoom-out" style="width:5%"></span> Zoom-out
+            </button>
+
+        </div>
+
     </div>
     <div class="leftPanel" id="leftPanel"></div>
     <div class="splitLM" id="splitLM"></div>
@@ -185,22 +197,31 @@
     $("body").on('mouseup',function(evt) {
         dragSplit = false
     })
-    //Listening move to previous state
+    //Listener for moving to previous state
+    //Backtracking
     $("body").on('keydown', function(event) {
         if (event.ctrlKey && event.key === 'z') {
             let rects = config.getRects()
-            if(rects.length >= 1) {
+            if(rects.length > 1) {
+                //Pop the current question out
+                config.goBack()
+                //Need to redraw the whole thing?
                 let test_progress_bar = config.getTest_Progress_bar()
+               // Change this to more dynamic code Ask Nick to do this
                 if(test_progress_bar >= 25) {
                     test_progress_bar -= 25
                 }
+                else{
+                    test_progress_bar -= 10
+                }
+
+                console.log("I'm still here, What'sup")
                 config.updateTest_Progress_Bar(test_progress_bar)
                 let left = $('#mainPanel').scrollLeft();
                 $('#mainPanel').scrollLeft(left - $('#mainPanel').width());
-                main.clear()
                 main.drawAll()
             }
-            else{
+            else if(rects.length === 1){
                 /*
                 $("#SearchBar-Container").css("visibility","visible")
                 $("#Search").css("visibility","visible")
@@ -210,6 +231,9 @@
                  */
                 $('#mainPanel').scrollLeft(0);
                 $('#mainPanel').scrollTop(0);
+                //Clear everything!
+                $("#svg").empty();
+
             }
 
             if(config.getTest_Progress_bar() >= 0) {

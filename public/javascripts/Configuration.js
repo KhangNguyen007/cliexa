@@ -80,17 +80,37 @@ class Configuration {
     getQuestionPosition(){
         return this.prev[this.prev.length-1]
     }
+    //Go back to previous state
+    goBack(){
+        this.popQuestionPosition()
+        this.popRects()
+        this.popRectSVG()
+        this.popLinesSVG()
+        this.popYesRectSVG()
+        this.popNoRectSVG()
+        this.popYesTextSVG()
+        this.popNoTextSVG()
+        this.popTitleTextSVG()
+
+
+    }
     updateRects(rects){
         this.rects = rects
     }
     getRects(){
         return this.rects
     }
+    popRects(){
+        this.rects.pop()
+    }
     updateRectsSVG(rectSVG){
         this.rectsSVG = rectSVG
     }
     getRectSVG(){
         return this.rectsSVG
+    }
+    popRectSVG(){
+        this.rectsSVG.pop()
     }
 
     // creates the connective line for the box
@@ -100,6 +120,9 @@ class Configuration {
     getLinesSVG(){
         return this.linesSVG
     }
+    popLinesSVG(){
+        this.linesSVG.pop()
+    }
 
     // this will display the questions on the boxes.
     updateTitleTextSVG(textSVG){
@@ -108,7 +131,9 @@ class Configuration {
     getTitleTextSVG(){
         return this.titleTextSVG
     }
-
+    popTitleTextSVG(){
+        this.titleTextSVG.pop()
+    }
     // if the user clicks yes, we populate the next corresponding question
     updateYesRectSVG(yesRectSVG){
         this.yesRectSVG = yesRectSVG
@@ -116,13 +141,18 @@ class Configuration {
     getYesRectSVG(){
         return this.yesRectSVG
     }
+    popYesRectSVG(){
+        this.yesRectSVG.pop()
+    }
     updateYesTextSVG(yesTextSVG){
         this.yesTextSVG = yesTextSVG
     }
     getYesTextSVG(){
         return this.yesTextSVG
     }
-
+    popYesTextSVG(){
+        this.yesTextSVG.pop()
+    }
     // if the user clicks no, we will populate the next corresponding question
     updateNoRectSVG(noRectSVG){
         this.noRectSVG = noRectSVG
@@ -130,11 +160,17 @@ class Configuration {
     getNoRectSVG(){
         return this.noRectSVG
     }
+    popNoRectSVG(){
+        this.noRectSVG.pop()
+    }
     updateNoTextSVG(noTextSVG){
         this.noTextSVG = noTextSVG
     }
     getNoTextSVG(){
         return this.noTextSVG
+    }
+    popNoTextSVG(){
+        this.noTextSVG.pop()
     }
     updateMainPanelWidth(mainPanelWidth){
         this.mainPanelWidth = mainPanelWidth

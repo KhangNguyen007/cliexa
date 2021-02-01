@@ -2,6 +2,7 @@
 This file will be our main function
  */
 let score = 0
+//Populate rectangle contain question info
 function populateRec(answer){
     let index
     let title
@@ -242,6 +243,8 @@ class Main{
     constructor(){
 
     }
+    //Think about Tree Hireachy which easier to manager
+    // Class Inheritance and Interface
     drawAll(){
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
@@ -255,7 +258,7 @@ class Main{
         let widthSize  = config.getWidth()
 
         for(let i = 1 ; i < rects.length;i++){
-            linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red")
+            linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
 
         for(let i = 0 ; i < rects.length;i++){
@@ -309,7 +312,7 @@ class Main{
         }
 
         for(let i = 1 ; i < rects.length;i++){
-            linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red")
+            linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
 
         config.updateLinesSVG(linesSVG)
@@ -322,9 +325,8 @@ class Main{
 
     }
 
-
+    //
     clear(){
-
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
@@ -410,52 +412,68 @@ class Main{
         let y = 0.05 * height
         let shape_height = height - 0.1 * height
         let rects = config.getRects()
-        let linesSVG = config.getLinesSVG()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+        let yesRectSVG = config.getYesRectSVG()
+        let noRectSVG = config.getNoRectSVG()
+        let linesSVG = config.getLinesSVG()
+        let yesTextSVG = config.getYesTextSVG()
+        let noTextSVG = config.getNoTextSVG()
 
-
-        // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
-        let newRect
-
+        let newRect = null
         if(rects.length === 0) {
-            newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
+             newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
                 false, title, rects.length)
         }
-        // If the first rectangle is populated, all the rectangles after will have connective box
         else{
             // Sets up the shape, size, and color, then creates the new Rectangle
             newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
                 shape_width, shape_height, "#FFFFFF", false, title, rects.length)
-
-            // Creates a new line that connects the previous box to the next box
-            let newLineSVG = new LineSVG()
-            linesSVG.push(newLineSVG)
         }
-
-
         // Creates a new instance of the rectangle
-        let newRectSVG = new RectangleSVG()
-        let newQuestionTextSVG = new TextSVG()
+        let finalRectSVG = new RectangleSVG()
+        let finalQuestionTextSVG = new TextSVG()
+        let finalYesRectSVG = new RectangleSVG()
+        let finalNoRectSVG  = new RectangleSVG()
+        let finalLineSVG    =  new LineSVG()
+        let finalYesTextSVG = new TextSVG()
+        let finalNoTextSVG  = new TextSVG()
         // Updates the new rectangle's size and question
         // Includes a "yes" button colored green and a "no" button colored red, along with button location
         // If no boolean is 0, if yes boolean is 1
-        newRectSVG.update(newRect.x, newRect.y, newRect.width, newRect.height, newRect.fill, 0)
-        newQuestionTextSVG.update(newRect.x, newRect.y+ 50, '#000000', newRect.title)
+        finalRectSVG.update(newRect.x, newRect.y, newRect.width, newRect.height, newRect.fill, 0)
+        finalQuestionTextSVG.update(newRect.x, newRect.y+ 50, '#000000', newRect.title)
+        finalYesRectSVG.updateWithOnClick(newRect.x, newRect.y + height/2, 0, 0,
+            'green', '1', null)
+        finalNoRectSVG.updateWithOnClick(newRect.x + newRect.width - 25, newRect.y, 0, 0,
+            'red', '1', null)
+        finalYesTextSVG.update(0, 0, '#000', null)
+        finalNoTextSVG.update(0,0,'#000', null)
+
 
         let cptCode = new TextSVG()
         cptCode.update(newRect.x+newRect.width/2, newRect.y + newRect.height/2, '\'#000000',cptcode_)
         // Populates/draws the rectangle with the updated question to the screen
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         rects.push(newRect)
-        rectsSVG.push(newRectSVG)
-        titleTextSVG.push(newQuestionTextSVG)
-        titleTextSVG.push(cptCode)
+        rectsSVG.push(finalRectSVG)
+        titleTextSVG.push(finalQuestionTextSVG)
+        titleTextSVG.push(cptCode)//?
+        yesRectSVG.push(finalYesRectSVG)
+        noRectSVG.push(finalNoRectSVG)
+        yesTextSVG.push(finalYesTextSVG)
+        noTextSVG.push(finalNoTextSVG)
+        linesSVG.push(finalLineSVG)
         // Populates/draws the rectangle with the updated question to the screen
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
+        config.updateYesRectSVG(yesRectSVG)
+        config.updateNoRectSVG(noRectSVG)
+        config.updateYesTextSVG(yesTextSVG)
+        config.updateNoTextSVG(noTextSVG)
+        config.updateLinesSVG(linesSVG)
         this.draw(newRect.id)
     }
 
