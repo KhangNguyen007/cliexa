@@ -52,7 +52,7 @@ let data =[
     {id:39,q:"Do you consume 5 or more drinks containing alcohol in a typical day?",yes:40,no:40},
     {id:40,q:"Do you have consume 6 or more alcoholic drinks on one occasion monthly?",yes:41,no:41},
     {id:41,q:"Do you often find yourself unable to stop drinking once you have started drinking?",yes:42,no:42},
-    {id:42,q:"Do you often fail to do what was normally expected from you because of drinking?",yes:43,no:43},
+    {id:42,q:"Do you often fail to do what is normally expected from you because of drinking?",yes:43,no:43},
     {id:43,q:"Do you often need a drink in the morning to get yourself going after a heavy drinking session?",yes:44,no:44},
     {id:44,q:"Do you often have a feeling of guilt or remorse after drinking?",yes:45,no:45},
     {id:45,q:"Do you often have not been unable to remember what happened the night before because of drinking?",yes:46,no:46},
