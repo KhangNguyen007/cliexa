@@ -32,12 +32,14 @@
     <div class="splitLM" id="splitLM"></div>
     <div class="mainPanel" id="mainPanel">
         <div class="package" id="package">
+
             <div class="sub-package" id="Smoking">Smoking Cessation</div>
-            <div class="sub-package" id="CCM">Chronic Care Management</div>
             <div class="sub-package" id="PHQ9">Depression Assessment</div>
             <div class="sub-package" id="GAD7">Anxiety Assessment</div>
             <div class="sub-package" id="AUDIT">Alcohol Assessment</div>
             <div class="sub-package" id="DAST-10">Drug Assessment</div>
+            <div class="sub-package" id="CCM">Chronic Care Management</div>
+
             <!--
             <div class="sub-package" id="GAD">GAD7</div>
             <div class="sub-package" id="DAST">DAST10</div>
@@ -284,7 +286,8 @@
 
         config.updateQuestionPosition(0)
         console.log("From search click...")
-        main.drawTheShape("Do you smoke?")
+        let question = data[0].q
+        main.drawTheShape(question)
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
@@ -299,9 +302,10 @@
     $("#CCM").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(7)
+        config.updateQuestionPosition(8)
         console.log("From search click...")
-        main.drawTheShape("Are you a returning patient?")
+        let question = data[8].q
+        main.drawTheShape(question)
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
@@ -316,9 +320,10 @@
     $("#PHQ9").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(16)
+        config.updateQuestionPosition(17)
         console.log("From search click...")
-        main.drawTheShape("Are you experiencing any symptoms of depression?")
+        let question = data[17].q
+        main.drawTheShape(question)
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
@@ -333,9 +338,10 @@
     $("#GAD7").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(27)
+        config.updateQuestionPosition(28)
         console.log("From search click...")
-        main.drawTheShape("Are you experiencing any symptoms of anxiety?")
+        let question = data[28].q
+        main.drawTheShape(question)
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
@@ -351,9 +357,10 @@
     $("#AUDIT").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(36)
+        config.updateQuestionPosition(37)
         console.log("From search click...")
-        main.drawTheShape("Do you drink alcohol?")
+        let question = data[37].q
+        main.drawTheShape(question)
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
@@ -368,9 +375,10 @@
     $("#DAST-10").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(48)
+        config.updateQuestionPosition(49)
         console.log("From search click...")
-        main.drawTheShape("Do you use drugs?")
+        let question = data[49].q
+        main.drawTheShape(question)
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
