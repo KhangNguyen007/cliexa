@@ -22,5 +22,8 @@ class Rectangle{
         this.width = width
         this.height = height
     }
+    getWidth(){
+        return this.width
+    }
 
 }

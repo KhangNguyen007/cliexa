@@ -17,12 +17,11 @@ Position of scroller
 class Configuration {
     constructor() {
         this.ctrlkey = false
-        this.prev = [] //To keep track of the question
+        this.prev = [] //To keep track of the question id
         this.rects = [];
         this.rectsSVG = [];
         this.linesSVG = []
-        this.titleTextSVG = []
-        this.titleTextSVGLine2 = []
+        this.titleTextSVG = [] //Create multiple line here
         this.yesRectSVG = []
         this.yesTextSVG = []
         this.noRectSVG = []
@@ -45,9 +44,22 @@ class Configuration {
         this.test_progress_bar = 0
         this.questionnaireLevel = 0
         this.update_progress = 0
+        this.level = [0]
         //this.progress_bar = 0
     }
-
+    debugPrev(){
+        return this.prev
+    }
+    setLevel(level){
+        this.level.push(level)
+    }
+    getCurrentLevel(){
+        return this.level[this.level.length - 1]
+    }
+    popCurrentLevel(){
+       this.level.pop()
+        console.log("This level:",this.level)
+    }
     setMainPanel(width, height){
         $('#mainPanel').scrollLeft(width);
         $('#mainPanel').scrollTop(height);
@@ -70,9 +82,6 @@ class Configuration {
     setCtrlKey(boolean){
         this.ctrlkey=boolean
     }
-    getCtrlKey(){
-        return this.ctrlkey
-    }
 
     // we check the question and make sure we populate the correct question
     updateQuestionPosition(prev){
@@ -84,25 +93,38 @@ class Configuration {
     getQuestionPosition(){
         return this.prev[this.prev.length-1]
     }
+
     //Go back to previous state
-    goBack(){
-        this.popQuestionPosition()
-        this.popRects()
-        this.popRectSVG()
-        this.popLinesSVG()
-        this.popYesRectSVG()
-        this.popNoRectSVG()
-        this.popYesTextSVG()
-        this.popNoTextSVG()
-        this.popTitleTextSVG()
-
-
+    goBack(final){
+        if(final === false)
+        {
+            this.popCurrentLevel()
+            this.popQuestionPosition()
+            this.popRects()
+            this.popRectSVG()
+            this.popLinesSVG()
+            this.popYesRectSVG()
+            this.popNoRectSVG()
+            this.popYesTextSVG()
+            this.popNoTextSVG()
+            this.popTitleTextSVG()
+        }
+        else{
+            this.popCurrentLevel()
+            this.popQuestionPosition()
+            this.popRects()
+            this.popRectSVG()
+            this.popTitleTextSVG()
+        }
     }
     updateRects(rects){
         this.rects = rects
     }
     getRects(){
         return this.rects
+    }
+    getLastRect(){
+        return this.rects[this.rects.length-1]
     }
     popRects(){
         this.rects.pop()
@@ -138,15 +160,6 @@ class Configuration {
 
     popTitleTextSVG(){
         this.titleTextSVG.pop()
-    }
-
-
-    // this will display the questions on the boxes.
-    updateTitleTextSVGLine2(textSVGLine2){
-        this.titleTextSVGLine2 = textSVGLine2
-    }
-    getTitleTextSVGLine2(){
-        return this.titleTextSVGLine2
     }
 
     // if the user clicks yes, we populate the next corresponding question

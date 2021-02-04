@@ -22,8 +22,7 @@ a {
   left:0;
 }
 .zoom{
-  overflow: hidden;
-  white-space: nowrap;
+
 }
 /* Took out the buttons from the top panel.
 // Can implement functions with the buttons in the future.
@@ -115,11 +114,7 @@ a {
   width:70px;
   height:70px;
 }
-.zoom{
-  position: absolute;
-  top:10%;
-  left:60%;
-}
+
 .package{
   position: absolute;
   width:100%;
