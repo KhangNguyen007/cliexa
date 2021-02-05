@@ -25,7 +25,11 @@ class TextSVG{
         let nOfLine = 1
         let line
         let rect1 = config.getLastRect()
-        let title_width= (rect1.width/13)*.87
+        let emWidth = 6.5
+        let emHeight = 16
+        let emMul = (rect1.height/16)/emHeight
+        var sEmMul = emMul.toString()+'em'
+        let title_width = rect1.width/(emMul*emWidth)*.85
         console.log("This is title width", title_width)
         console.log("This is title length", title.length)
         //alert(title)
@@ -100,7 +104,7 @@ class TextSVG{
             contentNode[i].setAttributeNS(null,'x',x + 30)
             contentNode[i].setAttributeNS(null,'y',y+35 + i*35)
             contentNode[i].setAttributeNS(null,'fill',fill);
-            contentNode[i].setAttributeNS(null,'font-size','2em')
+            contentNode[i].setAttributeNS(null,'font-size',sEmMul)
             contentNode[i].innerHTML = line[i]
             this.text.append(contentNode[i])
         }
