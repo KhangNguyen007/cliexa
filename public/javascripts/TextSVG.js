@@ -32,7 +32,7 @@ class TextSVG{
             nOfLine = 2
             line = new Array(nOfLine)
             let startIndex = 0
-            let endIndex = title.length*7/8
+            let endIndex = title.length*.82
             for(let i = 0 ; i < nOfLine;i++){
                 line[i] = title.slice(startIndex,endIndex).join(" ");
                 startIndex = endIndex
