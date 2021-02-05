@@ -24,12 +24,15 @@ class TextSVG{
         // I only need newQuestionTextSVG
         let nOfLine = 1
         let line
-        if(title.length >= 100){
+        let rect1 = config.getLastRect()
+        let title_width= (rect1.width/13)-20
+        console.log(title_width)
+        if(title.length >= title_width){
             title = title.split(" ")
             nOfLine = 2
             line = new Array(nOfLine)
             let startIndex = 0
-            let endIndex = title.length/2
+            let endIndex = title.length*7/8
             for(let i = 0 ; i < nOfLine;i++){
                 line[i] = title.slice(startIndex,endIndex).join(" ");
                 startIndex = endIndex
@@ -119,6 +122,7 @@ class TextSVG{
         this.text.setAttributeNS(null,'font-size','2em')
         this.text.innerHTML = title;
     }
+
 
     remove(){
         this.text.setAttributeNS(null,'x',"0");
