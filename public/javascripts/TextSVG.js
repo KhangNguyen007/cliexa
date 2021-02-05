@@ -28,20 +28,50 @@ class TextSVG{
         let title_width= (rect1.width/13)*.84
         console.log("This is title width", title_width)
         console.log("This is title length", title.length)
+        //alert(title)
         if(title.length >= title_width){
-            title = title.split(" ")
+            //title = title.split(" ")
+            //alert(title)
             nOfLine = 2
             line = new Array(nOfLine)
             let startIndex = 0
-            let endIndex = (title.length*0.80)-2
-            console.log("This is end index", endIndex)
-            for(let i = 0 ; i < nOfLine;i++){
-                line[i] = title.slice(startIndex,endIndex).join(" ");
-                startIndex = endIndex
-                endIndex = title.length
-                console.log("This is inside startIndex", startIndex)
+            let endIndex = (title.length * 0.80)
+            console.log("This is the length of title length: ", title.length)
+            console.log("This is end index outside", endIndex)
+            title_width = Math.round(title_width)
+            let line1 = ""
+            let line2 = ""
+            for(let i = title_width; i > 0; i--){
+
+                if(title[i] == " "){
+                    //console.log("What is the last number:", i)
+                    let saveCharacter = i
+                    for(let j = 0; j < saveCharacter; j++){
+                        line1 += title[j]
+                    }
+                    for(let k = i+1; k < title.length ; k++){
+                        line2 += title[k]
+                    }
+                    console.log(line1)
+                    console.log(line2)
+                    break
+                }
             }
-            console.log("This is in line", line)
+
+            // This will split the title by the number of spaces. Ex: start = 0 and end = 12 this
+            // will split the title of the text by counting 12 spaces
+            for(let i = 0 ; i < nOfLine;i++){
+                if(i == 0){
+                    line[i] = line1
+                }
+                if(i == 1) {
+                    line[i] = line2
+                }
+                //line[i] = title.slice(startIndex,endIndex).join(" ");
+                //startIndex = endIndex
+                //endIndex = title.length
+            }
+            //console.log("This is in line", line)
         }
         else{
             line = new Array(nOfLine)

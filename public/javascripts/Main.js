@@ -89,11 +89,11 @@ function populateRec(answer){
         $('#progress-bar').text(config.getCurrentLevel() + '%')
         if(score < 4)
         {
-            main.insertTheFinalBox(title,"CPT code:38592")
+            main.insertTheFinalBox(title,"CPT code: 38592")
         }
         else
         {
-            main.insertTheFinalBox(title,"CPT code:84919")
+            main.insertTheFinalBox(title,"CPT code: 84919")
         }
         main.setFinal(true)
         main.slide(0)
@@ -116,11 +116,11 @@ function populateRec(answer){
 
         if(score < 3)
         {
-            main.insertTheFinalBox(title,"CPT code:63833")
+            main.insertTheFinalBox(title,"CPT code: 63833")
         }
         else
         {
-            main.insertTheFinalBox(title,"CPT code:17490")
+            main.insertTheFinalBox(title,"CPT code: 17490")
         }
         main.setFinal(true)
         main.slide(0)
@@ -142,11 +142,11 @@ function populateRec(answer){
 
         if(score < 4)
         {
-            main.insertTheFinalBox(title,"CPT code:38592")
+            main.insertTheFinalBox(title,"CPT code: 38592")
         }
         else
         {
-            main.insertTheFinalBox(title,"CPT code:84919")
+            main.insertTheFinalBox(title,"CPT code: 84919")
         }
         main.setFinal(true)
         main.slide(0)
@@ -169,11 +169,11 @@ function populateRec(answer){
 
         if(score < 4)
         {
-            main.insertTheFinalBox(title,"CPT code:38491")
+            main.insertTheFinalBox(title,"CPT code: 38491")
         }
         else
         {
-            main.insertTheFinalBox(title,"CPT code:99944")
+            main.insertTheFinalBox(title,"CPT code: 99944")
         }
         main.setFinal(true)
         main.slide(0)
@@ -197,11 +197,11 @@ function populateRec(answer){
 
         if(score < 5)
         {
-            main.insertTheFinalBox(title,"CPT code:64829")
+            main.insertTheFinalBox(title,"CPT code: 64829")
         }
         else
         {
-            main.insertTheFinalBox(title,"CPT code:38485")
+            main.insertTheFinalBox(title,"CPT code: 38485")
         }
         main.setFinal(true)
         main.slide(0)
@@ -223,11 +223,11 @@ function populateRec(answer){
 
         if(score < 5)
         {
-            main.insertTheFinalBox(title,"CPT code:93836")
+            main.insertTheFinalBox(title,"CPT code: 93836")
         }
         else
         {
-            main.insertTheFinalBox(title,"CPT code:76547")
+            main.insertTheFinalBox(title,"CPT code: 76547")
         }
         main.setFinal(true)
         main.slide(0)
