@@ -328,7 +328,7 @@ class Main{
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
         if(titleTextSVG.length > index) {
-            titleTextSVG[index].updateCPT_Code(rects[index].x+45, rects[index].y + 50, '#444444', rects[index].title,cpt_code)
+            titleTextSVG[index].updateCPT_Code(rects[index].x+45, rects[index].y + 50, '#444444', rects[index].title, cpt_code)
         }
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
