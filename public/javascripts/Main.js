@@ -295,16 +295,16 @@ class Main{
              titleTextSVG[index].updateTitle(rects[index].x+45, rects[index].y + 50, '#444444', rects[index].title)
         }
         if(yesRectSVG.length > index) {
-            yesRectSVG[index].updateWithOnClick(rects[index].x, rects[index].y + heightSize / 3, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)")
+            yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)")
         }
         if(yesTextSVG.length > index) {
-            yesTextSVG[index].update(rects[index].x + (rects[index].width * (1/9)) , rects[index].y + rects[index].height / 2.25, '#FFFFFF', "Yes")
+            yesTextSVG[index].update(rects[index].x + (rects[index].width * (2/9)) , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes")
         }
         if(noRectSVG.length > index) {
-            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width - widthSize / 3, rects[index].y + heightSize / 3, widthSize / 3, heightSize / 3, '#999999', '1', "populateRec(0)")
+            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#999999', '1', "populateRec(0)")
         }
         if(noTextSVG.length > index) {
-            noTextSVG[index].update(rects[index].x + rects[index].width*(31/36), rects[index].y + rects[index].height / 2.25, '#FFFFFF', "No")
+            noTextSVG[index].update(rects[index].x + rects[index].width*(.746), rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No")
         }
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
