@@ -25,7 +25,7 @@ class TextSVG{
         let nOfLine = 1
         let line
         let rect1 = config.getLastRect()
-        let title_width= (rect1.width/13)*.84
+        let title_width= (rect1.width/13)*.87
         console.log("This is title width", title_width)
         console.log("This is title length", title.length)
         //alert(title)
