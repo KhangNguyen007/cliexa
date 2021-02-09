@@ -123,24 +123,29 @@ class TextSVG{
         // If no boolean is 0, if yes boolean is 1
         // Calculate newRect.title * 4em => The width of the rectangle
         // I only need newQuestionTextSVG
-
+        let rect2 = config.getLastRect()
+        let emWidth = 6.5
+        let emHeight = 16
+        let emMul = ((rect2.width)*.011)/emWidth
+        var sEmMul = emMul.toString()+'em'
+        console.log(sEmMul)
         this.text.setAttributeNS(null,'x',x);
         this.text.setAttributeNS(null,'y',y);
         this.text.setAttributeNS(null,'fill',fill);
-        this.text.setAttributeNS(null,'font-size','2em')
+        this.text.setAttributeNS(null,'font-size',sEmMul)
         var contentNode = new Array(2)
         contentNode[0] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
         contentNode[0].setAttributeNS(null,'x',x + 35)
         contentNode[0].setAttributeNS(null,'y',y + 35 )
         contentNode[0].setAttributeNS(null,'fill',fill);
-        contentNode[0].setAttributeNS(null,'font-size','1em')
+        contentNode[0].setAttributeNS(null,'font-size',sEmMul)
         contentNode[0].innerHTML = title
         this.text.append(contentNode[0])
         contentNode[1] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
         contentNode[1].setAttributeNS(null,'x',x + 360)
         contentNode[1].setAttributeNS(null,'y',y+35 + 250)
         contentNode[1].setAttributeNS(null,'fill',fill);
-        contentNode[1].setAttributeNS(null,'font-size','1em')
+        contentNode[1].setAttributeNS(null,'font-size',sEmMul)
         contentNode[1].innerHTML = cpt_code
         this.text.append(contentNode[1])
 
