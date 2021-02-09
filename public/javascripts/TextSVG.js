@@ -90,7 +90,6 @@ class TextSVG{
 
         }
 
-        this.text.innerHTML = title;
         //Get the width length
         let rect = config.getLastRect()
         //let rectWidth = rect.width
