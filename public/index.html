@@ -21,8 +21,8 @@
             <button type="button" class="btn btn-default btn-sm" id="zoom"><!-- Change style here -->
                 <span class="glyphicon glyphicon-zoom-in" ></span>
             </button>
-            <button type="button" class="btn btn-default btn-sm" id="normal"><!-- Change style here -->
-               Normal
+            <button type="button" class="btn btn-default btn-sm" id="on-off" onclick="switchOnOff()" ><!-- Change style here -->
+                Off
             </button>
             <button type="button" class="btn btn-default btn-sm" ><!-- Change style here -->
                 <span class="glyphicon glyphicon-zoom-out"></span>
@@ -33,7 +33,13 @@
     </div>
     <div class="leftPanel" id="leftPanel"></div>
     <div class="splitLM" id="splitLM"></div>
+    <div class="draggable-mode" style="display:none;position: absolute;width:100px;height:100px;background-color:red;top: 50%; right: 50%;transform: translate(50%,-50%);z-index: 1;opacity: 0.5">
+        <button id="turnOffMessage" style="position: absolute;right:0%;" onclick="hideMessage()">X</button>
+        <div id="message" >You enter draggable mode</div>
+    </div>
+
     <div class="mainPanel" id="mainPanel">
+
         <div class="package" id="package">
 
             <div class="sub-package" id="Smoking">Smoking Cessation</div>
@@ -53,6 +59,7 @@
             <div class="sub-package" id="PDI">PDI</div>
             -->
         </div>
+
         <!-- Remove search bar for now
         <div class="SearchBar-Container" id="SearchBar-Container">
             <input id="Search" />
@@ -208,11 +215,7 @@
         if (event.ctrlKey && event.key === 'z') {
             let rects = config.getRects()
             if(rects.length > 1) {
-                //Pop the current question out
-                console.log("Final: ",main.getFinal())
-                console.log("List of question:",config.debugPrev())
                 config.goBack(main.getFinal())
-                console.log("Question position:",config.getQuestionPosition())
                 main.setFinal(false)
                 let left = $('#mainPanel').scrollLeft();
                 $('#mainPanel').scrollLeft(left - $('#mainPanel').width());
@@ -421,8 +424,31 @@
     });
 
      */
+    function switchOnOff(){
+        //turnOffMessage
+        //<div id="message" style="display: none">You enter draggable mode</div>
+        if($("#on-off").html().includes("Off")){
+            $("#message").html("You enter draggable mode");
+            $("#on-off").html("On")
+            $(".draggable-mode").show()
+            config.updateMode(true)
+            panZoom.enableMouseWheelZoom()
+            //You enter draggable mode
+        }
+        else{
+            $("#message").html("You exit draggable mode");
+            $("#on-off").html("Off")
+            $(".draggable-mode").show()
+            config.updateMode(false)
+            panZoom.disableMouseWheelZoom()
+            //You exit draggable mode
+        }
 
 
+    }
+    function hideMessage(){
+        $(".draggable-mode").hide()
+    }
 
 </script>
 </html>

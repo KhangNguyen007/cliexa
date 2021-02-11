@@ -4,115 +4,118 @@
  */
 
 class TextSVG{
-    constructor() {
+    constructor(x,y,fill,title) {
         var svgns = "http://www.w3.org/2000/svg";
         this.text = document.createElementNS(svgns, 'text'); //Create a path in SVG's namespace
         //Create a subpath here
         $(".svg-pan-zoom_viewport").append(this.text)
+        this.line= 1
+        if(arguments.length) {
+            // Below is needed to create a second line on the table if it is needed.
+            // Modify this
+            // Updates the new rectangle's size and question
+            // Includes a "yes" button colored green and a "no" button colored red, along with button location
+            // If no boolean is 0, if yes boolean is 1
+            // Calculate newRect.title * 4em => The width of the rectangle
+            // I only need newQuestionTextSVG
+            let nOfLine = 1
+            let line
+            let rect1 = config.getLastRect()
+            let emWidth = 6.5
+            let emHeight = 16
+            let emMul = (rect1.height / 16) / emHeight
+            var sEmMul = emMul.toString() + 'em'
+            let title_width = rect1.width / (emMul * emWidth) * .85
+            if (title.length >= title_width) {
+                nOfLine = 2
+                line = new Array(nOfLine)
+                let startIndex = 0
+                let endIndex = (title.length * 0.80)
+                title_width = Math.round(title_width)
+                let line1 = ""
+                let line2 = ""
+                for (let i = title_width; i > 0; i--) {
+
+                    if (title[i] == " ") {
+                        //console.log("What is the last number:", i)
+                        let saveCharacter = i
+                        for (let j = 0; j < saveCharacter; j++) {
+                            line1 += title[j]
+                        }
+                        for (let k = i + 1; k < title.length; k++) {
+                            line2 += title[k]
+                        }
+                        console.log(line1)
+                        console.log(line2)
+                        break
+                    }
+                }
+
+                // This will split the title by the number of spaces. Ex: start = 0 and end = 12 this
+                // will split the title of the text by counting 12 spaces
+                for (let i = 0; i < nOfLine; i++) {
+                    if (i == 0) {
+                        line[i] = line1
+                    }
+                    if (i == 1) {
+                        line[i] = line2
+                    }
+                    //line[i] = title.slice(startIndex,endIndex).join(" ");
+                    //startIndex = endIndex
+                    //endIndex = title.length
+                }
+                //console.log("This is in line", line)
+            } else {
+                line = new Array(nOfLine)
+                title = title.split(" ")
+                let startIndex = 0
+                let endIndex = title.length
+                for (let i = 0; i < nOfLine; i++) {
+                    line[i] = title.slice(startIndex, endIndex).join(" ");
+                    startIndex = endIndex
+                    endIndex = title.length
+                }
+
+            }
+
+            //Get the width length
+            let rect = config.getLastRect()
+            //let rectWidth = rect.width
+            //Math formula to calculate this
+            //var textNode = document.createTextNode("milind morey");
+            //this.text.append(textNode)
+
+            this.contentNode = new Array(nOfLine)
+
+            for (let i = 0; i < this.contentNode.length; i++) {
+                this.contentNode[i] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                this.contentNode[i].setAttributeNS(null, 'x', x + 30)
+                this.contentNode[i].setAttributeNS(null, 'y', y + 35 + i * 35)
+                this.contentNode[i].setAttributeNS(null, 'fill', fill);
+                this.contentNode[i].setAttributeNS(null, 'font-size', sEmMul)
+                this.contentNode[i].innerHTML = line[i]
+                this.text.append(this.contentNode[i])
+            }
+            this.line=nOfLine
+        }
+
     }
     updatePosition(x,y){
         this.text.setAttributeNS(null,'x',x);
         this.text.setAttributeNS(null,'y',y);
     }
     updateTitle(x,y,fill,title){
-        // Below is needed to create a second line on the table if it is needed.
-        // Modify this
-        // Updates the new rectangle's size and question
-        // Includes a "yes" button colored green and a "no" button colored red, along with button location
-        // If no boolean is 0, if yes boolean is 1
-        // Calculate newRect.title * 4em => The width of the rectangle
-        // I only need newQuestionTextSVG
-        let nOfLine = 1
-        let line
         let rect1 = config.getLastRect()
         let emWidth = 6.5
         let emHeight = 16
         let emMul = (rect1.height/16)/emHeight
         var sEmMul = emMul.toString()+'em'
-        let title_width = rect1.width/(emMul*emWidth)*.85
-        console.log("This is title width", title_width)
-        console.log("This is title length", title.length)
-        //alert(title)
-        if(title.length >= title_width){
-            //title = title.split(" ")
-            //alert(title)
-            nOfLine = 2
-            line = new Array(nOfLine)
-            let startIndex = 0
-            let endIndex = (title.length * 0.80)
-            console.log("This is the length of title length: ", title.length)
-            console.log("This is end index outside", endIndex)
-            title_width = Math.round(title_width)
-            let line1 = ""
-            let line2 = ""
-            for(let i = title_width; i > 0; i--){
-
-                if(title[i] == " "){
-                    //console.log("What is the last number:", i)
-                    let saveCharacter = i
-                    for(let j = 0; j < saveCharacter; j++){
-                        line1 += title[j]
-                    }
-                    for(let k = i+1; k < title.length ; k++){
-                        line2 += title[k]
-                    }
-                    console.log(line1)
-                    console.log(line2)
-                    break
-                }
-            }
-
-            // This will split the title by the number of spaces. Ex: start = 0 and end = 12 this
-            // will split the title of the text by counting 12 spaces
-            for(let i = 0 ; i < nOfLine;i++){
-                if(i == 0){
-                    line[i] = line1
-                }
-                if(i == 1) {
-                    line[i] = line2
-                }
-                //line[i] = title.slice(startIndex,endIndex).join(" ");
-                //startIndex = endIndex
-                //endIndex = title.length
-            }
-            //console.log("This is in line", line)
+        for(let i = 0; i < this.contentNode.length;i++){
+            this.contentNode[i].setAttributeNS(null,'x',x + 30)
+            this.contentNode[i].setAttributeNS(null,'y',y+35 + i*35)
+            this.contentNode[i].setAttributeNS(null,'fill',fill);
+            this.contentNode[i].setAttributeNS(null,'font-size',sEmMul)
         }
-        else{
-            line = new Array(nOfLine)
-            title = title.split(" ")
-            let startIndex = 0
-            let endIndex = title.length
-            for(let i = 0 ; i < nOfLine;i++){
-                line[i] = title.slice(startIndex,endIndex).join(" ");
-                startIndex = endIndex
-                endIndex = title.length
-            }
-
-        }
-
-        //Get the width length
-        let rect = config.getLastRect()
-        //let rectWidth = rect.width
-        //Math formula to calculate this
-        //var textNode = document.createTextNode("milind morey");
-        //this.text.append(textNode)
-        var contentNode = new Array(nOfLine)
-
-        for(let i = 0; i < contentNode.length;i++){
-            contentNode[i] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-            contentNode[i].setAttributeNS(null,'x',x + 30)
-            contentNode[i].setAttributeNS(null,'y',y+35 + i*35)
-            contentNode[i].setAttributeNS(null,'fill',fill);
-            contentNode[i].setAttributeNS(null,'font-size',sEmMul)
-            contentNode[i].innerHTML = line[i]
-            this.text.append(contentNode[i])
-        }
-
-        //Create span
-
-        //Create multiple lines
-        //this.text.tspan = "Hello World1"
-        //this.text.tspan = "Hello World2"
     }
     updateCPT_Code(x,y,fill,title,cpt_code){
         // Below is needed to create a second line on the table if it is needed.

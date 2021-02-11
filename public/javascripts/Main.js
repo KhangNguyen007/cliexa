@@ -384,12 +384,12 @@ class Main{
         let newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
                 shape_width, shape_height, "#FFFFFF", false, title, rects.length)
         let newRectSVG = new RectangleSVG()
-        let newTitleText = new TextSVG()
+        let newTitleText = new TextSVG(newRect.x, newRect.y, '#444444', title)
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
-        titleTextSVG.push(newTitleText)
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
+        titleTextSVG.push(newTitleText)
         config.updateTitleTextSVG(titleTextSVG)
         this.drawFinalBox(newRect.id,cptcode_)
     }
@@ -430,7 +430,6 @@ class Main{
         }
         // Creates a new instance of the rectangle
         let newRectSVG = new RectangleSVG()    //Big rectangle
-        let newQuestionTextSVG = new TextSVG()   //Title center of rectangle
         let newYesRectSVG   = new RectangleSVG()   // Yes Rectangle on the left
         let newYesTextSVG = new TextSVG()          //  Text of Yes Rectangle on the left
         let newNoRectSVG    = new RectangleSVG()   //  No Rectangle on the right
@@ -441,7 +440,6 @@ class Main{
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
-        titleTextSVG.push(newQuestionTextSVG)
         yesRectSVG.push(newYesRectSVG)
         noRectSVG.push(newNoRectSVG)
         yesTextSVG.push(newYesTextSVG)
@@ -451,6 +449,8 @@ class Main{
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
+        let newQuestionTextSVG = new TextSVG(newRect.x, newRect.y + 50, '#444444',title)   //Title center of rectangle
+        titleTextSVG.push(newQuestionTextSVG)
         config.updateTitleTextSVG(titleTextSVG)
         config.updateYesRectSVG(yesRectSVG)
         config.updateYesTextSVG(yesTextSVG)
