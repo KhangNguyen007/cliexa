@@ -10,6 +10,7 @@ class TextSVG{
         //Create a subpath here
         $(".svg-pan-zoom_viewport").append(this.text)
         this.line= 1
+        let endQuestion = config.getQuestionPosition()
         if(arguments.length) {
             // Below is needed to create a second line on the table if it is needed.
             // Modify this
@@ -26,7 +27,12 @@ class TextSVG{
             let emMul = (rect1.height / 16) / emHeight
             var sEmMul = emMul.toString() + 'em'
             let title_width = rect1.width / (emMul * emWidth) * .85
+
+            //else {
+
+
             if (title.length >= title_width) {
+                console.log(endQuestion)
                 nOfLine = 2
                 line = new Array(nOfLine)
                 let startIndex = 0
@@ -45,8 +51,8 @@ class TextSVG{
                         for (let k = i + 1; k < title.length; k++) {
                             line2 += title[k]
                         }
-                        console.log(line1)
-                        console.log(line2)
+                        //console.log(line1)
+                        //console.log(line2)
                         break
                     }
                 }
@@ -78,6 +84,9 @@ class TextSVG{
 
             }
 
+            //}
+
+
             //Get the width length
             let rect = config.getLastRect()
             //let rectWidth = rect.width
@@ -85,18 +94,46 @@ class TextSVG{
             //var textNode = document.createTextNode("milind morey");
             //this.text.append(textNode)
 
-            this.contentNode = new Array(nOfLine)
+            // Nick added this when we reach the end of the box
+            // If this does not work remove this if statement and all contents inside
+            // Remove the else statements and brackets only
+            if (endQuestion == 6 || endQuestion == 15 || endQuestion == 26 || endQuestion == 35 || endQuestion == 47 || endQuestion == 59) {
+                console.log("SECOND")
+                this.contentNode = new Array(2)
+                let cptcode = config.getCPTCODE()
+                line[1] = cptcode
 
-            for (let i = 0; i < this.contentNode.length; i++) {
-                this.contentNode[i] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-                this.contentNode[i].setAttributeNS(null, 'x', x + 30)
-                this.contentNode[i].setAttributeNS(null, 'y', y + 35 + i * 35)
-                this.contentNode[i].setAttributeNS(null, 'fill', fill);
-                this.contentNode[i].setAttributeNS(null, 'font-size', sEmMul)
-                this.contentNode[i].innerHTML = line[i]
-                this.text.append(this.contentNode[i])
-            }
-            this.line=nOfLine
+                this.contentNode[0] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                this.contentNode[0].setAttributeNS(null, 'x', x + 30)
+                this.contentNode[0].setAttributeNS(null, 'y', y + 35 )//+ i * 35)
+                this.contentNode[0].setAttributeNS(null, 'fill', fill);
+                this.contentNode[0].setAttributeNS(null, 'font-size', sEmMul)
+                this.contentNode[0].innerHTML = line[0]
+                this.text.append(this.contentNode[0])
+                this.contentNode[1] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                this.contentNode[1].setAttributeNS(null,'x',x + 360)
+                this.contentNode[1].setAttributeNS(null,'y',y+35 + 1 * 250)
+                this.contentNode[1].setAttributeNS(null,'fill',fill);
+                this.contentNode[1].setAttributeNS(null,'font-size',sEmMul)
+                this.contentNode[1].innerHTML = line[1]
+                this.text.append(this.contentNode[1])
+                this.line = nOfLine
+            } // Delete everything in between including this bracket
+            else { // Delete this line only
+                //console.log("Not 6")
+                this.contentNode = new Array(nOfLine)
+
+                for (let i = 0; i < this.contentNode.length; i++) {
+                    this.contentNode[i] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
+                    this.contentNode[i].setAttributeNS(null, 'x', x + 30)
+                    this.contentNode[i].setAttributeNS(null, 'y', y + 35 + i * 35)
+                    this.contentNode[i].setAttributeNS(null, 'fill', fill);
+                    this.contentNode[i].setAttributeNS(null, 'font-size', sEmMul)
+                    this.contentNode[i].innerHTML = line[i]
+                    this.text.append(this.contentNode[i])
+                }
+                this.line = nOfLine
+            } // Delete this bracket only
         }
 
     }
@@ -125,17 +162,21 @@ class TextSVG{
         // If no boolean is 0, if yes boolean is 1
         // Calculate newRect.title * 4em => The width of the rectangle
         // I only need newQuestionTextSVG
+
+        ///////////////// COMMENTED SECTION OUT. UNCOMMENT IF NEEDED ///////////////////////////
+        /* ///////  REMOVE THIS '/*' FOR THE FINAL BOX, CURRENTLY UPDATING IN CONSTRUCTOR
         let rect2 = config.getLastRect()
         let emWidth = 6.5
         let emHeight = 16
         let emMul = ((rect2.width)*.011)/emWidth
         var sEmMul = emMul.toString()+'em'
-        console.log(sEmMul)
+
         this.text.setAttributeNS(null,'x',x);
         this.text.setAttributeNS(null,'y',y);
         this.text.setAttributeNS(null,'fill',fill);
-        this.text.setAttributeNS(null,'font-size',sEmMul)
-        var contentNode = new Array(2)
+        //this.text.setAttributeNS(null,'font-size',sEmMul)
+        let contentNode = new Array(2)
+
         contentNode[0] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
         contentNode[0].setAttributeNS(null,'x',x + 35)
         contentNode[0].setAttributeNS(null,'y',y + 35 )
@@ -143,6 +184,8 @@ class TextSVG{
         contentNode[0].setAttributeNS(null,'font-size',sEmMul)
         contentNode[0].innerHTML = title
         this.text.append(contentNode[0])
+
+
         contentNode[1] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
         contentNode[1].setAttributeNS(null,'x',x + 360)
         contentNode[1].setAttributeNS(null,'y',y+35 + 250)
@@ -150,8 +193,8 @@ class TextSVG{
         contentNode[1].setAttributeNS(null,'font-size',sEmMul)
         contentNode[1].innerHTML = cpt_code
         this.text.append(contentNode[1])
-
-
+        console.log("LASSST")
+        */
     }
     update(x,y,fill,title){
         // Below is needed to create a second line on the table if it is needed.

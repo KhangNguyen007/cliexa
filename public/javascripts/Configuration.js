@@ -26,6 +26,7 @@ class Configuration {
         this.yesTextSVG = []
         this.noRectSVG = []
         this.noTextSVG = []
+        this.storeCPTCODE = ""
         this.widthSize = $('#mainPanel').width()*7/10
         this.heightSize = $('#mainPanel').height()*8/10
         this.maxWidth =  $('#mainPanel').width()*8/10
@@ -47,6 +48,14 @@ class Configuration {
         this.level = [0]
         //this.progress_bar = 0
     }
+
+    updateCPTCODE(CPTCODE){
+        this.storeCPTCODE = CPTCODE
+    }
+    getCPTCODE(){
+        return this.storeCPTCODE
+    }
+
     debugPrev(){
         return this.prev
     }
