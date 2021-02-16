@@ -331,7 +331,7 @@ class Main{
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
         if(titleTextSVG.length > index) {
-             titleTextSVG[index].updateTitle(rects[index].x+45, rects[index].y + 50, '#444444', rects[index].title)
+             titleTextSVG[index].updateTitle(rects[index].x+45, rects[index].y + 50, '#000000', rects[index].title)
         }
         if(yesRectSVG.length > index) {
             yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)")
@@ -340,7 +340,7 @@ class Main{
             yesTextSVG[index].update(rects[index].x + (rects[index].width * (2/9)) , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes")
         }
         if(noRectSVG.length > index) {
-            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#999999', '1', "populateRec(0)")
+            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(0)")
         }
         if(noTextSVG.length > index) {
             noTextSVG[index].update(rects[index].x + rects[index].width*(.746), rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No")
