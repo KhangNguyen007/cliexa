@@ -367,7 +367,7 @@ class Main{
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
         if(titleTextSVG.length > index) {
-            titleTextSVG[index].updateCPT_Code(rects[index].x+45, rects[index].y + 250, '#444444', rects[index].title, cpt_code)
+            titleTextSVG[index].updateCPT_Code(rects[index].x+45, rects[index].y + 250, '#000000', rects[index].title, cpt_code)
         }
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
@@ -423,7 +423,7 @@ class Main{
         let newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
                 shape_width, shape_height, "#FFFFFF", false, title, rects.length)
         let newRectSVG = new RectangleSVG()
-        let newTitleText = new TextSVG(newRect.x, newRect.y, '#444444', title)
+        let newTitleText = new TextSVG(newRect.x, newRect.y, '#000000', title)
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         config.updateRects(rects)
@@ -488,7 +488,7 @@ class Main{
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
-        let newQuestionTextSVG = new TextSVG(newRect.x, newRect.y + 50, '#444444',title)   //Title center of rectangle
+        let newQuestionTextSVG = new TextSVG(newRect.x, newRect.y + 50, '#000000',title)   //Title center of rectangle
         titleTextSVG.push(newQuestionTextSVG)
         config.updateTitleTextSVG(titleTextSVG)
         config.updateYesRectSVG(yesRectSVG)
