@@ -75,4 +75,4 @@ let data =[
     {id:60,q:"We are finalizing your result for the drug assessment",loading:49}
 ]
 
-//Call from search question
+// Call from search question

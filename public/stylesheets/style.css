@@ -45,17 +45,17 @@ a {
 */
 
 .leftPanel{
-  background-color: #F7F7F7;
   position:absolute;
   top:10.5%;
-  width: 10%;
+  width: 10%; /* 10 */
   height: 90%;
+  background-color: white;
   left: 0;
-  opacity: 0.1;
+  /*opacity: 0.1;*/
 }
 .splitLM{
   height: 90%;
-  width: 0.1%;
+  width: 0.0%;
   position:absolute;
   left: 10%;
   top: 10.5%;
@@ -99,9 +99,9 @@ a {
 .rightPanel{
   position:absolute;
   top: 10.5%;
-  left: 91.5%;
-  width:10%;
-  background-color: #F7F7F7;
+  left: 90%; /* 91.5 */
+  width:10%;   /* 10 */
+  background-color: white;
   height:90%;
   box-shadow: 2px 2px 5px #aaaaaa
 
@@ -125,11 +125,11 @@ a {
 }
 .sub-package{
   position:relative;
-  margin: 0.5% 0.5% 0.5% 0.5%;
+  margin: 0.9% 0.5% 0.5% 1%; /* before all was at 0.5% */
   display: inline-block;
   width:23%;
   height:25%;
- /* background-color:#89CFF0; */
+  /* background-color:#89CFF0; */
   box-shadow: 5px 5px 8px gray;
   text-align: center;
   font-weight: bold;
@@ -144,78 +144,50 @@ a {
   /* Similar syntax to box-shadow */
 }
 
-
-/* One of the many questionnaires for our new starting interface
-// uncomment this if we plan to implement more questionnaires
-#GAD{
-  background-image: url("images/GAD.png");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
- */
-
+/* For smoking this provides a background cover for starting page, previous picture was Smoking1.jpg */
 #Smoking{
-  background-image: url("images/Smoking1.jpg");
+  background-image: url("images/Smoking-Icon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  color: black;
 }
+
+/* For CCM this provides a background cover for starting page, previous picture was CCM.jpg */
 #CCM{
-  background-image: url("images/CCM.jpg");
+  background-image: url("images/CCM-Icon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  color: black
 }
+
+/* For depression this provides a background cover for starting page, previous picture was Depression_Fading.jpg */
 #PHQ9{
-  background-image: url("images/Depression_Fading.jpg");
+  background-image: url("images/Depression-Icon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  color: black
 }
+
+/* For anxiety this provides a background cover for starting page, previous picture was GAD7.jpg */
 #GAD7{
-  background-image: url("images/GAD-Symptom.jpg");
+  background-image: url("images/Anxiety-Icon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  color: black
 }
+
+/* For alcohol this provides a background cover for starting page, previous picture was Alcohol.jpg */
 #AUDIT{
-  background-image: url("images/Alcohol.jpg");
+  background-image: url("images/Alcohol-Icon.png");
   background-repeat: no-repeat;
   background-size: cover;
+  color: black
 }
+
+/* For drugs this provides a background cover for starting page, previous picture was DAST10.jpg */
 #DAST-10{
-  background-image: url("images/DAST10.jpg");
+  background-image: url("images/Drugs-Icon.jpg");
   background-repeat: no-repeat;
   background-size: cover;
+  color: black
 }
-
-
-
-/* Many questionnaires for our new starting interface
-// uncomment this if we plan to implement more questionnaires
-#DAST{
-  background-image: url("images/DAST10.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-#NIDE{
-  background-image: url("images/NIDE.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-#AUDIT{
-  background-image: url("images/AUDIT.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-#DRAWING{
-  background-image: url("images/vacant.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
-#PDI{
-  background-image: url("images/PDI.gif");
-  background-repeat: no-repeat;
-  background-size: cover;
-}
-
- */
-
