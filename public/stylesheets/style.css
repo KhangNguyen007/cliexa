@@ -191,3 +191,8 @@ a {
   background-size: cover;
   color: black
 }
+
+.test2:hover{
+  stroke: blue;
+  stroke-width: 1px
+}
