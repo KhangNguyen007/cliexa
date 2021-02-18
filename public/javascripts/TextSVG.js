@@ -97,7 +97,7 @@ class TextSVG{
             // Nick added this when we reach the end of the box
             // If this does not work remove this if statement and all contents inside
             // Remove the else statements and brackets only
-            if (endQuestion == 6 || endQuestion == 15 || endQuestion == 26 || endQuestion == 35 || endQuestion == 47 || endQuestion == 59) {
+            if (endQuestion == 6 || endQuestion == 14 || endQuestion == 25 || endQuestion == 36 || endQuestion == 46 || endQuestion == 58) {
                 console.log("SECOND")
                 this.contentNode = new Array(2)
                 let cptcode = config.getCPTCODE()
