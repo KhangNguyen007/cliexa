@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 </head>
 <body>
 <div class="container">
@@ -33,10 +34,11 @@
     </div>
     <div class="leftPanel" id="leftPanel"></div>
     <div class="splitLM" id="splitLM"></div>
-    <div class="draggable-mode" style="display:none;position: absolute;width:100px;height:100px;background-color:red;top: 50%; right: 50%;transform: translate(50%,-50%);z-index: 1;opacity: 0.5">
+    <div class="draggable-mode" style="display:none;position: absolute;width:100px;height:100px;background-color:lightblue;top: 50%; right: 50%;transform: translate(50%,-50%);z-index: 1;opacity: 5">
         <button id="turnOffMessage" style="position: absolute;right:0%;" onclick="hideMessage()">X</button>
         <div id="message" >You enter draggable mode</div>
     </div>
+
 
     <div class="mainPanel" id="mainPanel">
 
@@ -287,7 +289,7 @@
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
-        $("#Smoking").css("width", "23%");+
+        $("#Smoking").css("width", "23%");
         $("#Smoking").css("height", "25%");
     }).mouseout(function() {
         $("#Smoking").css("width", "23%");
