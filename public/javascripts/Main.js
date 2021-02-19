@@ -28,14 +28,14 @@ function populateRec(answer){
         // config.update_progress = (100/config.questionnaireLevel) // This brings it to 12.5 percent
         config.update_progress = 12
     }
-    else if(config.getQuestionPosition() === 17)
+    else if(config.getQuestionPosition() === 16)
     {
         progress_bar = 0
         config.updateTest_Progress_Bar(progress_bar)
         config.questionnaireLevel = 10
         config.update_progress = (100/config.questionnaireLevel)
     }
-    else if(config.getQuestionPosition() === 28)
+    else if(config.getQuestionPosition() === 27)
     {
         progress_bar = 0
         config.updateTest_Progress_Bar(progress_bar)
@@ -43,13 +43,13 @@ function populateRec(answer){
         // config.update_progress = (100/config.questionnaireLevel) // Ths bring it up to 12.5 percent
         config.update_progress = 12
     }
-    else if(config.getQuestionPosition() === 37)
+    else if(config.getQuestionPosition() === 36)
     {
         config.questionnaireLevel = 11
         // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
         config.update_progress = 9
     }
-    else if(config.getQuestionPosition() === 49)
+    else if(config.getQuestionPosition() === 48)
     {
         config.questionnaireLevel = 11
         // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
@@ -93,7 +93,7 @@ function populateRec(answer){
         console.log("Current level:",config.getCurrentLevel())
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
-        if(score < 4)
+        if(score > 4)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -126,7 +126,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 3)
+        if(score > 3)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -158,7 +158,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 4)
+        if(score > 4)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -191,7 +191,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 4)
+        if(score > 4)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -225,7 +225,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 5)
+        if(score > 5)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -256,7 +256,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 5)
+        if(score > 5)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)

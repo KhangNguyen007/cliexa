@@ -15,9 +15,9 @@ let data =[
     {id:8,q:"Are you a returning patient?",yes:12, no:9}, // The starting code for CCM
     {id:9,q:"Are you enrolled in medicare?", yes:10,no:15},
     {id:10,q:"Do you have two or more diagnoses shown below?",yes:12,no:11},
-    {id:11,q:"Implementing the PHQ-9. Click yes if its high/med. Click no if its low.",yes:12,no:16},
-    {id:12,q:"Are you enrolled in any Chronic Care Management with any other physician?",yes:16,no:13},
-    {id:13,q:"Did you sign the CCM consent form?",yes:14,no:16},
+    {id:11,q:"Implementing the PHQ-9. Click yes if its high/med. Click no if its low.",yes:12,no:15},
+    {id:12,q:"Are you enrolled in any Chronic Care Management with any other physician?",yes:15,no:13},
+    {id:13,q:"Did you sign the CCM consent form?",yes:14,no:15},
     {id:14,q:"Is this your CCM plan worksheet?", yes:15,no:15},
     //{id:15,q:"Remote Patient Monitoring set up screen will populate here. Is this your RPM?",yes:16,no:16},
     {id:15,q:"We are finalizing your result for CCM",loading:8}, // The final code for CCM
