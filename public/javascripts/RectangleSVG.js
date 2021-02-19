@@ -19,8 +19,7 @@ class RectangleSVG{
         this.rect.setAttributeNS(null, 'height', height.toString());
     }
 
-    // Update without onClick
-    // This allows the users to click on the boxes.
+    // Update without onClick -> final box
     update(x,y,width,height,fill,zIndex){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
@@ -32,6 +31,7 @@ class RectangleSVG{
         this.rect.setAttributeNS(null, 'z-index', zIndex);
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
+        //this.rect.setAttributeNS(null,"class", "test1");
     }
 
 
@@ -49,6 +49,8 @@ class RectangleSVG{
         this.rect.setAttributeNS(null, 'onclick', onclick);
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
+        this.rect.setAttributeNS(null,"class", "test2");
+        //this.rect.setAttributeNS(null,"className", "test2");
     }
 
     // Allows the resizing of the boxes containing the questions

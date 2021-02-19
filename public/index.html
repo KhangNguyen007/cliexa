@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="./stylesheets/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
 </head>
 <body>
 <div class="container">
@@ -33,21 +34,22 @@
     </div>
     <div class="leftPanel" id="leftPanel"></div>
     <div class="splitLM" id="splitLM"></div>
-    <div class="draggable-mode" style="display:none;position: absolute;width:100px;height:100px;background-color:red;top: 50%; right: 50%;transform: translate(50%,-50%);z-index: 1;opacity: 0.5">
+    <div class="draggable-mode" style="display:none;position: absolute;width:100px;height:100px;background-color:lightblue;top: 50%; right: 50%;transform: translate(50%,-50%);z-index: 1;opacity: 5">
         <button id="turnOffMessage" style="position: absolute;right:0%;" onclick="hideMessage()">X</button>
         <div id="message" >You enter draggable mode</div>
     </div>
+
 
     <div class="mainPanel" id="mainPanel">
 
         <div class="package" id="package">
 
-            <div class="sub-package" id="Smoking">Smoking Cessation</div>
-            <div class="sub-package" id="PHQ9">Depression Assessment</div>
-            <div class="sub-package" id="GAD7">Anxiety Assessment</div>
-            <div class="sub-package" id="AUDIT">Alcohol Assessment</div>
-            <div class="sub-package" id="DAST-10">Drug Assessment</div>
-            <div class="sub-package" id="CCM">Chronic Care Management</div>
+            <div class="sub-package borderline" id="Smoking">Smoking Cessation</div>
+            <div class="sub-package borderline" id="PHQ9">Depression Assessment</div>
+            <div class="sub-package borderline" id="GAD7">Anxiety Assessment</div>
+            <div class="sub-package borderline" id="AUDIT">Alcohol Assessment</div>
+            <div class="sub-package borderline" id="DAST-10">Drug Assessment</div>
+            <div class="sub-package borderline" id="CCM">Chronic Care Management</div>
 
             <!--
             <div class="sub-package" id="GAD">GAD7</div>
@@ -73,7 +75,7 @@
         <!--
         Previous values for viewBox is "0 0 1000000 1000000" width="1000000" height="1000000"
         -->
-        <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 15000 800" width="15000" height="800" style="visibility: hidden;background-color: #f6f8f9; display: inline;" version="1.1">
+        <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 25000 800" width="25000" height="800" style="visibility: hidden;background-color: #f6f8f9; display: inline;" version="1.1">
             <!-- Using Jquery to add shape -->
         </svg>
 
@@ -287,7 +289,7 @@
         $("#svg").css("visibility","visible")
 
     }).mouseover(function(){
-        $("#Smoking").css("width", "23%");+
+        $("#Smoking").css("width", "23%");
         $("#Smoking").css("height", "25%");
     }).mouseout(function() {
         $("#Smoking").css("width", "23%");
@@ -315,8 +317,8 @@
     $("#PHQ9").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(17)
-        let question = data[17].q
+        config.updateQuestionPosition(16)
+        let question = data[16].q
         main.insertShape(question)
         $("#svg").css("visibility","visible")
 
@@ -332,8 +334,8 @@
     $("#GAD7").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(28)
-        let question = data[28].q
+        config.updateQuestionPosition(27)
+        let question = data[27].q
         main.insertShape(question)
         $("#svg").css("visibility","visible")
 
@@ -350,8 +352,8 @@
     $("#AUDIT").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(37)
-        let question = data[37].q
+        config.updateQuestionPosition(36)
+        let question = data[36].q
         main.insertShape(question)
         $("#svg").css("visibility","visible")
 
@@ -367,8 +369,8 @@
     $("#DAST-10").click(function() {
         //Hide all package
         $("#package").hide()
-        config.updateQuestionPosition(49)
-        let question = data[49].q
+        config.updateQuestionPosition(48)
+        let question = data[48].q
         main.insertShape(question)
         $("#svg").css("visibility","visible")
 
@@ -453,6 +455,7 @@
     function hideMessage(){
         $(".draggable-mode").hide()
     }
+
 
 </script>
 </html>

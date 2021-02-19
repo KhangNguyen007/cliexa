@@ -28,14 +28,14 @@ function populateRec(answer){
         // config.update_progress = (100/config.questionnaireLevel) // This brings it to 12.5 percent
         config.update_progress = 12
     }
-    else if(config.getQuestionPosition() === 17)
+    else if(config.getQuestionPosition() === 16)
     {
         progress_bar = 0
         config.updateTest_Progress_Bar(progress_bar)
         config.questionnaireLevel = 10
         config.update_progress = (100/config.questionnaireLevel)
     }
-    else if(config.getQuestionPosition() === 28)
+    else if(config.getQuestionPosition() === 27)
     {
         progress_bar = 0
         config.updateTest_Progress_Bar(progress_bar)
@@ -43,13 +43,13 @@ function populateRec(answer){
         // config.update_progress = (100/config.questionnaireLevel) // Ths bring it up to 12.5 percent
         config.update_progress = 12
     }
-    else if(config.getQuestionPosition() === 37)
+    else if(config.getQuestionPosition() === 36)
     {
         config.questionnaireLevel = 11
         // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
         config.update_progress = 9
     }
-    else if(config.getQuestionPosition() === 49)
+    else if(config.getQuestionPosition() === 48)
     {
         config.questionnaireLevel = 11
         // new_progress = (100/config.questionnaireLevel) // Equals to about 9.09
@@ -93,7 +93,7 @@ function populateRec(answer){
         console.log("Current level:",config.getCurrentLevel())
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
-        if(score < 4)
+        if(score > 4)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -126,7 +126,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 3)
+        if(score > 3)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -141,7 +141,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the depression questionnaire
-    else if(data[index].loading === 17) {
+    else if(data[index].loading === 16) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
         Qualified_CPT = "CPT code: 54545"
         NotQualified_CPT = "CPT code: 66190"
@@ -158,7 +158,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 4)
+        if(score > 4)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -173,7 +173,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the anxiety questionnaire
-    else if(data[index].loading === 28) {
+    else if(data[index].loading === 27) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
         Qualified_CPT = "CPT code: 63881"
         NotQualified_CPT = "CPT code: 10992"
@@ -191,7 +191,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 4)
+        if(score > 4)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -206,7 +206,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the alcohol questionnaire
-    else if(data[index].loading === 37) {
+    else if(data[index].loading === 36) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
         Qualified_CPT = "CPT code: 64829"
         NotQualified_CPT = "CPT code: 38485"
@@ -225,7 +225,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 5)
+        if(score > 5)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -240,7 +240,7 @@ function populateRec(answer){
     }
 
     // If we reach the final box for the drug questionnaire
-    else if(data[index].loading === 49) {
+    else if(data[index].loading === 48) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
         Qualified_CPT = "CPT code: 93836"
         NotQualified_CPT = "CPT code: 76547"
@@ -256,7 +256,7 @@ function populateRec(answer){
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-        if(score < 5)
+        if(score > 5)
         {
             config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
@@ -279,7 +279,7 @@ function populateRec(answer){
             }
 
             // If we are at the beginning of the new questionnaire, set progress bar to 0
-            if(index == 0 || index == 17 || index == 28 || index == 37 || index == 49 || index == 8){
+            if(index == 0 || index == 16 || index == 27 || index == 36 || index == 48 || index == 8){
                 progress_bar = 0
                 config.setLevel(progress_bar)
             }

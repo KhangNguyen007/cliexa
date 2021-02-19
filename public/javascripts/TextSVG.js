@@ -97,8 +97,17 @@ class TextSVG{
             // Nick added this when we reach the end of the box
             // If this does not work remove this if statement and all contents inside
             // Remove the else statements and brackets only
-            if (endQuestion == 6 || endQuestion == 15 || endQuestion == 26 || endQuestion == 35 || endQuestion == 47 || endQuestion == 59) {
-                console.log("SECOND")
+            //index = data[config.getQuestionPosition()].yes
+
+            // Since there is multiple ways to get to the final box for CCM, we will always update the CCM CPT Code
+            if (endQuestion > 7 && endQuestion < 16)
+            {
+                //console.log("Please work here")
+                endQuestion = 14
+            }
+            //console.log("This is in end question: "+endQuestion)
+            if (endQuestion == 6 || endQuestion == 14 || endQuestion == 25 || endQuestion == 34 || endQuestion == 46 || endQuestion == 58) {
+                //console.log("SECOND")
                 this.contentNode = new Array(2)
                 let cptcode = config.getCPTCODE()
                 line[1] = cptcode
