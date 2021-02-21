@@ -103,11 +103,19 @@ class Draggble {
                     r.x += dx;
                     r.y += dy;
                 }
+
             }
 
             config.updateRects(rects)
-            // Redraw
-            main.draw(this.index);
+            // If not final
+            if(config.isFinal() && this.index === rects.length-1 ) {
+                main.drawFinalBox(this.index);
+            }
+            else{
+                main.draw(this.index);
+            }
+
+            //If final box
             // reset the starting mouse position for the next mousemove
             this.startX = mx;
             this.startY = my;

@@ -15,6 +15,13 @@ class Rectangle{
         this.isDragging = isDragging
         this.title = title
         this.id = id
+        this.cpt_code = null
+    }
+    setCPT_Code(cpt_code){
+        this.cpt_code = cpt_code
+    }
+    getCPT_Code(){
+        return this.cpt_code
     }
     update(x,y,width,height){
         this.x = x

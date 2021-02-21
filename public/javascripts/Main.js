@@ -95,12 +95,10 @@ function populateRec(answer){
         $('#progress-bar').text(config.getCurrentLevel() + '%')
         if(score > 4)
         {
-            config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
         }
         else
         {
-            config.updateCPTCODE(NotQualified_CPT)
             main.insertTheFinalBox(title,NotQualified_CPT)
         }
         main.setFinal(true)
@@ -128,12 +126,10 @@ function populateRec(answer){
 
         if(score > 3)
         {
-            config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
         }
         else
         {
-            config.updateCPTCODE(NotQualified_CPT)
             main.insertTheFinalBox(title,NotQualified_CPT)
         }
         main.setFinal(true)
@@ -160,12 +156,10 @@ function populateRec(answer){
 
         if(score > 4)
         {
-            config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
         }
         else
         {
-            config.updateCPTCODE(NotQualified_CPT)
             main.insertTheFinalBox(title,NotQualified_CPT)
         }
         main.setFinal(true)
@@ -193,12 +187,10 @@ function populateRec(answer){
 
         if(score > 4)
         {
-            config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
         }
         else
         {
-            config.updateCPTCODE(NotQualified_CPT)
             main.insertTheFinalBox(title,NotQualified_CPT)
         }
         main.setFinal(true)
@@ -227,12 +219,10 @@ function populateRec(answer){
 
         if(score > 5)
         {
-            config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
         }
         else
         {
-            config.updateCPTCODE(NotQualified_CPT)
             main.insertTheFinalBox(title,NotQualified_CPT)
         }
         main.setFinal(true)
@@ -258,12 +248,10 @@ function populateRec(answer){
 
         if(score > 5)
         {
-            config.updateCPTCODE(Qualified_CPT)
             main.insertTheFinalBox(title,Qualified_CPT)
         }
         else
         {
-            config.updateCPTCODE(NotQualified_CPT)
             main.insertTheFinalBox(title,NotQualified_CPT)
         }
         main.setFinal(true)
@@ -316,6 +304,7 @@ class Main{
     }
 
     draw(index) {
+
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
@@ -358,19 +347,30 @@ class Main{
         config.updateNoTextSVG(noTextSVG)
     }
 
-    drawFinalBox(index,cpt_code) {
+    drawFinalBox(index) {
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
-
+        let cptTextSVG  = config.getCPTTextSVG()
+        let linesSVG = config.getLinesSVG()
         if(rectsSVG.length > index) {
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
+
         if(titleTextSVG.length > index) {
-            titleTextSVG[index].updateCPT_Code(rects[index].x+45, rects[index].y + 250, '#000000', rects[index].title, cpt_code)
+            titleTextSVG[index].update(rects[index].x+45, rects[index].y + 50, '#000000', rects[index].title)
         }
+        cptTextSVG.update(rects[index].x+200, rects[index].y + 200, '#000000',rects[index].getCPT_Code())
+        for(let i = 1 ; i < rects.length; i++){
+            linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
+        }
+
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
+        config.updateCPTTextSVG(cptTextSVG)
+
+        config.setFinal(true)
+
     }
 
     // When a question is answered, it will slide to the next question automatically.
@@ -404,7 +404,6 @@ class Main{
         config.setScaleTranslate(1,1,0,0)
         panZoom.reset()
         panZoom.zoom(1)
-        this.drawAll()
         //1 means go back to
         //Slide to the last element
         this.slide(1)
@@ -422,15 +421,18 @@ class Main{
         let titleTextSVG = config.getTitleTextSVG()
         let newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
                 shape_width, shape_height, "#FFFFFF", false, title, rects.length)
+        newRect.setCPT_Code(cptcode_)
         let newRectSVG = new RectangleSVG()
         let newTitleText = new TextSVG(newRect.x, newRect.y, '#000000', title)
+        let cptCode = new TextSVG(newRect.x, newRect.y, '#000000', cptcode_)
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         titleTextSVG.push(newTitleText)
         config.updateTitleTextSVG(titleTextSVG)
-        this.drawFinalBox(newRect.id,cptcode_)
+        config.updateCPTTextSVG(cptCode)
+        this.drawFinalBox(newRect.id)
     }
 
     // Automatically draw the rectangle shape with the question and the yes or no button
@@ -500,4 +502,5 @@ class Main{
     }
     // This will read through the question title and split it into two lines
     // The lines will be displayed in the same position as before and the other line will be below it.
+
 }
