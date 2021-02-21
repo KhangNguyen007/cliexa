@@ -29,11 +29,11 @@ class TextSVG{
             let emMul = 2,sEmMul = emMul.toString() + 'em'
             console.log("Title length:",title.length)
             console.log("Rect Width:",rect.width)
-            let title_width = title.length*16
+            let title_width = (title.length)*16
             console.log("Title Width:",title_width)
             if (title_width >= rect.width) {
                 console.log("Get into split line")
-                nOfLine = Math.ceil(title_width/rect.width)
+                nOfLine = Math.ceil(title_width/(rect.width))
                 console.log("number of line:",nOfLine)
                 line = new Array(nOfLine)
                 for(let i = 0 ; i < line.length; i++){
@@ -42,7 +42,7 @@ class TextSVG{
                 let splitTitle = title.split(" ")
                 let count = 0, i = 0
                 while(count < splitTitle.length){
-                    if(line[i].length*16 <= rect.width) {
+                    if((line[i].length)*16 <= rect.width) {
                         line[i] += splitTitle[count++]
                         line[i] += " "
                     }
@@ -84,7 +84,7 @@ class TextSVG{
     }
     updateTitle(x,y,fill,title){
         let rect = config.getLastRect()
-        let emWidth = 6.5,emHeight = 16,emMul = (rect.height/16)/emHeight,sEmMul = emMul.toString()+'em'
+        let emMul = 2,sEmMul = emMul.toString() + 'em'
         for(let i = 0; i < this.contentNode.length;i++){
             this.contentNode[i].setAttributeNS(null,'x',x + 30)
             this.contentNode[i].setAttributeNS(null,'y',y+35 + i*35)
