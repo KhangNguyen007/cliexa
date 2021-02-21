@@ -27,8 +27,8 @@ class TextSVG{
             let emWidth = 6.5,emHeight = 16,emMul = (rect.height / 16) / emHeight,sEmMul = emMul.toString() + 'em'
             let title_width = rect.width / (emMul * emWidth) * .85
             title_width = Math.ceil(title_width)
-            if (title.length + 12 >= title_width) {
-                nOfLine = Math.ceil(title.length/title_width)
+            if ((title.length + 4)*emWidth >= rect.width) {
+                nOfLine = Math.ceil(title.length/rect.width)
                 line = new Array(nOfLine)
                 for(let i = 0 ; i < line.length; i++){
                     line[i] = ""
