@@ -107,10 +107,11 @@ class Draggble {
             }
 
             config.updateRects(rects)
-            // If not final
-            if(config.isFinal() && this.index === rects.length-1 ) {
+            // If  final
+            if(main.getFinal() && this.index === rects.length-1 ) {
                 main.drawFinalBox(this.index);
             }
+            //If not final
             else{
                 main.draw(this.index);
             }

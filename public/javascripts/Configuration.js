@@ -27,7 +27,6 @@ class Configuration {
         this.noRectSVG = []
         this.noTextSVG = []
         this.cptSVG = null
-        this.final = false
         this.widthSize = $('#mainPanel').width()*7/10
         this.heightSize = $('#mainPanel').height()*8/10
         this.maxWidth =  $('#mainPanel').width()*8/10
@@ -49,12 +48,7 @@ class Configuration {
         this.level = [0]
         //this.progress_bar = 0
     }
-    setFinal(final){
-        this.final = final
-    }
-    isFinal(){
-        return this.final
-    }
+
     getCPTTextSVG(){
         return this.cptSVG
     }

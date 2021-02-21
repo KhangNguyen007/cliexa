@@ -369,7 +369,7 @@ class Main{
         config.updateTitleTextSVG(titleTextSVG)
         config.updateCPTTextSVG(cptTextSVG)
 
-        config.setFinal(true)
+        main.setFinal(true)
 
     }
 
