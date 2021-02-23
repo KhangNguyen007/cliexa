@@ -8,7 +8,7 @@ let score = 0
 function populateRec(answer){
     let index,title,progress_bar
     let Qualified_CPT
-    let NotQualified_CPT
+    let NotQualified_CPT = "You are not qualified for a CPT Code."
     let rects = config.getRects()
     //Here is the logic to expand question
 
@@ -79,8 +79,8 @@ function populateRec(answer){
     if(data[index].loading === 0) {
         console.log("HERE FIRST")
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "CPT code: 38592"
-        NotQualified_CPT = "CPT code: 84919"
+        Qualified_CPT = "You are qualified! CPT code: 38592"
+        //NotQualified_CPT = "CPT code: 84919"
         //Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -108,8 +108,8 @@ function populateRec(answer){
     // If we reach the final box for CCM questionnaire, populate the final box
     else if(data[index].loading === 8) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "CPT code: 63833"
-        NotQualified_CPT = "CPT code: 17490"
+        Qualified_CPT = "You are qualified! CPT code: 63833"
+        //NotQualified_CPT = "CPT code: 17490"
 
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
@@ -139,8 +139,8 @@ function populateRec(answer){
     // If we reach the final box for the depression questionnaire
     else if(data[index].loading === 16) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "CPT code: 54545"
-        NotQualified_CPT = "CPT code: 66190"
+        Qualified_CPT = "You are qualified! CPT code: 54545"
+        //NotQualified_CPT = "CPT code: 66190"
 
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
@@ -169,8 +169,8 @@ function populateRec(answer){
     // If we reach the final box for the anxiety questionnaire
     else if(data[index].loading === 27) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "CPT code: 63881"
-        NotQualified_CPT = "CPT code: 10992"
+        Qualified_CPT = "You are qualified! CPT code: 63881"
+        //NotQualified_CPT = "You are not qualified for a CPT Code"
 
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
@@ -200,8 +200,8 @@ function populateRec(answer){
     // If we reach the final box for the alcohol questionnaire
     else if(data[index].loading === 36) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "CPT code: 64829"
-        NotQualified_CPT = "CPT code: 38485"
+        Qualified_CPT = "You are qualified! CPT code: 64829"
+        //NotQualified_CPT = "You are not qualified for a CPT Code"
 
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
@@ -232,8 +232,8 @@ function populateRec(answer){
     // If we reach the final box for the drug questionnaire
     else if(data[index].loading === 48) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "CPT code: 93836"
-        NotQualified_CPT = "CPT code: 76547"
+        Qualified_CPT = "You are qualified! CPT code: 93836"
+        //NotQualified_CPT = "CPT code: 76547"
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -294,7 +294,7 @@ class Main{
     constructor(){
         this.final = false //Indicate final box
     }
-    //Think about Tree Hireachy which easier to manager
+    //Think about Tree Hiearchy which easier to manager
     // Class Inheritance and Interface
     setFinal(final){
         this.final = final
@@ -360,7 +360,7 @@ class Main{
         if(titleTextSVG.length > index) {
             titleTextSVG[index].update(rects[index].x+45, rects[index].y + 50, '#000000', rects[index].title)
         }
-        cptTextSVG.update(rects[index].x+200, rects[index].y + 200, '#000000',rects[index].getCPT_Code())
+        cptTextSVG.update(rects[index].x+285, rects[index].y + 285, '#000000',rects[index].getCPT_Code())
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
