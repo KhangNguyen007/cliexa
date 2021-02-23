@@ -26,10 +26,14 @@ class TextSVG{
             let rect = config.getLastRect()
             //1em -> 16px, how many em depend on the width
             //Who decide how many em?
-            let emMul = 2,sEmMul = emMul.toString() + 'em'
+            let emMul = 2
+            if(window.innerWidth <= 1200){
+                emMul = 1.5
+            }
+            let sEmMul = emMul.toString() + 'em'
             console.log("Title length:",title.length)
             console.log("Rect Width:",rect.width)
-            let title_width = (title.length)*16
+            let title_width = (title.length)*emMul*8
             console.log("Title Width:",title_width)
             if (title_width >= rect.width) {
                 console.log("Get into split line")
@@ -42,7 +46,7 @@ class TextSVG{
                 let splitTitle = title.split(" ")
                 let count = 0, i = 0
                 while(count < splitTitle.length){
-                    if((line[i].length)*16 <= rect.width) {
+                    if((line[i].length)*emMul*8 <= rect.width) {
                         line[i] += splitTitle[count++]
                         line[i] += " "
                     }
@@ -83,8 +87,11 @@ class TextSVG{
         this.text.setAttributeNS(null,'y',y);
     }
     updateTitle(x,y,fill,title){
-        let rect = config.getLastRect()
-        let emMul = 2,sEmMul = emMul.toString() + 'em'
+        let emMul = 2
+        if(window.innerWidth <= 1200){
+            emMul = 1.5
+        }
+        let sEmMul = emMul.toString() + 'em'
         for(let i = 0; i < this.contentNode.length;i++){
             this.contentNode[i].setAttributeNS(null,'x',x + 30)
             this.contentNode[i].setAttributeNS(null,'y',y+35 + i*35)
@@ -94,10 +101,15 @@ class TextSVG{
     }
 
     update(x,y,fill,title){
+        let emMul = 2
+        if(window.innerWidth <= 1200){
+            emMul = 1.5
+        }
+        let sEmMul = emMul.toString() + 'em'
         this.text.setAttributeNS(null,'x',x);
         this.text.setAttributeNS(null,'y',y);
         this.text.setAttributeNS(null,'fill',fill);
-        this.text.setAttributeNS(null,'font-size','2em')
+        this.text.setAttributeNS(null,'font-size',sEmMul)
         this.text.innerHTML = title;
     }
 
