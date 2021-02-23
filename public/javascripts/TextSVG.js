@@ -20,20 +20,22 @@ class TextSVG{
         this.text = document.createElementNS(svgns, 'text'); //Create a path in SVG's namespace
         $(".svg-pan-zoom_viewport").append(this.text)
         this.line= 1
+        this.emMul = 2
+        this.leftAlign = 15
         if(arguments.length) {
 
             let nOfLine = 1,line
             let rect = config.getLastRect()
             //1em -> 16px, how many em depend on the width
             //Who decide how many em?
-            let emMul = 2
-            if(window.innerWidth <= 1200){
-                emMul = 1.5
+            if( rect.width <= 1200){
+                this.emMul = 1.5
+                this.leftAlign = -15
             }
-            let sEmMul = emMul.toString() + 'em'
+            let sEmMul = this.emMul.toString() + 'em'
             console.log("Title length:",title.length)
             console.log("Rect Width:",rect.width)
-            let title_width = (title.length)*emMul*8
+            let title_width = (title.length)*this.emMul*8
             console.log("Title Width:",title_width)
             if (title_width >= rect.width) {
                 console.log("Get into split line")
@@ -46,7 +48,7 @@ class TextSVG{
                 let splitTitle = title.split(" ")
                 let count = 0, i = 0
                 while(count < splitTitle.length){
-                    if((line[i].length)*emMul*8 <= rect.width) {
+                    if((line[i].length)*this.emMul*8 <= rect.width) {
                         line[i] += splitTitle[count++]
                         line[i] += " "
                     }
@@ -72,7 +74,7 @@ class TextSVG{
 
             for (let i = 0; i < this.contentNode.length; i++) {
                 this.contentNode[i] = document.createElementNS("http://www.w3.org/2000/svg", "tspan");
-                this.contentNode[i].setAttributeNS(null, 'x', x + 30)
+                this.contentNode[i].setAttributeNS(null, 'x', x + this.leftAlign)
                 this.contentNode[i].setAttributeNS(null, 'y', y + 35 + i * 35)
                 this.contentNode[i].setAttributeNS(null, 'fill', fill);
                 this.contentNode[i].setAttributeNS(null, 'font-size', sEmMul)
@@ -87,13 +89,10 @@ class TextSVG{
         this.text.setAttributeNS(null,'y',y);
     }
     updateTitle(x,y,fill,title){
-        let emMul = 2
-        if(window.innerWidth <= 1200){
-            emMul = 1.5
-        }
-        let sEmMul = emMul.toString() + 'em'
+
+        let sEmMul = this.emMul.toString() + 'em'
         for(let i = 0; i < this.contentNode.length;i++){
-            this.contentNode[i].setAttributeNS(null,'x',x + 30)
+            this.contentNode[i].setAttributeNS(null,'x',x + this.leftAlign)
             this.contentNode[i].setAttributeNS(null,'y',y+35 + i*35)
             this.contentNode[i].setAttributeNS(null,'fill',fill);
             this.contentNode[i].setAttributeNS(null,'font-size',sEmMul)
@@ -101,11 +100,8 @@ class TextSVG{
     }
 
     update(x,y,fill,title){
-        let emMul = 2
-        if(window.innerWidth <= 1200){
-            emMul = 1.5
-        }
-        let sEmMul = emMul.toString() + 'em'
+
+        let sEmMul = this.emMul.toString() + 'em'
         this.text.setAttributeNS(null,'x',x);
         this.text.setAttributeNS(null,'y',y);
         this.text.setAttributeNS(null,'fill',fill);
