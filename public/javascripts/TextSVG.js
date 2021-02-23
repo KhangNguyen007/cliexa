@@ -29,7 +29,7 @@ class TextSVG{
             //1em -> 16px, how many em depend on the width
             //Who decide how many em?
             if( rect.width <= 1200){
-                this.emMul = 1.5
+                this.emMul = 2
                 this.leftAlign = -15
             }
             let sEmMul = this.emMul.toString() + 'em'
