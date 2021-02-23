@@ -30,7 +30,7 @@ class TextSVG{
             //Who decide how many em?
             if( rect.width <= 1200){
                 this.emMul = 2
-                this.leftAlign = -15
+                this.leftAlign = -5
             }
             let sEmMul = this.emMul.toString() + 'em'
             console.log("Title length:",title.length)
@@ -48,7 +48,7 @@ class TextSVG{
                 let splitTitle = title.split(" ")
                 let count = 0, i = 0
                 while(count < splitTitle.length){
-                    if((line[i].length)*this.emMul*8 <= rect.width) {
+                    if((line[i].length)*this.emMul*7.40 <= rect.width) {
                         line[i] += splitTitle[count++]
                         line[i] += " "
                     }
