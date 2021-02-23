@@ -358,7 +358,8 @@ class Main{
         }
 
         if(titleTextSVG.length > index) {
-            titleTextSVG[index].update(rects[index].x+45, rects[index].y + 50, '#000000', rects[index].title)
+            // for rects[index].y + 70, change the 70 to 90 to match text position of final box with all other boxes
+            titleTextSVG[index].update(rects[index].x+40, rects[index].y + 70, '#000000', rects[index].title)
         }
         cptTextSVG.update(rects[index].x+285, rects[index].y + 285, '#000000',rects[index].getCPT_Code())
         for(let i = 1 ; i < rects.length; i++){
