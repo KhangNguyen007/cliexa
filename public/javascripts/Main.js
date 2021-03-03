@@ -10,6 +10,9 @@ function populateRec(answer){
     let Qualified_CPT
     let NotQualified_CPT = "You are not qualified for a CPT Code."
     let rects = config.getRects()
+    let cptDetail = config.getCPTDescription()
+    cptDetail = "CPT codes are numerical codes used to identify different medical services."
+    let noCPT = ""
     //Here is the logic to expand question
 
     // This will set the predefine levels for the questionnaires. This is used to display the progress bar value
@@ -95,11 +98,11 @@ function populateRec(answer){
         $('#progress-bar').text(config.getCurrentLevel() + '%')
         if(score > 4)
         {
-            main.insertTheFinalBox(title,Qualified_CPT)
+            main.insertTheFinalBox(title,Qualified_CPT,cptDetail)
         }
         else
         {
-            main.insertTheFinalBox(title,NotQualified_CPT)
+            main.insertTheFinalBox(title,NotQualified_CPT,noCPT)
         }
         main.setFinal(true)
         main.slide(0)
@@ -126,11 +129,11 @@ function populateRec(answer){
 
         if(score > 3)
         {
-            main.insertTheFinalBox(title,Qualified_CPT)
+            main.insertTheFinalBox(title,Qualified_CPT,cptDetail)
         }
         else
         {
-            main.insertTheFinalBox(title,NotQualified_CPT)
+            main.insertTheFinalBox(title,NotQualified_CPT,noCPT)
         }
         main.setFinal(true)
         main.slide(0)
@@ -156,11 +159,11 @@ function populateRec(answer){
 
         if(score > 4)
         {
-            main.insertTheFinalBox(title,Qualified_CPT)
+            main.insertTheFinalBox(title,Qualified_CPT,cptDetail)
         }
         else
         {
-            main.insertTheFinalBox(title,NotQualified_CPT)
+            main.insertTheFinalBox(title,NotQualified_CPT,noCPT)
         }
         main.setFinal(true)
         main.slide(0)
@@ -187,11 +190,11 @@ function populateRec(answer){
 
         if(score > 4)
         {
-            main.insertTheFinalBox(title,Qualified_CPT)
+            main.insertTheFinalBox(title,Qualified_CPT,cptDetail)
         }
         else
         {
-            main.insertTheFinalBox(title,NotQualified_CPT)
+            main.insertTheFinalBox(title,NotQualified_CPT,noCPT)
         }
         main.setFinal(true)
         main.slide(0)
@@ -219,11 +222,11 @@ function populateRec(answer){
 
         if(score > 5)
         {
-            main.insertTheFinalBox(title,Qualified_CPT)
+            main.insertTheFinalBox(title,Qualified_CPT,cptDetail)
         }
         else
         {
-            main.insertTheFinalBox(title,NotQualified_CPT)
+            main.insertTheFinalBox(title,NotQualified_CPT,noCPT)
         }
         main.setFinal(true)
         main.slide(0)
@@ -248,11 +251,11 @@ function populateRec(answer){
 
         if(score > 5)
         {
-            main.insertTheFinalBox(title,Qualified_CPT)
+            main.insertTheFinalBox(title,Qualified_CPT,cptDetail)
         }
         else
         {
-            main.insertTheFinalBox(title,NotQualified_CPT)
+            main.insertTheFinalBox(title,NotQualified_CPT,noCPT)
         }
         main.setFinal(true)
         main.slide(0)
@@ -352,6 +355,7 @@ class Main{
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
         let cptTextSVG  = config.getCPTTextSVG()
+        let cptDescription = config.getCPTDescription()
         let linesSVG = config.getLinesSVG()
         if(rectsSVG.length > index) {
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
@@ -362,6 +366,7 @@ class Main{
             titleTextSVG[index].update(rects[index].x+40, rects[index].y + 70, '#000000', rects[index].title)
         }
         cptTextSVG.update(rects[index].x+285, rects[index].y + 285, '#000000',rects[index].getCPT_Code())
+        cptDescription.update(rects[index].x+40, rects[index].y + 320, '#000000',rects[index].getCPT_Description())
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
@@ -369,6 +374,8 @@ class Main{
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
         config.updateCPTTextSVG(cptTextSVG)
+        config.updateCPTDescription(cptDescription)
+
 
         main.setFinal(true)
 
@@ -410,7 +417,7 @@ class Main{
         this.slide(1)
     }
     // Update the final box.
-    insertTheFinalBox(title,cptcode_){
+    insertTheFinalBox(title,cptcode_,cpt_description){
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
         let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
         let x = 0.05 * width
@@ -420,19 +427,25 @@ class Main{
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
+        let descriptionCPT = config.getCPTDescription()
         let newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
                 shape_width, shape_height, "#FFFFFF", false, title, rects.length)
         newRect.setCPT_Code(cptcode_)
+        newRect.setCPT_Description(cpt_description)
+        console.log(cpt_description) ///////
         let newRectSVG = new RectangleSVG()
         let newTitleText = new TextSVG(newRect.x, newRect.y, '#000000', title)
         let cptCode = new TextSVG(newRect.x, newRect.y, '#000000', cptcode_)
+        let cptDetail = new TextSVG(newRect.x, newRect.y, '#000000', cpt_description)
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         titleTextSVG.push(newTitleText)
+        //descriptionCPT.push(cptDetail)
         config.updateTitleTextSVG(titleTextSVG)
         config.updateCPTTextSVG(cptCode)
+        config.updateCPTDescription(cptDetail)
         this.drawFinalBox(newRect.id)
     }
 

@@ -16,12 +16,19 @@ class Rectangle{
         this.title = title
         this.id = id
         this.cpt_code = null
+        this.cpt_detail = null
     }
     setCPT_Code(cpt_code){
         this.cpt_code = cpt_code
     }
     getCPT_Code(){
         return this.cpt_code
+    }
+    setCPT_Description(cpt_detail){
+        this.cpt_detail = cpt_detail
+    }
+    getCPT_Description(){
+        return this.cpt_detail
     }
     update(x,y,width,height){
         this.x = x

@@ -27,6 +27,7 @@ class Configuration {
         this.noRectSVG = []
         this.noTextSVG = []
         this.cptSVG = null
+        this.cptDescription = null
         this.widthSize = $('#mainPanel').width()*7/10
         this.heightSize = $('#mainPanel').height()*8/10
         this.maxWidth =  $('#mainPanel').width()*8/10
@@ -54,6 +55,13 @@ class Configuration {
     }
     updateCPTTextSVG(cptSVG){
         this.cptSVG = cptSVG
+    }
+
+    getCPTDescription(){
+        return this.cptDescription
+    }
+    updateCPTDescription(cptDescription){
+        this.cptDescription = cptDescription
     }
 
     debugPrev(){
