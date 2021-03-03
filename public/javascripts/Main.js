@@ -11,7 +11,7 @@ function populateRec(answer){
     let NotQualified_CPT = "You are not qualified for a CPT Code."
     let rects = config.getRects()
     let cptDetail = config.getCPTDescription()
-    cptDetail = "CPT codes are numerical codes used to identify different medical services."
+    cptDetail = "CPT codes are numerical codes used to identify medical services."
     let noCPT = ""
     //Here is the logic to expand question
 
