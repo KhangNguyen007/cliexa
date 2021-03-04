@@ -33,14 +33,9 @@ class TextSVG{
                 this.leftAlign = -5
             }
             let sEmMul = this.emMul.toString() + 'em'
-            console.log("Title length:",title.length)
-            console.log("Rect Width:",rect.width)
             let title_width = (title.length)*this.emMul*8
-            console.log("Title Width:",title_width)
             if (title_width >= rect.width) {
-                console.log("Get into split line")
                 nOfLine = Math.ceil(title_width/(rect.width))
-                console.log("number of line:",nOfLine)
                 line = new Array(nOfLine)
                 for(let i = 0 ; i < line.length; i++){
                     line[i] = ""
