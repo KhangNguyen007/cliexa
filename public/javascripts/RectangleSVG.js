@@ -6,6 +6,7 @@ class RectangleSVG{
     //x
     constructor() {
         let svgns = "http://www.w3.org/2000/svg"
+        this.persistent = false
         this.rect = document.createElementNS(svgns, 'rect'); //Create a path in SVG's namespace
         $(".svg-pan-zoom_viewport").append(this.rect);
 
@@ -37,7 +38,7 @@ class RectangleSVG{
 
     // Update with onClick
     // Allows the users to select a specific questionnaire from the search box
-    updateWithOnClick(x,y,width,height,fill,zIndex,onclick){
+    updateWithOnClick(x,y,width,height,fill,zIndex,onclick,persistentHighLight){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
         this.rect.setAttributeNS(null, 'rx',"5");
@@ -50,9 +51,17 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
         this.rect.setAttributeNS(null,"class", "test2");
+        if(persistentHighLight){
+            this.rect.setAttributeNS(null, 'rx',"100");
+            this.rect.setAttributeNS(null, 'ry',"100");
+        }
         //this.rect.setAttributeNS(null,"className", "test2");
     }
-
+    updateStoreHighLight(){
+        console.log("Update HightLight")
+        this.rect.setAttributeNS(null, 'rx',"100");
+        this.rect.setAttributeNS(null, 'ry',"100");
+    }
     // Allows the resizing of the boxes containing the questions
     resize(x,y,width,height,fill,zIndex){
         this.rect.setAttributeNS(null, 'x', x.toString());

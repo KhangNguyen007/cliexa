@@ -17,6 +17,7 @@ class Rectangle{
         this.id = id
         this.cpt_code = null
         this.cpt_detail = null
+        this.answer = null
     }
     setCPT_Code(cpt_code){
         this.cpt_code = cpt_code
@@ -39,5 +40,10 @@ class Rectangle{
     getWidth(){
         return this.width
     }
-
+    setAnswer(answer){
+        this.answer = answer
+    }
+    getAnswer(){
+        return this.answer
+    }
 }

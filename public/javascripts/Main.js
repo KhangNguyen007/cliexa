@@ -13,6 +13,18 @@ function populateRec(answer){
     let cptDetail = config.getCPTDescription()
     cptDetail = "CPT codes are numerical codes used to identify medical services."
     let noCPT = ""
+    let yesRectSVG   = config.getYesRectSVG()
+    let noTextSVG   = config.getNoRectSVG()
+    if(answer == 1){
+        console.log("Answer Yes")
+        console.log("Current length",rects.length-1)
+        main.storedHighLight("Yes")
+        yesRectSVG[yesRectSVG.length-1].persistent = true
+    }
+    else if(answer == 0){
+        main.storedHighLight("No")
+        noTextSVG[noTextSVG.length-1].persistent = true
+    }
     //Here is the logic to expand question
 
     // This will set the predefine levels for the questionnaires. This is used to display the progress bar value
@@ -305,7 +317,19 @@ class Main{
     getFinal(){
         return this.final
     }
-
+    storedHighLight(answer){
+        let yesRectSVG = config.getYesRectSVG()
+        let noRectSVG = config.getNoRectSVG()
+        if(answer === "Yes"){
+            //Update Yes here
+            console.log("Update Yes")
+            yesRectSVG[yesRectSVG.length-1].updateStoreHighLight()
+        }
+            else if(answer === "No"){
+                //Update No here
+                noRectSVG[noRectSVG.length-1].updateStoreHighLight()
+        }
+    }
     draw(index) {
 
         let rects = config.getRects()
@@ -326,13 +350,13 @@ class Main{
              titleTextSVG[index].updateTitle(rects[index].x+45, rects[index].y + 50, '#000000', rects[index].title)
         }
         if(yesRectSVG.length > index) {
-            yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)")
+            yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)",yesRectSVG[index].persistent)
         }
         if(yesTextSVG.length > index) {
             yesTextSVG[index].update(rects[index].x + (rects[index].width * (2/9)) , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes")
         }
         if(noRectSVG.length > index) {
-            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(0)")
+            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(0)",noRectSVG[index].persistent)
         }
         if(noTextSVG.length > index) {
             noTextSVG[index].update(rects[index].x + rects[index].width*(.746), rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No")
@@ -348,6 +372,7 @@ class Main{
         config.updateNoRectSVG(noRectSVG)
         config.updateYesTextSVG(yesTextSVG)
         config.updateNoTextSVG(noTextSVG)
+        console.log("Store hightlight draw")
     }
 
     drawFinalBox(index) {
