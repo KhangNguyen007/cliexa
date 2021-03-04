@@ -35,6 +35,9 @@ class TextSVG{
             let sEmMul = this.emMul.toString() + 'em'
             let title_width = (title.length)*this.emMul*8
             if (title_width >= rect.width) {
+                console.log("This is rectangle width: ", rect.width)
+                let saveHeight = rect.height
+                console.log("This is height: ", saveHeight)
                 nOfLine = Math.ceil(title_width/(rect.width))
                 line = new Array(nOfLine)
                 for(let i = 0 ; i < line.length; i++){

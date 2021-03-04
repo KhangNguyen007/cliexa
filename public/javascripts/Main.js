@@ -10,6 +10,7 @@ function populateRec(answer){
     let Qualified_CPT
     let NotQualified_CPT = "You are not qualified for a CPT Code."
     let rects = config.getRects()
+
     let cptDetail = config.getCPTDescription()
     cptDetail = "CPT codes are numerical codes used to identify medical services."
     let noCPT = ""
@@ -382,6 +383,7 @@ class Main{
         let cptTextSVG  = config.getCPTTextSVG()
         let cptDescription = config.getCPTDescription()
         let linesSVG = config.getLinesSVG()
+        let rect_dimensions = config.getLastRect()
         if(rectsSVG.length > index) {
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
@@ -390,8 +392,14 @@ class Main{
             // for rects[index].y + 70, change the 70 to 90 to match text position of final box with all other boxes
             titleTextSVG[index].update(rects[index].x+40, rects[index].y + 70, '#000000', rects[index].title)
         }
-        cptTextSVG.update(rects[index].x+285, rects[index].y + 285, '#000000',rects[index].getCPT_Code())
-        cptDescription.update(rects[index].x+40, rects[index].y + 320, '#000000',rects[index].getCPT_Description())
+        let getHeight = rect_dimensions.height
+        let middleHeight = getHeight / 2
+        let getWidth = rect_dimensions.width
+        let middleWidth = getWidth / 4
+        console.log("HEIGHT: ", getHeight)
+        // x = 285
+        cptTextSVG.update(rects[index].x + middleWidth+20, rects[index].y + middleHeight + 15, '#000000',rects[index].getCPT_Code())
+        cptDescription.update(rects[index].x+40, rects[index].y + middleHeight + 45, '#000000',rects[index].getCPT_Description())
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
