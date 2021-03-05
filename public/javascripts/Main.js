@@ -395,11 +395,14 @@ class Main{
         let getHeight = rect_dimensions.height
         let middleHeight = getHeight / 2
         let getWidth = rect_dimensions.width
-        let middleWidth = getWidth / 4
-        console.log("HEIGHT: ", getHeight)
+        let middleWidth = getWidth / 2
+        //let CPTTextLength = (448 / 2)
+
+
+
         // x = 285
-        cptTextSVG.update(rects[index].x + middleWidth+20, rects[index].y + middleHeight + 15, '#000000',rects[index].getCPT_Code())
-        cptDescription.update(rects[index].x+40, rects[index].y + middleHeight + 45, '#000000',rects[index].getCPT_Description())
+        cptTextSVG.update(rects[index].x + middleWidth - 224, rects[index].y + middleHeight + 15, '#000000',rects[index].getCPT_Code())
+        cptDescription.update(rects[index].x + middleWidth - 416, rects[index].y + middleHeight + 45, '#000000',rects[index].getCPT_Description())
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }

@@ -28,6 +28,7 @@ class Configuration {
         this.noTextSVG = []
         this.cptSVG = null
         this.cptDescription = null
+        this.titleLength = null
         this.widthSize = $('#mainPanel').width()*7/10
         this.heightSize = $('#mainPanel').height()*8/10
         this.maxWidth =  $('#mainPanel').width()*8/10
@@ -49,6 +50,15 @@ class Configuration {
         this.level = [0]
         //this.progress_bar = 0
     }
+
+    getTitleLength(){
+        return this.titleLength
+    }
+
+    updateTitleLength(titleLength){
+        this.titleLength = titleLength
+    }
+
 
     getCPTTextSVG(){
         return this.cptSVG
