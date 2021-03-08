@@ -93,9 +93,11 @@ function populateRec(answer){
 
     // If we reach the final box for smoking cessation questionnaire, populate the final box.
     if(data[index].loading === 0) {
-        console.log("HERE FIRST")
+        //console.log("HERE FIRST")
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "You are qualified! CPT code: 38592"
+        Qualified_CPT = "You are qualified! CPT code: 99406"
+        cptDetail = "Smoking and tobacco use cessation counseling " +
+            "visit (intermediate) lasting 3 to 10 minutes."
         //NotQualified_CPT = "CPT code: 84919"
         //Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
@@ -124,7 +126,9 @@ function populateRec(answer){
     // If we reach the final box for CCM questionnaire, populate the final box
     else if(data[index].loading === 8) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "You are qualified! CPT code: 63833"
+        Qualified_CPT = "You are qualified! CPT code: 99091"
+        cptDetail = "Collection of physiologic data digitally stored and or " +
+            "transmitted by the patient and or caregiver to the physician."
         //NotQualified_CPT = "CPT code: 17490"
 
         // Create a final box here
@@ -155,7 +159,8 @@ function populateRec(answer){
     // If we reach the final box for the depression questionnaire
     else if(data[index].loading === 16) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "You are qualified! CPT code: 54545"
+        Qualified_CPT = "You are qualified! CPT code: 96127"
+        cptDetail = "Brief emotional or behavioral assessment with scoring and documentation."
         //NotQualified_CPT = "CPT code: 66190"
 
         // Create a final box here
@@ -185,7 +190,8 @@ function populateRec(answer){
     // If we reach the final box for the anxiety questionnaire
     else if(data[index].loading === 27) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "You are qualified! CPT code: 63881"
+        Qualified_CPT = "You are qualified! CPT code: 96127"
+        cptDetail = "Brief emotional or behavioral assessment with scoring and documentation."
         //NotQualified_CPT = "You are not qualified for a CPT Code"
 
         // Create a final box here
@@ -216,7 +222,10 @@ function populateRec(answer){
     // If we reach the final box for the alcohol questionnaire
     else if(data[index].loading === 36) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "You are qualified! CPT code: 64829"
+        Qualified_CPT = "You are qualified! CPT code: 99408"
+        cptDetail = "Alcohol and/or substance abuse (other than tobacco) structured " +
+            "screening (e.g., AUDIT, DAST), and brief intervention (SBI) services;" +
+            " 15 to 30 minutes."
         //NotQualified_CPT = "You are not qualified for a CPT Code"
 
         // Create a final box here
@@ -248,7 +257,10 @@ function populateRec(answer){
     // If we reach the final box for the drug questionnaire
     else if(data[index].loading === 48) {
         // HERE WILL CONTAIN WHETHER THE CPT CODE IS QUALIFIED OR NOT
-        Qualified_CPT = "You are qualified! CPT code: 93836"
+        Qualified_CPT = "You are qualified! CPT code: 99408"
+        cptDetail = "Alcohol and/or substance abuse (other than tobacco) structured " +
+            "screening (e.g., AUDIT, DAST), and brief intervention (SBI) services;" +
+            " 15 to 30 minutes."
         //NotQualified_CPT = "CPT code: 76547"
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
