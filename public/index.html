@@ -40,7 +40,7 @@
     <div class="splitLM" id="splitLM"></div>
     <div class="draggable-mode" style="display:none;position: absolute;width:100px;height:100px;background-color:lightblue;top: 50%; right: 50%;transform: translate(50%,-50%);z-index: 1;opacity: 5">
         <button id="turnOffMessage" style="position: absolute;right:0%;" onclick="hideMessage()">X</button>
-        <div id="message" >You enter draggable mode</div>
+        <div id="message" >You entered focus mode</div>
     </div>
 
 
@@ -438,7 +438,7 @@
         //turnOffMessage
         //<div id="message" style="display: none">You enter draggable mode</div>
         if($("#on-off").html().includes("Off")){
-            $("#message").html("You enter draggable mode");
+            $("#message").html("You entered focus mode");
             $("#on-off").html("On")
             $(".draggable-mode").show()
             config.updateMode(true)
@@ -446,7 +446,7 @@
             //You enter draggable mode
         }
         else{
-            $("#message").html("You exit draggable mode");
+            $("#message").html("You exited focus mode");
             $("#on-off").html("Off")
             $(".draggable-mode").show()
             config.updateMode(false)
