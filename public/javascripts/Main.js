@@ -16,6 +16,7 @@ function populateRec(answer){
     let noCPT = ""
     let yesRectSVG   = config.getYesRectSVG()
     let noTextSVG   = config.getNoRectSVG()
+
     if(answer == 1){
         console.log("Answer Yes")
         console.log("Current length",rects.length-1)
@@ -330,6 +331,8 @@ class Main{
     getFinal(){
         return this.final
     }
+
+
     storedHighLight(answer){
         let yesRectSVG = config.getYesRectSVG()
         let noRectSVG = config.getNoRectSVG()
@@ -343,6 +346,8 @@ class Main{
                 noRectSVG[noRectSVG.length-1].updateStoreHighLight()
         }
     }
+
+
     draw(index) {
 
         let rects = config.getRects()

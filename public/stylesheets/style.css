@@ -198,7 +198,7 @@ a {
   color: black
 }
 
-.test2:hover{
+.answer_box_borderline:hover{
   stroke: darkblue;
   stroke-width: 3.5px;
 }

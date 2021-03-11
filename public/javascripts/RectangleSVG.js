@@ -50,17 +50,18 @@ class RectangleSVG{
         this.rect.setAttributeNS(null, 'onclick', onclick);
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
-        this.rect.setAttributeNS(null,"class", "test2");
+        this.rect.setAttributeNS(null,"class", "answer_box_borderline");
         if(persistentHighLight){
             this.rect.setAttributeNS(null, 'rx',"100");
             this.rect.setAttributeNS(null, 'ry',"100");
         }
-        //this.rect.setAttributeNS(null,"className", "test2");
+        //this.rect.setAttributeNS(null,"className", "answer_box_borderline");
     }
+    // This will keep the highlight on after the user has clicked an answer.
     updateStoreHighLight(){
         console.log("Update HightLight")
-        this.rect.setAttributeNS(null, 'rx',"100");
-        this.rect.setAttributeNS(null, 'ry',"100");
+        this.rect.setAttributeNS(null, "stroke", "darkblue");
+        this.rect.setAttributeNS(null, "stroke-width","3.5");
     }
     // Allows the resizing of the boxes containing the questions
     resize(x,y,width,height,fill,zIndex){
@@ -82,6 +83,7 @@ class RectangleSVG{
         this.rect  = null
     }
 
+    /*
     // Will highlight the box when it is clicked by the user
     highlight(){
         this.rect.setAttributeNS(null,"stroke", "blue");
@@ -92,4 +94,6 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
+    */
+
 }
