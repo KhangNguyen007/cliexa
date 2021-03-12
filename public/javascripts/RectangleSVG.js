@@ -52,8 +52,8 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
         this.rect.setAttributeNS(null,"class", "answer_box_borderline");
         if(persistentHighLight){
-            this.rect.setAttributeNS(null, 'rx',"100");
-            this.rect.setAttributeNS(null, 'ry',"100");
+            this.rect.setAttributeNS(null, "stroke", "darkblue");
+            this.rect.setAttributeNS(null, "stroke-width","3.5");
         }
         //this.rect.setAttributeNS(null,"className", "answer_box_borderline");
     }
@@ -83,7 +83,7 @@ class RectangleSVG{
         this.rect  = null
     }
 
-    
+
     // Will highlight the box when it is clicked by the user
     highlight(){
         this.rect.setAttributeNS(null,"stroke", "blue");
