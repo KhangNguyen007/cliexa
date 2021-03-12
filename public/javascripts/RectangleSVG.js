@@ -83,7 +83,7 @@ class RectangleSVG{
         this.rect  = null
     }
 
-    /*
+    
     // Will highlight the box when it is clicked by the user
     highlight(){
         this.rect.setAttributeNS(null,"stroke", "blue");
@@ -94,6 +94,6 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
-    */
+
 
 }
