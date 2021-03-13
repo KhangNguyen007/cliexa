@@ -365,7 +365,7 @@ class Main{
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
         if(titleTextSVG.length > index) {
-             titleTextSVG[index].updateTitle(rects[index].x+45, rects[index].y + 50, '#000000', rects[index].title)
+             titleTextSVG[index].updateTitle(rects[index].x,45, rects[index].y,70, '#000000', rects[index].title)
         }
         if(yesRectSVG.length > index) {
             yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)",yesRectSVG[index].persistent)
@@ -382,7 +382,6 @@ class Main{
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
-
         config.updateLinesSVG(linesSVG)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
@@ -390,7 +389,6 @@ class Main{
         config.updateNoRectSVG(noRectSVG)
         config.updateYesTextSVG(yesTextSVG)
         config.updateNoTextSVG(noTextSVG)
-        console.log("Store hightlight draw")
     }
 
     drawFinalBox(index) {
@@ -407,7 +405,8 @@ class Main{
 
         if(titleTextSVG.length > index) {
             // for rects[index].y + 70, change the 70 to 90 to match text position of final box with all other boxes
-            titleTextSVG[index].update(rects[index].x+40, rects[index].y + 70, '#000000', rects[index].title)
+            //titleTextSVG[index].update(rects[index].x+40, rects[index].y + 70, '#000000', rects[index].title)
+            titleTextSVG[index].updateTitle(rects[index].x, 40, rects[index].y,70, '#000000', rects[index].title)
         }
         let getHeight = rect_dimensions.height
         let middleHeight = getHeight / 2
@@ -418,8 +417,10 @@ class Main{
 
 
         // x = 285
-        cptTextSVG.update(rects[index].x + middleWidth - 224, rects[index].y + middleHeight + 15, '#000000',rects[index].getCPT_Code())
-        cptDescription.update(rects[index].x + middleWidth - 416, rects[index].y + middleHeight + 45, '#000000',rects[index].getCPT_Description())
+        cptTextSVG.update(rects[index].x + middleWidth - 224, rects[index].y+middleHeight + 15, '#000000',rects[index].getCPT_Code())
+        //cptTextSVG.update(rects[index].x, rects[index].y, '#000000',rects[index].getCPT_Code())
+        cptDescription.updateTitle(rects[index].x, middleWidth - 416,rects[index].y , middleHeight + 45,'#000000',rects[index].getCPT_Description())
+        //cptDescription.updateTitle(rects[index].x,middleWidth - 224, rects[index].y, + middleHeight + 15,'#000000',rects[index].getCPT_Description())
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
@@ -473,29 +474,29 @@ class Main{
     insertTheFinalBox(title,cptcode_,cpt_description){
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
         let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
-        let x = 0.05 * width
         let shape_width = width - 0.1 * width
-        let y = 0.05 * height
         let shape_height = height - 0.1 * height
         let rects = config.getRects()
         let rectsSVG = config.getRectSVG()
         let titleTextSVG = config.getTitleTextSVG()
-        let descriptionCPT = config.getCPTDescription()
+        let getHeight = config.getLastRect().height
+        let middleHeight = getHeight / 2
+        let getWidth = config.getLastRect().width
+        let middleWidth = getWidth / 2
+
         let newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
                 shape_width, shape_height, "#FFFFFF", false, title, rects.length)
         newRect.setCPT_Code(cptcode_)
         newRect.setCPT_Description(cpt_description)
-        console.log(cpt_description) ///////
         let newRectSVG = new RectangleSVG()
-        let newTitleText = new TextSVG(newRect.x, newRect.y, '#000000', title)
-        let cptCode = new TextSVG(newRect.x, newRect.y, '#000000', cptcode_)
-        let cptDetail = new TextSVG(newRect.x, newRect.y, '#000000', cpt_description)
+        let newTitleText = new TextSVG(newRect.x,45, newRect.y,50, '#000000', title,"title")
+        let cptCode = new TextSVG(newRect.x,0,newRect.y,0, '#000000', cptcode_,"cpt_code")
+        let cptDetail = new TextSVG(newRect.x ,middleWidth - 416, newRect.y,middleHeight + 45,'#000000', cpt_description,"description")
         rects.push(newRect)
         rectsSVG.push(newRectSVG)
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
         titleTextSVG.push(newTitleText)
-        //descriptionCPT.push(cptDetail)
         config.updateTitleTextSVG(titleTextSVG)
         config.updateCPTTextSVG(cptCode)
         config.updateCPTDescription(cptDetail)
@@ -531,7 +532,6 @@ class Main{
             // Sets up the shape, size, and color, then creates the new Rectangle
             newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
                 shape_width, shape_height, "#FFFFFF", false, title, rects.length)
-
             // Creates a new line that connects the previous box to the next box
             let newLineSVG = new LineSVG()
             linesSVG.push(newLineSVG)
@@ -557,7 +557,7 @@ class Main{
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
-        let newQuestionTextSVG = new TextSVG(newRect.x, newRect.y + 50, '#000000',title)   //Title center of rectangle
+        let newQuestionTextSVG = new TextSVG(newRect.x, 45,newRect.y, 50, '#000000',title,"title")   //Title center of rectangle
         titleTextSVG.push(newQuestionTextSVG)
         config.updateTitleTextSVG(titleTextSVG)
         config.updateYesRectSVG(yesRectSVG)

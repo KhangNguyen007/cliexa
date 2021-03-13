@@ -74,9 +74,6 @@ class Configuration {
         this.cptDescription = cptDescription
     }
 
-    debugPrev(){
-        return this.prev
-    }
     setLevel(level){
         this.level.push(level)
     }
