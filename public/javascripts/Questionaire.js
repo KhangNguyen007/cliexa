@@ -69,7 +69,7 @@ let data =[
     {id:53,q:'Do you ever feel bad or guilty about your drug use? If never used drugs, choose "No"',yes:54,no:54},
     {id:54,q:"Does your spouse (or parents) ever complain about your involvement with drugs?",yes:55,no:55},
     {id:55,q:"Have you neglected your family because of your use of drugs?",yes:56,no:56},
-    {id:56,q:"Have you engaged in illegal activities inorder to obtain drugs?",yes:57,no:57},
+    {id:56,q:"Have you engaged in illegal activities in order to obtain drugs?",yes:57,no:57},
     {id:57,q:"Have you ever experienced withdrawal symptoms when you stopped taking drugs?",yes:58,no:58},
     {id:58,q:"Have you had medical problems as a result of your drug use? (e.g., memory loss, hepatitis, convulsions, bleeding, etc...)",yes:59,no:59},
     {id:59,q:"We are finalizing your result for the drug assessment",loading:48}
