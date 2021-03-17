@@ -57,7 +57,9 @@ class RectangleSVG{
         }
         //this.rect.setAttributeNS(null,"className", "answer_box_borderline");
     }
+
     // This will keep the highlight on after the user has clicked an answer.
+    // May have to update this section of code based on Arin's feedback
     updateStoreHighLight(){
         console.log("Update HightLight")
         this.rect.setAttributeNS(null, "stroke", "darkblue");

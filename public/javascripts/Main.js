@@ -412,14 +412,11 @@ class Main{
         let middleHeight = getHeight / 2
         let getWidth = rect_dimensions.width
         let middleWidth = getWidth / 2
-        //let CPTTextLength = (448 / 2)
-
-
 
         // x = 285
         cptTextSVG.update(rects[index].x + middleWidth - 224, rects[index].y+middleHeight + 15, '#000000',rects[index].getCPT_Code())
         //cptTextSVG.update(rects[index].x, rects[index].y, '#000000',rects[index].getCPT_Code())
-        cptDescription.updateTitle(rects[index].x, middleWidth - 416,rects[index].y , middleHeight + 45,'#000000',rects[index].getCPT_Description())
+        cptDescription.updateTitle(rects[index].x, middleWidth - 450,rects[index].y , middleHeight + 45,'#000000',rects[index].getCPT_Description())
         //cptDescription.updateTitle(rects[index].x,middleWidth - 224, rects[index].y, + middleHeight + 15,'#000000',rects[index].getCPT_Description())
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
@@ -429,10 +426,7 @@ class Main{
         config.updateTitleTextSVG(titleTextSVG)
         config.updateCPTTextSVG(cptTextSVG)
         config.updateCPTDescription(cptDescription)
-
-
         main.setFinal(true)
-
     }
 
     // When a question is answered, it will slide to the next question automatically.
@@ -447,6 +441,7 @@ class Main{
             }
         }
     }
+
     // Stays in the focus of the current box.
     reAlign(){
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
@@ -470,6 +465,7 @@ class Main{
         //Slide to the last element
         this.slide(1)
     }
+
     // Update the final box.
     insertTheFinalBox(title,cptcode_,cpt_description){
         let width =  Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
@@ -521,12 +517,14 @@ class Main{
         let yesTextSVG   = config.getYesTextSVG()
         let noTextSVG    = config.getNoTextSVG()
         let lineSVG      = config.getLinesSVG()
+
         // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
         let newRect
         if(rects.length === 0) {
             newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
                 false, title, rects.length)
         }
+
         // If the first rectangle is populated, all the rectangles after will have connective box
         else{
             // Sets up the shape, size, and color, then creates the new Rectangle
@@ -536,6 +534,7 @@ class Main{
             let newLineSVG = new LineSVG()
             linesSVG.push(newLineSVG)
         }
+
         // Creates a new instance of the rectangle
         let newRectSVG = new RectangleSVG()    //Big rectangle
         let newYesRectSVG   = new RectangleSVG()   // Yes Rectangle on the left
@@ -553,6 +552,7 @@ class Main{
         yesTextSVG.push(newYesTextSVG)
         noTextSVG.push(newNoTextSVG)
         lineSVG.push(newLineSVG)
+
         // Populates/draws the rectangle with the updated question to the screen
         // Will create a new rectangle with updated question when patient answers "yes" or "no"
         config.updateRects(rects)
@@ -569,5 +569,4 @@ class Main{
     }
     // This will read through the question title and split it into two lines
     // The lines will be displayed in the same position as before and the other line will be below it.
-
 }

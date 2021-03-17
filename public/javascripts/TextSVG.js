@@ -23,9 +23,11 @@ class TextSVG{
         this.emMul = 2
         this.x = 0
         this.y = 0
+
         if(property === "description"){
             this.emMul = 2
         }
+
         if(arguments.length) {
             let nOfLine = 1,line
             let rect = config.getLastRect()
@@ -35,8 +37,10 @@ class TextSVG{
                 this.emMul = 2
                 this.leftAlign = -5
             }
-            let sEmMul = this.emMul.toString() + 'em'
-            let title_width = (title.length)*this.emMul*8
+            let sEmMul = this.emMul.toString() + 'em' // Sets the size of the character
+            let title_width = (title.length)*this.emMul*8 // Calculate the end boundary of box
+
+            // If the title is longer than the box, create multiple lines as needed
             if (title_width >= rect.width) {
                 let saveHeight = rect.height
                 nOfLine = Math.ceil(title_width/(rect.width))
@@ -47,7 +51,7 @@ class TextSVG{
                 let splitTitle = title.split(" ")
                 let count = 0, i = 0
                 while(count < splitTitle.length){
-                    if((line[i].length)*this.emMul*7.40 + leftAlign <= rect.width) {
+                    if((line[i].length)*this.emMul*7.45 + leftAlign <= rect.width) {
                         line[i] += splitTitle[count++]
                         line[i] += " "
                     }
