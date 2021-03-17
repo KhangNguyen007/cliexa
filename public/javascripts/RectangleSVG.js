@@ -61,7 +61,7 @@ class RectangleSVG{
     // This will keep the highlight on after the user has clicked an answer.
     // May have to update this section of code based on Arin's feedback
     updateStoreHighLight(){
-        console.log("Update HightLight")
+        //console.log("Update HightLight")
         this.rect.setAttributeNS(null, "stroke", "darkblue");
         this.rect.setAttributeNS(null, "stroke-width","3.5");
     }

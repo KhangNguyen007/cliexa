@@ -13,13 +13,13 @@ function populateRec(answer){
 
     let cptDetail = config.getCPTDescription()
     cptDetail = "CPT codes are numerical codes used to identify medical services."
-    let noCPT = ""
+    let noCPT = "", CPT_buffer = 0
     let yesRectSVG   = config.getYesRectSVG()
     let noTextSVG   = config.getNoRectSVG()
 
     if(answer == 1){
-        console.log("Answer Yes")
-        console.log("Current length",rects.length-1)
+        //console.log("Answer Yes")
+        //console.log("Current length",rects.length-1)
         main.storedHighLight("Yes")
         yesRectSVG[yesRectSVG.length-1].persistent = true
     }
@@ -109,7 +109,7 @@ function populateRec(answer){
         let progress_bar = 100
         config.setLevel(progress_bar)
         config.updateTest_Progress_Bar(progress_bar)
-        console.log("Current level:",config.getCurrentLevel())
+        //console.log("Current level:",config.getCurrentLevel())
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
         if(score > 4)
@@ -163,7 +163,8 @@ function populateRec(answer){
         Qualified_CPT = "You are qualified! CPT code: 96127"
         cptDetail = "Brief emotional or behavioral assessment with scoring and documentation."
         //NotQualified_CPT = "CPT code: 66190"
-
+        CPT_buffer = 64
+        config.updateCPTDetailBuffer(CPT_buffer)
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -194,7 +195,8 @@ function populateRec(answer){
         Qualified_CPT = "You are qualified! CPT code: 96127"
         cptDetail = "Brief emotional or behavioral assessment with scoring and documentation."
         //NotQualified_CPT = "You are not qualified for a CPT Code"
-
+        CPT_buffer = 64
+        config.updateCPTDetailBuffer(CPT_buffer)
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
             let width = $('#svg').width()
@@ -204,7 +206,7 @@ function populateRec(answer){
         let progress_bar = 100
         config.setLevel(progress_bar)
         config.updateTest_Progress_Bar(progress_bar)
-        console.log(progress_bar)
+        //console.log(progress_bar)
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
@@ -239,7 +241,7 @@ function populateRec(answer){
         config.setLevel(progress_bar)
         config.updateTest_Progress_Bar(progress_bar)
 
-        console.log(progress_bar)
+        //console.log(progress_bar)
         $('#progress-bar').width(config.getCurrentLevel() + '%')
         $('#progress-bar').text(config.getCurrentLevel() + '%')
 
@@ -338,7 +340,7 @@ class Main{
         let noRectSVG = config.getNoRectSVG()
         if(answer === "Yes"){
             //Update Yes here
-            console.log("Update Yes")
+            //console.log("Update Yes")
             yesRectSVG[yesRectSVG.length-1].updateStoreHighLight()
         }
             else if(answer === "No"){
@@ -416,7 +418,7 @@ class Main{
         // x = 285
         cptTextSVG.update(rects[index].x + middleWidth - 224, rects[index].y+middleHeight + 15, '#000000',rects[index].getCPT_Code())
         //cptTextSVG.update(rects[index].x, rects[index].y, '#000000',rects[index].getCPT_Code())
-        cptDescription.updateTitle(rects[index].x, middleWidth - 450,rects[index].y , middleHeight + 45,'#000000',rects[index].getCPT_Description())
+        cptDescription.updateTitle(rects[index].x, middleWidth - 420,rects[index].y , middleHeight + 45,'#000000',rects[index].getCPT_Description())
         //cptDescription.updateTitle(rects[index].x,middleWidth - 224, rects[index].y, + middleHeight + 15,'#000000',rects[index].getCPT_Description())
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")

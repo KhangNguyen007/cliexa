@@ -48,7 +48,16 @@ class Configuration {
         this.questionnaireLevel = 0
         this.update_progress = 0
         this.level = [0]
+        this.CPT_Detail_Buffer = 0
         //this.progress_bar = 0
+    }
+
+    updateCPTDetailBuffer(CPT_Detail_Buffer){
+        this.CPT_Detail_Buffer = CPT_Detail_Buffer
+    }
+
+    getCPTDetailBuffer(){
+        return this.CPT_Detail_Buffer
     }
 
     getTitleLength(){
