@@ -56,14 +56,14 @@ class TextSVG{
 
                 while(count < splitTitle.length){
                     // * 7.45
-                    if((line[i].length)*this.emMul*7.45 + leftAlign + CPT_buffer <= rect.width) {
+                    if((line[i].length)*this.emMul*7.40 + leftAlign + CPT_buffer <= rect.width) {
                         line[i] += splitTitle[count++]
                         line[i] += " "
                     }
                     else{
                         i++
                     }
-                    saveCH = (line[i].length)*this.emMul*7.45+ leftAlign + CPT_buffer
+                    //saveCH = (line[i].length)*this.emMul*7.40+ leftAlign + CPT_buffer
                     //console.log("LINE: ", saveCH)
                 }
 
