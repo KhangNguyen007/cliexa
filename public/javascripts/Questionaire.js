@@ -1,7 +1,7 @@
 
 // Contains the two questionnaires given to us by Cliexa.
 let data =[
-    // Smoking questionnaire
+    // Smoking questionnaire (Smoking)
     {id:0,q:"Are you a current smoker?",yes:1,no:16}, // The starting code for smoking
     {id:1,q:"Do you smoke within the first 30 minutes after waking up?", yes:2,no:2},
     {id:2,q:"Do you find it difficult to smoke in places you shouldn't? Examples: schools, hospital, library, etc...",yes:3,no:3},
@@ -11,10 +11,12 @@ let data =[
     {id:6,q:"Do you still smoke even if you are sick, have the cold or flu or have trouble breathing?",yes:7,no:7},
     {id:7,q:"We are finalizing your result for smoking",loading:0},// The final code for smoking
 
-    // CCM questionnaire
+    // CCM questionnaire (CCM)
     {id:8,q:"Are you a returning patient?",yes:12, no:9}, // The starting code for CCM
     {id:9,q:"Are you enrolled in medicare?", yes:10,no:15},
-    {id:10,q:"Do you have two or more diagnoses shown below?",yes:12,no:11},
+    {id:10,q:"Do you have two or more diagnoses of the following: Depression, Cancer, HIV/AIDS, Diabetes, Heart Failure, " +
+            "Stroke, Asthma, Arthritis, Hypertension (High blood pressure), Chronic Kidney Disease, Ischemic Heart Disease, " +
+            " or any others diagnoses?",yes:12,no:11}, // This will connect to the Depression questionnaire
     {id:11,q:"Implementing the PHQ-9. Click yes if its high/med. Click no if its low.",yes:12,no:15},
     {id:12,q:"Are you enrolled in any Chronic Care Management with any other physician?",yes:15,no:13},
     {id:13,q:"Did you sign the CCM consent form?",yes:14,no:15},
@@ -22,7 +24,7 @@ let data =[
     //{id:15,q:"Remote Patient Monitoring set up screen will populate here. Is this your RPM?",yes:16,no:16},
     {id:15,q:"We are finalizing your result for CCM",loading:8}, // The final code for CCM
 
-    // Depression questionnaire
+    // Depression questionnaire (PHQ-9)
     {id:16,q:"Are you experiencing symptoms of depression?",yes:17,no:27}, // The starting code for depression
     {id:17,q:"Do you have little interest or pleasure in doing things?", yes:18,no:18},
     {id:18,q:"Are you feeling down, depressed, or hopeless?",yes:19,no:19},
@@ -35,7 +37,7 @@ let data =[
     {id:25,q:"Do you thoughts that you would be better off dead or thoughts of hurting yourself?",yes:26,no:26},
     {id:26,q:"We are finalizing your results for depression",loading:16}, // The final code for depression
 
-    // Anxiety questionnaire
+    // Anxiety questionnaire (GAD-7)
     {id:27,q:"Are you experiencing symptoms of anxiety?",yes:28,no:36},
     {id:28,q:"Do you often feel nervous, anxious, or on edge?",yes:29,no:29},
     {id:29,q:"Are you not able to stop or control worrying?",yes:30,no:30},
@@ -46,7 +48,7 @@ let data =[
     {id:34,q:"Do you often feel afraid that something awful might happen?",yes:35,no:35},
     {id:35,q:"We are finalizing your result for anxiety",loading:27},
 
-    // Alcohol Assessment
+    // Alcohol Assessment (AUDIT)
     {id:36,q:"Do you drink alcohol?",yes:37,no:48}, // Go to the alcohol assessment
     {id:37,q:"Do you often consume a drink containing alcohol?",yes:38,no:38},
     {id:38,q:"Do you consume 5 or more drinks containing alcohol in a typical day?",yes:39,no:39},
@@ -60,7 +62,7 @@ let data =[
     {id:46,q:"Has a relative, friend, healthcare worker been concerned about your drinking?",yes:47,no:47},
     {id:47,q:"We are finalizing your result for the alcohol assessment",loading:36},
 
-    // Drug assessment
+    // Drug assessment (DAST-10)
     {id:48,q:"Do you use drugs?",yes:49,no:8},
     {id:49,q:"Have you used drugs other than those required for medical reasons?",yes:50,no:50},
     {id:50,q:"Do you abuse more than one drug at a time?",yes:51,no:51},
