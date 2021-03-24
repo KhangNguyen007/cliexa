@@ -95,11 +95,10 @@ class TextSVG{
         this.text.setAttributeNS(null,'y',y);
     }
     updateTitle(x,leftAlign,y,heightAlign,fill){
-
         let sEmMul = this.emMul.toString() + 'em'
         for(let i = 0; i < this.contentNode.length;i++){
             this.contentNode[i].setAttributeNS(null,'x',x + leftAlign)
-            this.contentNode[i].setAttributeNS(null,'y',y+35 + i*35 + heightAlign)
+            this.contentNode[i].setAttributeNS(null,'y',y+35 + i*35 + heightAlign-30)
             this.contentNode[i].setAttributeNS(null,'fill',fill);
             this.contentNode[i].setAttributeNS(null,'font-size',sEmMul)
         }
