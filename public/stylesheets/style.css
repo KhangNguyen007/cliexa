@@ -199,7 +199,8 @@ a {
 }
 
 .answer_box_borderline:hover{
-  stroke: darkblue;
+  /*stroke: darkblue;*/
+  stroke: #0011FF;
   stroke-width: 3.5px;
 }
 
@@ -207,4 +208,6 @@ a {
   border-color: #4a7ebe;
   color: #4a7ebe;
 }
-svg { cursor: default; }
+svg {
+  cursor: default;
+}

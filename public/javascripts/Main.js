@@ -2,15 +2,20 @@
 This file will be our main function
  */
 
+// Global variable for all assessments
 let score = 0
 
+// Global variables specifically for CCM assessment
+let CCM_Assessment = false
+let CCM_PHQ_9_Score = 0
+let CCM_PHQ_Boolean = false
+let save_prev = 0
 
 function populateRec(answer){
     let index,title,progress_bar
     let Qualified_CPT
     let NotQualified_CPT = "You are not qualified for a CPT Code."
     let rects = config.getRects()
-
     let cptDetail = config.getCPTDescription()
     cptDetail = "CPT codes are numerical codes used to identify medical services."
     let noCPT = "", CPT_buffer = 0
@@ -39,18 +44,24 @@ function populateRec(answer){
         config.update_progress = 15
         config.updateTest_Progress_Bar(progress_bar)
     }
-    else if(config.getQuestionPosition() === 8)
+    else if(config.getQuestionPosition() === 8 || config.getQuestionPosition() === 17)
     {
-        config.questionnaireLevel = 8
-        // config.update_progress = (100/config.questionnaireLevel) // This brings it to 12.5 percent
-        config.update_progress = 12
+        if(config.getQuestionPosition() === 8) {
+            config.questionnaireLevel = 8
+            // config.update_progress = (100/config.questionnaireLevel) // This brings it to 12.5 percent
+            config.update_progress = 12
+            CCM_Assessment = true
+        }
+        if(CCM_Assessment == true && config.getQuestionPosition() === 17){
+            config.update_progress = 6
+        }
     }
     else if(config.getQuestionPosition() === 16)
     {
         progress_bar = 0
         config.updateTest_Progress_Bar(progress_bar)
         config.questionnaireLevel = 10
-        config.update_progress = (100/config.questionnaireLevel)
+        config.update_progress = (100 / config.questionnaireLevel)
     }
     else if(config.getQuestionPosition() === 27)
     {
@@ -76,21 +87,70 @@ function populateRec(answer){
     // Gets the answer from the user and will send them to the next question based off their answer
     if (answer) { // If the user selects yes, go to next question corresponding to yes
         index = data[config.getQuestionPosition()].yes
+        //console.log("INDEX2221111:", index)
         if (index === undefined) {
             index = data[config.getQuestionPosition()].goto
         }
-        score += 1
+        if(CCM_PHQ_Boolean == true){
+            CCM_PHQ_9_Score += 1
+        }
+        else {
+            score += 1
+        }
         // Update title and index for the new rectangle
         title = data[index].q
+        //console.log("INDEX:", index)
     }
     else { // If the user selects no, go to the next question corresponding to no
         index = data[config.getQuestionPosition()].no
+        console.log("NEW_INDEX:",index)
         if (index === undefined) {
             index = data[config.getQuestionPosition()].goto
         }
         //Update title and index for the new rectangle
         title = data[index].q
     }
+
+
+    if(index == 10){
+        save_prev = index
+    }
+    if(save_prev == 10 && index == 17 && CCM_Assessment == true) {
+        CCM_PHQ_Boolean = true
+        CCM_PHQ_9_Score += 1
+    }
+
+    // This will back out of the depression assessment and back into the CCM questionnaire
+    // This will only happen if we started in the CCM assessment first.
+    if(CCM_Assessment == true && index == 25){
+        CCM_PHQ_Boolean = false
+
+        // Once we are back from the PHQ-9 called from CCM, we return back to the CCM questionnaire
+        if(CCM_PHQ_Boolean == false){
+            // If they score medium to high on PHQ-9, we go ask if they are enrolled with other physicans
+            if(CCM_PHQ_9_Score > 4){
+                score += 1
+                index = data[config.getQuestionPosition()].ccm
+                if (index === undefined) {
+                    index = data[config.getQuestionPosition()].goto
+                }
+                index = 12
+                title = data[index].q
+            }
+
+            // If they score low on PHQ-9, we will finalize their result for CCM
+            else{
+                index = data[config.getQuestionPosition()].ccm
+                if (index === undefined) {
+                    index = data[config.getQuestionPosition()].goto
+                }
+                index = 15
+                title = data[index].q
+            }
+        }
+    }
+
+    //console.log("INDEX:", index)
 
     // If we reach the final box for smoking cessation questionnaire, populate the final box.
     if(data[index].loading === 0) {
@@ -122,6 +182,7 @@ function populateRec(answer){
         }
         main.setFinal(true)
         main.slide(0)
+
     }
 
     // If we reach the final box for CCM questionnaire, populate the final box
@@ -163,7 +224,7 @@ function populateRec(answer){
         Qualified_CPT = "You are qualified! CPT code: 96127"
         cptDetail = "Brief emotional or behavioral assessment with scoring and documentation."
         //NotQualified_CPT = "CPT code: 66190"
-        CPT_buffer = 64
+        CPT_buffer = 70
         config.updateCPTDetailBuffer(CPT_buffer)
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
@@ -195,7 +256,7 @@ function populateRec(answer){
         Qualified_CPT = "You are qualified! CPT code: 96127"
         cptDetail = "Brief emotional or behavioral assessment with scoring and documentation."
         //NotQualified_CPT = "You are not qualified for a CPT Code"
-        CPT_buffer = 64
+        CPT_buffer = 70
         config.updateCPTDetailBuffer(CPT_buffer)
         // Create a final box here
         if (rects[rects.length - 1].x + $('#mainPanel').width() >= $('#svg').width()) {
@@ -299,8 +360,17 @@ function populateRec(answer){
 
             // If we are at the beginning of the new questionnaire, set progress bar to 0
             if(index == 0 || index == 16 || index == 27 || index == 36 || index == 48 || index == 8){
-                progress_bar = 0
-                config.setLevel(progress_bar)
+
+                if(index == 16 && CCM_Assessment == true){
+                    progress_bar = config.getCurrentLevel() + config.update_progress
+                    config.setLevel(progress_bar)
+                    console.log("THIS IS VERY TRUE")
+                }
+                else{
+                    progress_bar = 0
+                    config.setLevel(progress_bar)
+                }
+
             }
             // Added the progress of the bars together.
             else
@@ -313,12 +383,22 @@ function populateRec(answer){
             $('#progress-bar').width(config.getCurrentLevel() + '%')
             $('#progress-bar').text(config.getCurrentLevel() + '%')
             main.insertShape(title)
+
             main.slide(0)
+            /*
+            if(rects.length > 1){
+                main.slide(0)
+            }
+            else{
+                main.slide(1)
+            }*/
         }
     }
     config.updateQuestionPosition(index)
-    //console.log("Question link:",config.getQuestionPosition())
+    console.log("Question link:",config.getQuestionPosition())
+    console.log("CCM:", CCM_Assessment)
 }
+
 
 
 class Main{
@@ -343,11 +423,26 @@ class Main{
             //console.log("Update Yes")
             yesRectSVG[yesRectSVG.length-1].updateStoreHighLight()
         }
-            else if(answer === "No"){
-                //Update No here
-                noRectSVG[noRectSVG.length-1].updateStoreHighLight()
+        else if(answer === "No"){
+            //Update No here
+            noRectSVG[noRectSVG.length-1].updateStoreHighLight()
         }
     }
+
+    /*
+    stored_text_color(answer){
+        let yesTextSVG = config.getYesTextSVG()
+        let noTextSVG = config.getNoTextSVG()
+        if(answer === "Yes"){
+            //Update Yes here
+            //console.log("Update Yes")
+            yesRectSVG[yesRectSVG.length-1].update_text()
+        }
+        else if(answer === "No"){
+            //Update No here
+            noRectSVG[noRectSVG.length-1].update_text()
+        }
+    }*/
 
 
     draw(index) {
@@ -363,20 +458,33 @@ class Main{
         let heightSize = config.getHeight()
         let widthSize  = config.getWidth()
 
+        /* For the first box to disappear
+        rectsSVG[0].update(0, 0, 0, 0, 0, 0)
+        titleTextSVG[0].update(0, 0, 0, 0, 0, 0)
+        yesTextSVG[0].update(0, 0, 0, 0, 0, 0)
+        noTextSVG[0].update(0, 0, 0, 0, 0, 0)
+        noRectSVG[0].update(0, 0, 0, 0, 0, 0)
+        yesRectSVG[0].update(0, 0, 0, 0, 0, 0)
+        */
+
         if(rectsSVG.length > index) {
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
         if(titleTextSVG.length > index) {
-             titleTextSVG[index].updateTitle(rects[index].x,45, rects[index].y,70, '#000000', rects[index].title)
+            titleTextSVG[index].updateTitle(rects[index].x,45, rects[index].y,70, '#000000', rects[index].title)
         }
+        // The color of the light blue we use is #1E99D6
+        // New color is grey which is #808080. Dark grey #696969, even darker grey #373131, hard dark grey #211D1D, super dark grey #151414
         if(yesRectSVG.length > index) {
-            yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(1)",yesRectSVG[index].persistent)
+            yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#151414', '1', "populateRec(1)",yesRectSVG[index].persistent)
         }
         if(yesTextSVG.length > index) {
             yesTextSVG[index].update(rects[index].x + (rects[index].width * (2/9)) , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes")
         }
+        // The color of the light blue we use is #1E99D6
+        // New color is grey which is #808080
         if(noRectSVG.length > index) {
-            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#1E99D6', '1', "populateRec(0)",noRectSVG[index].persistent)
+            noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#151414', '1', "populateRec(0)",noRectSVG[index].persistent)
         }
         if(noTextSVG.length > index) {
             noTextSVG[index].update(rects[index].x + rects[index].width*(.746), rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No")
@@ -384,6 +492,9 @@ class Main{
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
+
+
+
         config.updateLinesSVG(linesSVG)
         config.updateRectsSVG(rectsSVG)
         config.updateTitleTextSVG(titleTextSVG)
@@ -465,7 +576,13 @@ class Main{
         panZoom.zoom(1)
         //1 means go back to
         //Slide to the last element
-        this.slide(1)
+        if(index > 2){
+            this.slide(1)
+        }
+        else{
+            this.slide(0)
+        }
+
     }
 
     // Update the final box.
@@ -483,7 +600,7 @@ class Main{
         let middleWidth = getWidth / 2
 
         let newRect = new Rectangle(rects[rects.length - 1].x + width, rects[rects.length - 1].y,
-                shape_width, shape_height, "#FFFFFF", false, title, rects.length)
+            shape_width, shape_height, "#FFFFFF", false, title, rects.length)
         newRect.setCPT_Code(cptcode_)
         newRect.setCPT_Description(cpt_description)
         let newRectSVG = new RectangleSVG()
@@ -572,3 +689,4 @@ class Main{
     // This will read through the question title and split it into two lines
     // The lines will be displayed in the same position as before and the other line will be below it.
 }
+

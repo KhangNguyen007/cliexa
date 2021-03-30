@@ -35,6 +35,14 @@ class RectangleSVG{
         //this.rect.setAttributeNS(null,"class", "test1");
     }
 
+    updateText(x,width,y,height,text_fill,text_answer){
+        this.rect.setAttributeNS(null, 'x', x.toString());
+        this.rect.setAttributeNS(null, 'width', width.toString());
+        this.rect.setAttributeNS(null, 'y', y.toString());
+        this.rect.setAttributeNS(null, 'height', height.toString());
+        this.rect.setAttributeNS(null, 'text_fill', '#FF0000')
+    }
+
 
     // Update with onClick
     // Allows the users to select a specific questionnaire from the search box
@@ -51,6 +59,9 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
         this.rect.setAttributeNS(null,"class", "answer_box_borderline");
+
+
+
         if(persistentHighLight){
             this.rect.setAttributeNS(null, "stroke", "darkblue");
             this.rect.setAttributeNS(null, "stroke-width","3.5");
@@ -58,13 +69,30 @@ class RectangleSVG{
         //this.rect.setAttributeNS(null,"className", "answer_box_borderline");
     }
 
+
+
     // This will keep the highlight on after the user has clicked an answer.
     // May have to update this section of code based on Arin's feedback
     updateStoreHighLight(){
-        //console.log("Update HightLight")
-        this.rect.setAttributeNS(null, "stroke", "darkblue");
-        this.rect.setAttributeNS(null, "stroke-width","3.5");
+        //console.log("This will store the highlight based on the user selection")
+        //this.rect.setAttributeNS(null, "stroke", "darkblue");
+        //this.rect.setAttributeNS(null, "stroke-width","3.5");
+        this.rect.setAttributeNS(null, "fill", "#1E99D6")
+        this.rect.setAttributeNS(null, 'text-fill', "#FFFFFF")
     }
+
+    /*
+    update_text(){
+        //console.log("This will store the highlight based on the user selection")
+        //this.rect.setAttributeNS(null, "stroke", "darkblue");
+        //this.rect.setAttributeNS(null, "stroke-width","3.5");
+        this.rect.setAttributeNS(null, "fill", "#1E99D6")
+        this.rect.setAttributeNS(null, 'text-fill', "#FFFFFF")
+        this.rect.setAttributeNS(null, 'text_color', "#FF0000")
+        this.rect.setAttributeNS(null, 'text', 'yes')
+    }*/
+
+
     // Allows the resizing of the boxes containing the questions
     resize(x,y,width,height,fill,zIndex){
         this.rect.setAttributeNS(null, 'x', x.toString());
