@@ -75,8 +75,8 @@ class RectangleSVG{
     // May have to update this section of code based on Arin's feedback
     updateStoreHighLight(){
         //console.log("This will store the highlight based on the user selection")
-        //this.rect.setAttributeNS(null, "stroke", "darkblue");
-        //this.rect.setAttributeNS(null, "stroke-width","3.5");
+        this.rect.setAttributeNS(null, "stroke", "darkblue");
+        this.rect.setAttributeNS(null, "stroke-width","3.5");
         this.rect.setAttributeNS(null, "fill", "#1E99D6")
         this.rect.setAttributeNS(null, 'text-fill', "#FFFFFF")
     }
