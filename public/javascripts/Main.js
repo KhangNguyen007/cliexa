@@ -458,14 +458,6 @@ class Main{
         let heightSize = config.getHeight()
         let widthSize  = config.getWidth()
 
-        /* For the first box to disappear
-        rectsSVG[0].update(0, 0, 0, 0, 0, 0)
-        titleTextSVG[0].update(0, 0, 0, 0, 0, 0)
-        yesTextSVG[0].update(0, 0, 0, 0, 0, 0)
-        noTextSVG[0].update(0, 0, 0, 0, 0, 0)
-        noRectSVG[0].update(0, 0, 0, 0, 0, 0)
-        yesRectSVG[0].update(0, 0, 0, 0, 0, 0)
-        */
 
         if(rectsSVG.length > index) {
             rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
@@ -479,7 +471,7 @@ class Main{
             yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#151414', '1', "populateRec(1)",yesRectSVG[index].persistent)
         }
         if(yesTextSVG.length > index) {
-            yesTextSVG[index].update(rects[index].x + (rects[index].width * (2/9)) , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes")
+            yesTextSVG[index].update(rects[index].x + rects[index].width*(1/9) + widthSize/6 -23.25 , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes")
         }
         // The color of the light blue we use is #1E99D6
         // New color is grey which is #808080
@@ -487,7 +479,7 @@ class Main{
             noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#151414', '1', "populateRec(0)",noRectSVG[index].persistent)
         }
         if(noTextSVG.length > index) {
-            noTextSVG[index].update(rects[index].x + rects[index].width*(.746), rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No")
+            noTextSVG[index].update(rects[index].x + rects[index].width*(.63)+ widthSize/6 -18, rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No")
         }
         for(let i = 1 ; i < rects.length; i++){
             linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
@@ -689,4 +681,3 @@ class Main{
     // This will read through the question title and split it into two lines
     // The lines will be displayed in the same position as before and the other line will be below it.
 }
-
