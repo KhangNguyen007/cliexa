@@ -117,7 +117,7 @@ class RectangleSVG{
     // Will highlight the box when it is clicked by the user
     highlight(){
         this.rect.setAttributeNS(null,"stroke", "blue");
-        this.rect.setAttributeNS(null,"stroke-width", "1");
+        this.rect.setAttributeNS(null,"stroke-width", "3");
     }
     // Will take the highlight off the box when user clicks on the page
     offHighlight(){

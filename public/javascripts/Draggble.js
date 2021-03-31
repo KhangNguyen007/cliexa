@@ -77,7 +77,7 @@ class Draggble {
     }
 
     // handle mouse moves
-    myMove(e,svg) {
+    myMove(e,svg,rects1) {
         // if we're dragging anything...
         let ctx = svg.getBoundingClientRect();
         let rects = config.getRects()
@@ -99,13 +99,13 @@ class Draggble {
             // since the last mousemove
             for (var i = 0; i < rects.length; i++) {
                 var r = rects[i];
+                var jj = rectsSVG[i];
                 if (r.isDragging) {
                     r.x += dx;
                     r.y += dy;
                 }
-
             }
-
+            config.updateRectsSVG(rectsSVG)
             config.updateRects(rects)
             // If  final
             if(main.getFinal() && this.index === rects.length-1 ) {
@@ -164,4 +164,5 @@ class Draggble {
         let matrix = value.substring(value.lastIndexOf("(") + 1, value.lastIndexOf(")")).split(',')
         config.setScaleTranslate(matrix[0],matrix[3],matrix[4],matrix[5])
      }
+
 }
