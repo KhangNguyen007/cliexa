@@ -445,6 +445,7 @@
             $("#message").html("You entered focus mode");
             $("#on-off").html("On")
             $(".draggable-mode").show()
+            setTimeout(hideMessage, 1500);
             config.updateMode(true)
             panZoom.enableMouseWheelZoom()
             //You enter draggable mode
@@ -455,9 +456,9 @@
             $(".draggable-mode").show()
             config.updateMode(false)
             panZoom.disableMouseWheelZoom()
+            setTimeout(hideMessage, 1500);
             //You exit draggable mode
         }
-
 
     }
     function hideMessage(){
