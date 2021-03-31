@@ -31,7 +31,7 @@ class Rectangle{
     getCPT_Description(){
         return this.cpt_detail
     }
-    update(x,y,width,height){
+    create_box(x,y,width,height){
         this.x = x
         this.y = y
         this.width = width

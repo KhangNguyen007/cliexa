@@ -10,7 +10,7 @@ class LineSVG{
     }
     // This will update the connective line's location. The line color is blue.
     // This will have the lines connect to the center of the each box.
-    update(x1,y1,x2,y2,fill,stroke,strokeWidth){
+    update_lines(x1,y1,x2,y2,fill,stroke,strokeWidth){
         this.line.setAttributeNS(null, 'x1', x1.toString());
         this.line.setAttributeNS(null, 'y1', y1.toString());
         this.line.setAttributeNS(null, 'x2', x2.toString());

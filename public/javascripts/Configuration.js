@@ -205,6 +205,8 @@ class Configuration {
     popYesRectSVG(){
         this.yesRectSVG.pop()
     }
+
+    // updates the size, placement, and color of the "Yes" text
     updateYesTextSVG(yesTextSVG){
         this.yesTextSVG = yesTextSVG
     }
@@ -214,6 +216,7 @@ class Configuration {
     popYesTextSVG(){
         this.yesTextSVG.pop()
     }
+
     // if the user clicks no, we will populate the next corresponding question
     updateNoRectSVG(noRectSVG){
         this.noRectSVG = noRectSVG
@@ -224,6 +227,8 @@ class Configuration {
     popNoRectSVG(){
         this.noRectSVG.pop()
     }
+
+    // updates the size, placement, and color of the "No" text
     updateNoTextSVG(noTextSVG){
         this.noTextSVG = noTextSVG
     }
@@ -233,6 +238,7 @@ class Configuration {
     popNoTextSVG(){
         this.noTextSVG.pop()
     }
+
     updateMainPanelWidth(mainPanelWidth){
         this.mainPanelWidth = mainPanelWidth
     }
@@ -248,7 +254,7 @@ class Configuration {
         return this.mainPanelHeight
     }
 
-    //
+    // gets/sets the height and the size of the box
     updateWidthSize(width){
         this.widthSize = width
     }
@@ -277,4 +283,5 @@ class Configuration {
     getTest_Progress_bar(){
         return this.test_progress_bar
     }
+
 }

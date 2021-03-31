@@ -196,6 +196,7 @@ a {
   color: black
 }
 
+/* This will make the yes and no box change colors and give it a highlighted border when the mouse is hovered over it */
 .answer_box_borderline:hover{
   /*stroke: darkblue;*/
   stroke: #0011FF;

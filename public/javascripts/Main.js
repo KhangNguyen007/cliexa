@@ -460,7 +460,7 @@ class Main{
 
 
         if(rectsSVG.length > index) {
-            rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
+            rectsSVG[index].update_boxes(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
         if(titleTextSVG.length > index) {
             titleTextSVG[index].updateTitle(rects[index].x,45, rects[index].y,70, '#000000', rects[index].title)
@@ -471,7 +471,8 @@ class Main{
             yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#151414', '1', "populateRec(1)",yesRectSVG[index].persistent)
         }
         if(yesTextSVG.length > index) {
-            yesTextSVG[index].update(rects[index].x + rects[index].width*(1/9) + widthSize/6 -23.25 , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes")
+            yesTextSVG[index].update_yes_no_text(rects[index].x + rects[index].width*(1/9) + widthSize/6 -23.25 , rects[index].y + rects[index].height / 1.66, '#FFFFFF', "Yes","populateRec(1)")
+            //yesRectSVG[index].updateWithOnClick(rects[index].x+rects[index].width*(1/9), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#151414', '1', "populateRec(1)",yesRectSVG[index].persistent)
         }
         // The color of the light blue we use is #1E99D6
         // New color is grey which is #808080
@@ -479,10 +480,10 @@ class Main{
             noRectSVG[index].updateWithOnClick(rects[index].x + rects[index].width*(.63), rects[index].y + heightSize / 2, widthSize / 3, heightSize / 3, '#151414', '1', "populateRec(0)",noRectSVG[index].persistent)
         }
         if(noTextSVG.length > index) {
-            noTextSVG[index].update(rects[index].x + rects[index].width*(.63)+ widthSize/6 -18, rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No")
+            noTextSVG[index].update_yes_no_text(rects[index].x + rects[index].width*(.63)+ widthSize/6 -18, rects[index].y + rects[index].height / 1.66, '#FFFFFF', "No","populateRec(0)")
         }
         for(let i = 1 ; i < rects.length; i++){
-            linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
+            linesSVG[i-1].update_lines(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
 
 
@@ -505,7 +506,7 @@ class Main{
         let linesSVG = config.getLinesSVG()
         let rect_dimensions = config.getLastRect()
         if(rectsSVG.length > index) {
-            rectsSVG[index].update(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
+            rectsSVG[index].update_boxes(rects[index].x, rects[index].y, rects[index].width, rects[index].height, "#FFFFFF", '1')
         }
 
         if(titleTextSVG.length > index) {
@@ -519,12 +520,12 @@ class Main{
         let middleWidth = getWidth / 2
 
         // x = 285
-        cptTextSVG.update(rects[index].x + middleWidth - 224, rects[index].y+middleHeight + 15, '#000000',rects[index].getCPT_Code())
+        cptTextSVG.update_CPT_Text(rects[index].x + middleWidth - 224, rects[index].y+middleHeight + 15, '#000000',rects[index].getCPT_Code())
         //cptTextSVG.update(rects[index].x, rects[index].y, '#000000',rects[index].getCPT_Code())
         cptDescription.updateTitle(rects[index].x, middleWidth - 420,rects[index].y , middleHeight + 45,'#000000',rects[index].getCPT_Description())
         //cptDescription.updateTitle(rects[index].x,middleWidth - 224, rects[index].y, + middleHeight + 15,'#000000',rects[index].getCPT_Description())
         for(let i = 1 ; i < rects.length; i++){
-            linesSVG[i-1].update(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
+            linesSVG[i-1].update_lines(rects[i-1].x+rects[i-1].width/2,rects[i-1].y+rects[i-1].height/2,rects[i].x+rects[i].width/2,rects[i].y+rects[i].height/2,"red","blue","1")
         }
 
         config.updateRectsSVG(rectsSVG)
@@ -558,10 +559,10 @@ class Main{
         let shape_height = height -0.1*height
         let rects = config.getRects()
         //Initialize the first rect to origin position
-        rects[0].update(x,y,shape_width,shape_height)
+        rects[0].create_box(x,y,shape_width,shape_height)
         //Update new position for all when realign
         for(let i = 1; i < rects.length; i++){
-            rects[i].update(rects[i-1].x + width,rects[i-1].y,shape_width,shape_height)
+            rects[i](rects[i-1].x + width,rects[i-1].y,shape_width,shape_height)
         }
         config.setScaleTranslate(1,1,0,0)
         panZoom.reset()

@@ -19,6 +19,8 @@ class TextSVG{
         var svgns = "http://www.w3.org/2000/svg";
         this.text = document.createElementNS(svgns, 'text'); //Create a path in SVG's namespace
         $(".svg-pan-zoom_viewport").append(this.text)
+        this.rect = document.createElementNS(svgns, 'rect'); //Create a path in SVG's namespace
+        $(".svg-pan-zoom_viewport").append(this.rect);
         this.line= 1
         this.emMul = 2
         this.x = 0
@@ -104,13 +106,24 @@ class TextSVG{
         }
     }
 
-    update(x,y,fill,title){
+    update_yes_no_text(x,y,fill,title,onclick){
+        let sEmMul = this.emMul.toString() + 'em'
+        this.text.setAttributeNS(null,'x',x);
+        this.text.setAttributeNS(null,'y',y);
+        this.text.setAttributeNS(null,'fill',fill);
+        this.text.setAttributeNS(null,'font-size',sEmMul)
+        this.text.setAttributeNS(null,'onclick',onclick)
+        this.text.innerHTML = title;
+    }
+
+    update_CPT_Text(x,y,fill,title){
         let sEmMul = this.emMul.toString() + 'em'
         this.text.setAttributeNS(null,'x',x);
         this.text.setAttributeNS(null,'y',y);
         this.text.setAttributeNS(null,'fill',fill);
         this.text.setAttributeNS(null,'font-size',sEmMul)
         this.text.innerHTML = title;
+        //this.rect.setAttributeNS(null,"class", "answer_box_borderline");
     }
 
 

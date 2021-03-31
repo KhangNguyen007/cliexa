@@ -73,7 +73,7 @@ class Draggble {
             rects[i].isDragging = false;
         }
         config.updateRects(rects)
-        selectedRectangle.update(0,0,0,0,"#FFC433",'1')
+        selectedRectangle.update_boxes(0,0,0,0,"#FFC433",'1')
     }
 
     // handle mouse moves
@@ -133,7 +133,7 @@ class Draggble {
 
             //current mouse on the 4/4 quarter
             if (this.startX <= mx && this.startY <= my) {
-                selectedRectangle.update(this.startX.toString(), this.startY.toString(), dx.toString(), dy.toString(), "#FFC433", '1')
+                selectedRectangle.update_boxes(this.startX.toString(), this.startY.toString(), dx.toString(), dy.toString(), "#FFC433", '1')
                 for (var i = 0; i < rects.length; i++) {
                     var r = rects[i];
                     if (r.x > this.startX && r.x < mx && r.y > this.startY && r.y < my && r.y + r.height < my && r.width < mx) {
@@ -143,15 +143,15 @@ class Draggble {
             }
             //current mouse on the 3/4 quarter
             else if (this.startX >= mx && this.startY < my) {
-                selectedRectangle.update((mx).toString(), (this.rectY).toString(), (this.rectX - mx).toString(), (my - this.rectY).toString(), "#FFC433", '1')
+                selectedRectangle.update_boxes((mx).toString(), (this.rectY).toString(), (this.rectX - mx).toString(), (my - this.rectY).toString(), "#FFC433", '1')
             }
             //current mouse on the 2/4 quarter
             else if (this.startX > mx && this.startY > my) {
-                selectedRectangle.update((mx).toString(), (my).toString(), (this.rectX - mx).toString(), (this.rectY - my).toString(), "#FFC433", '1')
+                selectedRectangle.update_boxes((mx).toString(), (my).toString(), (this.rectX - mx).toString(), (this.rectY - my).toString(), "#FFC433", '1')
             }
             //current mouse on the 1/4 quarter
             else if (this.startX < mx && this.startY > my) {
-                selectedRectangle.update((mx - (mx - this.rectX)).toString(), (my).toString(), (mx - this.rectX).toString(), (this.rectY - my).toString(), "#FFC433", '1')
+                selectedRectangle.update_boxes((mx - (mx - this.rectX)).toString(), (my).toString(), (mx - this.rectX).toString(), (this.rectY - my).toString(), "#FFC433", '1')
             }
             //While doing this should highlight all the rectangle within the range
         }

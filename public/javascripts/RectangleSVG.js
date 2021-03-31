@@ -21,7 +21,7 @@ class RectangleSVG{
     }
 
     // Update without onClick -> final box
-    update(x,y,width,height,fill,zIndex){
+    update_boxes(x,y,width,height,fill,zIndex){
         this.rect.setAttributeNS(null, 'x', x.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
         this.rect.setAttributeNS(null, 'rx',"10");
@@ -35,12 +35,12 @@ class RectangleSVG{
         //this.rect.setAttributeNS(null,"class", "test1");
     }
 
-    updateText(x,width,y,height,text_fill,text_answer){
+    updateText(x,y,text_fill,text_answer, onclick){
         this.rect.setAttributeNS(null, 'x', x.toString());
-        this.rect.setAttributeNS(null, 'width', width.toString());
         this.rect.setAttributeNS(null, 'y', y.toString());
-        this.rect.setAttributeNS(null, 'height', height.toString());
         this.rect.setAttributeNS(null, 'text_fill', '#FF0000')
+        this.rect.textContent = text_answer
+        this.rect.setAttributeNS(null, 'onclick', onclick);
     }
 
 
