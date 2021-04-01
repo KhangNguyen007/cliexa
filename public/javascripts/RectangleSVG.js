@@ -65,6 +65,8 @@ class RectangleSVG{
         if(persistentHighLight){
             this.rect.setAttributeNS(null, "stroke", "darkblue");
             this.rect.setAttributeNS(null, "stroke-width","3.5");
+            this.rect.setAttributeNS(null, "fill", "#1E99D6")
+            this.rect.setAttributeNS(null, 'text-fill', "#FFFFFF")
         }
         //this.rect.setAttributeNS(null,"className", "answer_box_borderline");
     }
