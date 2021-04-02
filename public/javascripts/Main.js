@@ -495,6 +495,7 @@ class Main{
         config.updateNoRectSVG(noRectSVG)
         config.updateYesTextSVG(yesTextSVG)
         config.updateNoTextSVG(noTextSVG)
+
     }
 
     drawFinalBox(index) {
@@ -633,6 +634,8 @@ class Main{
         // Will create the first rectangle with questions. Sets up shape, size, and color of first rectangle
         let newRect
         if(rects.length === 0) {
+            let newLineSVG = new LineSVG()
+            linesSVG.push(newLineSVG)
             newRect = new Rectangle(x, y, shape_width, shape_height, "#FFFFFF",
                 false, title, rects.length)
         }
