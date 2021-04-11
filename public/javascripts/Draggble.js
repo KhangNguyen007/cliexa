@@ -2,7 +2,6 @@
 Description: Draggble is a collection of functions to move/scale/translate object in SVG
 Author: Khang Nguyen
  */
-
 class Draggble {
     constructor() {
         this.dragok = false;
@@ -160,9 +159,11 @@ class Draggble {
     //Handle when wheeling the mouse
     //Update relative scale and translate in SVG
     myWheel(e,panZoom){
+
         let value = ($('.svg-pan-zoom_viewport').css('transform'));
+        console.log(value)
         let matrix = value.substring(value.lastIndexOf("(") + 1, value.lastIndexOf(")")).split(',')
-        config.setScaleTranslate(matrix[0],matrix[3],matrix[4],matrix[5])
+            config.setScaleTranslate(matrix[0],matrix[3],matrix[4],matrix[5])
      }
 
 }

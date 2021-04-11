@@ -3,6 +3,7 @@ This file will be our main function
  */
 
 // Global variable for all assessments
+let offsetX = 0
 let score = 0
 
 // Global variables specifically for CCM assessment
@@ -404,8 +405,13 @@ function populateRec(answer){
 class Main{
     constructor(){
         this.final = false //Indicate final box
+        this.translateX= 0
+        this.translateY= 0
+        this.scaleX = 0
+        this.scaleY = 0
     }
-    //Think about Tree Hiearchy which easier to manager
+
+    //Think about Tree Hierarchy which easier to manager
     // Class Inheritance and Interface
     setFinal(final){
         this.final = final
@@ -413,7 +419,30 @@ class Main{
     getFinal(){
         return this.final
     }
-
+    setTranslateX(translateX){
+        this.translateX = translateX
+    }
+    getTranslateX(){
+        return this.translateX
+    }
+    setTranslateY(translateY){
+        this.translateY = translateY
+    }
+    getTranslateY(){
+        return this.translateY
+    }
+    setScaleX(scaleX){
+        this.scaleX = scaleX
+    }
+    getScaleX(){
+        return this.scaleX
+    }
+    setScaleY(scaleY){
+        this.scaleY = scaleY
+    }
+    getScaleY(){
+        return this.scaleY
+    }
 
     storedHighLight(answer){
         let yesRectSVG = config.getYesRectSVG()
@@ -541,7 +570,10 @@ class Main{
         if(config.getMode() === false) {
             if(slide === 0) {
                 let left = $('#mainPanel').scrollLeft();
+
                 $('#mainPanel').scrollLeft(left + $('#mainPanel').width());
+                offsetX = $('#mainPanel').scrollLeft()
+                console.log("Scroll left:",$('#mainPanel').scrollLeft())
             }
             else if(slide === 1){
                 $('#mainPanel').scrollLeft(0);

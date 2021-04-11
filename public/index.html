@@ -19,18 +19,21 @@
 
         <div style="position:absolute;bottom:2px;right:10%;background-color: white;">
 
-            <!--
-            <button type="button" class="btn btn-default btn-sm" id="zoom"> (Put this in comments)Change style here
+
+            <button type="button" class="btn btn-default btn-sm" id="zoom" onclick="zoomIn()">
                 <span class="glyphicon glyphicon-zoom-in" ></span>
-            </button> -->
+            </button>
+
             <button type="button" class="btn btn-default btn-sm" id="on-off" onclick="switchOnOff()" ><!-- Change style here -->
                 Off
             </button>
 
-            <!--
-            <button type="button" class="btn btn-default btn-sm" > (Put this in comments) Change style here
+            <button type="button" class="btn btn-default btn-sm" onclick="zoomOut()">
                 <span class="glyphicon glyphicon-zoom-out"></span>
-            </button>-->
+            </button>
+
+
+
         </div>
 
         <div class="home-button" style="position:absolute;width:10%;height:100%;right:0%;bottom:0%; background-color: white; border:1px solid white">
@@ -251,15 +254,6 @@
 
 
 
-    $("#zoomIn").on('click',function (event) {
-        console.log(panZoom.getZoom())
-        // drawAll()
-    })
-
-    $("#zoomOut").on('click',function (event) {
-
-        //drawAll()
-    })
 
 
     document.addEventListener ("keyup", function (event) {
@@ -459,6 +453,103 @@
             setTimeout(hideMessage, 1500);
             //You exit draggable mode
         }
+
+    }
+
+
+
+    let scaleX = 1
+    let scaleY = 1
+    let translateX = 0
+    let translateY = 0
+    let flag = true
+    let valueX
+    let valueY
+
+
+
+    $(document).ready(function () {
+        $("svg").mousemove(function (e) {
+           console.log("Mouse position:",e.offsetX,e.offsetY)
+            //offsetX = e.offsetX
+        });
+    });
+
+    function zoomIn(){
+        console.log('matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")")
+
+        var svg = document.getElementById('svg')
+        var paths = svg.querySelectorAll('.svg-pan-zoom_viewport > rect,text,line');
+        for(var i=0; i<paths.length; ++i) {
+            paths[i].style.transform = 'matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")"
+        }
+        scaleX += 0.078257
+        translateX -= valueX
+        translateY -= valueY
+        scaleX = Math.min(1,scaleX)
+        scaleY = Math.max(1,scaleY)
+    }
+    function zoomOut(){
+        //Engineer zoom in and out tomorrow.
+        //Try to find the relationship between translate and scale and skew and rotate
+        //
+
+        console.log('matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")")
+        if(flag){
+            valueX = (offsetX + 1024/2)/13.05
+            valueY = 15.5
+            translateX = valueX
+            translateY = valueY
+            flag = false
+            console.log("Offset of mouse position:", offsetX + 1024/2)
+        }
+
+        //('.svg-pan-zoom_viewport').css('transform','matrix(`${matrix[0]}`,`${matrix[3]}`,`${matrix[4]}`,`${matrix[5]}`');
+        //$('.svg-pan-zoom_viewport').style.transform = 'matrix(0.44269, 0, 0, 0.44269, 310.394, 43.298)'
+        //$('.svg-pan-zoom_viewport').css('transform','matrix('+matrix[0] +")'");
+        //let svg = $("#svg")
+        //$('.svg-pan-zoom_viewport').css('transform', 'translate(50 50) rotate(60)');
+        //svg.style.transform = `scaleX(${matrix[0]})`;
+        //$(".svg-pan-zoom_viewport").css("transform","translate(200,200)")
+        //var mySVG = document.getElementById('svg');
+        //mySVG.setAttribute("transform-origin", "0 0");
+        //mySVG.setAttribute("transform", "scale(0.1 0.1)");//This will move svg
+        //mySVG.setAttribute("transform", "skewX(40)");//This will move svg
+        //mySVG.setAttribute("transform", "skewY(40)");//This will move svg
+        var svg = document.getElementById('svg')
+        var paths = svg.querySelectorAll('.svg-pan-zoom_viewport > rect,text,line');
+        for(var i=0; i<paths.length; ++i) {
+            //paths[i].style.scale = scaleX+ " " + scaleY;
+            //paths[i].style.scale = '0.5 0.5'
+            //paths[i].style.transform = "translate(" + translateX + "px,"+ translateY + "px)";
+            //matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
+            /*
+            scaleX -= 0.078257 , 0.072132, 0.066488, 0.061285
+            scaleY -= 0.078257 , 0.072132, 0.066488, 0.061285
+            translateX() += 37.4176
+            translateY() += 10.8703
+            Value: matrix(0.921743, 0, 0, 0.921743, 40.5944, 11.8781) Draggble.js:165:17
+            Value: matrix(0.849611, 0, 0, 0.849611, 78.012, 22.7484) Draggble.js:165:17
+            Value: matrix(0.783123, 0, 0, 0.783123, 112.501, 32.6897) Draggble.js:165:17
+            Value: matrix(0.721838, 0, 0, 0.721838, 144.37, 42.0878) Draggble.js:165:17
+            Value: matrix(0.665349, 0, 0, 0.665349, 173.588, 52.0809) Draggble.js:165:17
+            Value: matrix(0.613281, 0, 0, 0.613281, 200.52, 61.2919)
+
+            Value: matrix(0.921743, 0, 0, 0.921743, 40.7509, 11.252)
+            Value: matrix(0.921743, 0, 0, 0.921743, 122.999, 11.4085)
+            Value: matrix(0.921743, 0, 0, 0.921743, 280.373, 13.2084)
+            Value: matrix(0.921743, 0, 0, 0.921743, 359.178, 13.0519)
+            //Translate X will depend on the number of click
+            */
+            paths[i].style.transform = 'matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")"
+        }
+        scaleX -= 0.078257
+        translateX += valueX
+        translateY += valueY
+        scaleX = Math.max(0.1,scaleX)
+        scaleY = Math.max(0.1,scaleY)
+
+
 
     }
     function hideMessage(){
