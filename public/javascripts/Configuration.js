@@ -35,6 +35,7 @@ class Configuration {
         this.maxHeight =  $('#mainPanel').height()*8/10
         this.minWidth = 100
         this.minHeight = 100
+        this.matrix =  [1,0,1,0]
         this.mode = false   // {0 = focus, 1 = not focus}
         this.mainPanelWidth = window.innerWidth
         this.mainPanelHeight = window.innerHeight

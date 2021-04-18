@@ -23,7 +23,9 @@
             <button type="button" class="btn btn-default btn-sm" id="zoom" onclick="zoomIn()">
                 <span class="glyphicon glyphicon-zoom-in" ></span>
             </button>
-
+            <button type="button" class="btn btn-default btn-sm" id="pan-on-off" onclick="panOnOff()" ><!-- Change style here -->
+                Pan-Off
+            </button>
             <button type="button" class="btn btn-default btn-sm" id="on-off" onclick="switchOnOff()" ><!-- Change style here -->
                 Off
             </button>
@@ -50,6 +52,11 @@
         <div id="message" >You entered focus mode</div>
     </div>
 
+    <div class="pan-mode" style="display:none;position: absolute;width:100px;height:100px;background-color:lightblue;top: 50%; right: 50%;transform: translate(50%,-50%);z-index: 1;opacity: 5">
+        <button id="turnOffPanMessage" style="position: absolute;right:0%;" onclick="hidePanMessage()">X</button>
+        <div id="panMessage" >You entered pan mode</div>
+    </div>
+
 
     <div class="mainPanel" id="mainPanel">
 
@@ -62,41 +69,15 @@
             <div class="sub-package borderline" id="DAST-10">Drug Assessment</div>
             <div class="sub-package borderline" id="CCM">Chronic Care Management</div>
 
-            <!--
-            <div class="sub-package" id="GAD">GAD7</div>
-            <div class="sub-package" id="DAST">DAST10</div>
 
-            <div class="sub-package" id="NIDE">NIDE</div>
-            <div class="sub-package" id="AUDIT">AUDIT</div>
-            <div class="sub-package" id="DRAWING">DRAWING</div>
-            <div class="sub-package" id="PDI">PDI</div>
-            -->
         </div>
 
-        <!-- Remove search bar for now
-        <div class="SearchBar-Container" id="SearchBar-Container">
-            <input id="Search" />
-            <div class="SearchBar-Container-Result" id="Search-Result">
-                <ul id="SearchList">
-                </ul>
-            </div>
-        </div>
-        -->
-
-        <!--
-        Previous values for viewBox is "0 0 1000000 1000000" width="1000000" height="1000000"
-        -->
         <svg id="svg" xmlns="http://www.w3.org/2000/svg" class="shadow" viewBox="0 0 25000 800" width="25000" height="800" style="visibility: hidden;background-color: #f6f8f9; display: inline;" version="1.1">
             <!-- Using Jquery to add shape -->
         </svg>
 
     </div>
 
-    <!--
-    <div class="zoom" id="zoom">
-        <button id="zoomIn" >Reset</button><br/>
-    </div>
-    -->
     <div class="rightPanel" id="rightPanel"></div>
 </div>
 </body>
@@ -153,79 +134,6 @@
         }
     }
 
-    //When click on a question => should populate this shape
-    //When click search from the search bar, will populate it here set prev to id
-    $('ul').on('click',"li",function(){
-        //alert($(this).html());
-        //Draw new rectagle here.
-
-        //$("#SearchBar-Container").css("visibility","hidden")
-        //$("#Search").css("visibility","hidden")
-        //$("#Search-Result").css("visibility","hidden")
-        //$("#SearchList").css("visibility","hidden")
-
-
-        return false;
-    });
-
-    //$(".SearchBar-Container-Result").css("visibility","hidden")
-
-    //Search input here
-    /*
-    let click = false
-    $("input").on('input', function (evt) {
-        $("input").val(this.value)
-        let searchSelector = $("#SearchList")
-        searchSelector.empty()
-        for(let i = 0; i < data.length; i++){
-            if((data[i].q.toLowerCase()).match(this.value.toLowerCase())){
-                searchSelector.append( "<li id="+data[i].id+">" + data[i].q + "</li>" );
-            }
-        }
-        if(this.value === ""){
-            $(".SearchBar-Container-Result").css("visibility","hidden")
-        }
-        else{
-            $(".SearchBar-Container-Result").css("visibility","visible")
-        }
-        //If click on one of the question then hide search and searchSelector
-        if(click) {
-            $("#Search").css("visibility", "hidden")
-            searchSelector.css("visibility", "hidden")
-        }
-        return false;
-    });
-    */
-
-    //Move SPLIT LM
-    let dragSplit = false
-    $("#splitLM").on('mousedown',function(evt){
-        dragSplit = true
-    })
-
-    $("#splitLM").on('mouseup',function(evt){
-        if(dragSplit){
-            if(!config.getMode()) {
-                //Call realign to focus on one rectangle at a time
-                main.reAlign()
-            }
-        }
-    })
-
-    //Change the view of the main panel when move the left and main panel
-    $("body").on('mousemove',function(evt) {
-        if (dragSplit) {
-            $("#leftPanel").css('width',evt.clientX)
-            $("#splitLM").css('left',evt.clientX)
-            $("#mainPanel").css('left',evt.clientX + $("#splitLM").width())
-            $("#mainPanel").css('width', $(window).width() - evt.clientX - $("#rightPanel").width())
-            //$("#mainPanel").css('width',evt.clientX)
-        }
-    })
-
-    $("body").on('mouseup',function(evt) {
-        dragSplit = false
-    })
     //Listener for moving to previous state
     //Backtracking
     $("body").on('keydown', function(event) {
@@ -433,16 +341,14 @@
 
      */
     function switchOnOff(){
-        //turnOffMessage
-        //<div id="message" style="display: none">You enter draggable mode</div>
         if($("#on-off").html().includes("Off")){
             $("#message").html("You entered focus mode");
             $("#on-off").html("On")
             $(".draggable-mode").show()
-            setTimeout(hideMessage, 1500);
+            setTimeout(hideMessage, 1000);
             config.updateMode(true)
             panZoom.enableMouseWheelZoom()
-            //You enter draggable mode
+
         }
         else{
             $("#message").html("You exited focus mode");
@@ -450,110 +356,48 @@
             $(".draggable-mode").show()
             config.updateMode(false)
             panZoom.disableMouseWheelZoom()
-            setTimeout(hideMessage, 1500);
-            //You exit draggable mode
+            setTimeout(hideMessage, 1000);
         }
+    }
+    function panOnOff(){
+        if($("#pan-on-off").html().includes("Off")){
+            $("#panMessage").html("You entered pan mode");
+            $("#pan-on-off").html("pan-On")
+            $(".pan-mode").show()
+            setTimeout(hidePanMessage, 1000);
+            panZoom.enablePan()
 
+        }
+        else{
+            $("#panMessage").html("You exited pan mode");
+            $("#pan-on-off").html("pan-Off")
+            $(".pan-mode").show()
+            setTimeout(hidePanMessage, 1000);
+            panZoom.disablePan()
+        }
     }
 
-
-
-    let scaleX = 1
-    let scaleY = 1
-    let translateX = 0
-    let translateY = 0
-    let flag = true
-    let valueX
-    let valueY
-
-
-
-    $(document).ready(function () {
-        $("svg").mousemove(function (e) {
-           console.log("Mouse position:",e.offsetX,e.offsetY)
-            //offsetX = e.offsetX
-        });
-    });
-
+    let realZoom = 1
     function zoomIn(){
-        console.log('matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")")
-
         var svg = document.getElementById('svg')
-        var paths = svg.querySelectorAll('.svg-pan-zoom_viewport > rect,text,line');
-        for(var i=0; i<paths.length; ++i) {
-            paths[i].style.transform = 'matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")"
-        }
-        scaleX += 0.078257
-        translateX -= valueX
-        translateY -= valueY
-        scaleX = Math.min(1,scaleX)
-        scaleY = Math.max(1,scaleY)
+        realZoom = realZoom + 0.06648778915
+        realZoom = Math.min(1,realZoom)
+        panZoom.zoomAtPoint(realZoom,{x:offsetX + $('#mainPanel').width()/2,y:$('#mainPanel').height()/2})
+        console.log(realZoom)
     }
     function zoomOut(){
-        //Engineer zoom in and out tomorrow.
-        //Try to find the relationship between translate and scale and skew and rotate
-        //
-
-        console.log('matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")")
-        if(flag){
-            valueX = (offsetX + $('#mainPanel').width()/2)/13.05
-            valueY = 15.5
-            translateX = valueX
-            translateY = valueY
-            flag = false
-            console.log("Offset of mouse position:", offsetX + 1024/2)
-        }
-
-        //('.svg-pan-zoom_viewport').css('transform','matrix(`${matrix[0]}`,`${matrix[3]}`,`${matrix[4]}`,`${matrix[5]}`');
-        //$('.svg-pan-zoom_viewport').style.transform = 'matrix(0.44269, 0, 0, 0.44269, 310.394, 43.298)'
-        //$('.svg-pan-zoom_viewport').css('transform','matrix('+matrix[0] +")'");
-        //let svg = $("#svg")
-        //$('.svg-pan-zoom_viewport').css('transform', 'translate(50 50) rotate(60)');
-        //svg.style.transform = `scaleX(${matrix[0]})`;
-        //$(".svg-pan-zoom_viewport").css("transform","translate(200,200)")
-        //var mySVG = document.getElementById('svg');
-        //mySVG.setAttribute("transform-origin", "0 0");
-        //mySVG.setAttribute("transform", "scale(0.1 0.1)");//This will move svg
-        //mySVG.setAttribute("transform", "skewX(40)");//This will move svg
-        //mySVG.setAttribute("transform", "skewY(40)");//This will move svg
         var svg = document.getElementById('svg')
-        var paths = svg.querySelectorAll('.svg-pan-zoom_viewport > rect,text,line');
-        for(var i=0; i<paths.length; ++i) {
-            //paths[i].style.scale = scaleX+ " " + scaleY;
-            //paths[i].style.scale = '0.5 0.5'
-            //paths[i].style.transform = "translate(" + translateX + "px,"+ translateY + "px)";
-            //matrix(scaleX(),skewY(),skewX(),scaleY(),translateX(),translateY())
-            /*
-            scaleX -= 0.078257 , 0.072132, 0.066488, 0.061285
-            scaleY -= 0.078257 , 0.072132, 0.066488, 0.061285
-            translateX() += 37.4176
-            translateY() += 10.8703
-            Value: matrix(0.921743, 0, 0, 0.921743, 40.5944, 11.8781) Draggble.js:165:17
-            Value: matrix(0.849611, 0, 0, 0.849611, 78.012, 22.7484) Draggble.js:165:17
-            Value: matrix(0.783123, 0, 0, 0.783123, 112.501, 32.6897) Draggble.js:165:17
-            Value: matrix(0.721838, 0, 0, 0.721838, 144.37, 42.0878) Draggble.js:165:17
-            Value: matrix(0.665349, 0, 0, 0.665349, 173.588, 52.0809) Draggble.js:165:17
-            Value: matrix(0.613281, 0, 0, 0.613281, 200.52, 61.2919)
-
-            Value: matrix(0.921743, 0, 0, 0.921743, 40.7509, 11.252)
-            Value: matrix(0.921743, 0, 0, 0.921743, 122.999, 11.4085)
-            Value: matrix(0.921743, 0, 0, 0.921743, 280.373, 13.2084)
-            Value: matrix(0.921743, 0, 0, 0.921743, 359.178, 13.0519)
-            //Translate X will depend on the number of click
-            */
-            paths[i].style.transform = 'matrix('+parseFloat(scaleX.toFixed(5))+ ', 0, 0, ' +parseFloat(scaleX.toFixed(5))+','+ parseFloat(translateX.toFixed(5)) +',' + parseFloat(translateY.toFixed(5)) + ")"
-        }
-        scaleX -= 0.078257
-        translateX += valueX
-        translateY += valueY
-        scaleX = Math.max(0.1,scaleX)
-        scaleY = Math.max(0.1,scaleY)
-
-
+        realZoom -= 0.06648778915
+        realZoom = Math.max(0.1,realZoom)
+        panZoom.zoomAtPoint(realZoom,{x:offsetX + $('#mainPanel').width()/2,y:$('#mainPanel').height()/2})
+        console.log(realZoom)
 
     }
     function hideMessage(){
         $(".draggable-mode").hide()
+    }
+    function hidePanMessage(){
+        $(".pan-mode").hide()
     }
 
 
