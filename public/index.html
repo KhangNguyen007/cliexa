@@ -313,7 +313,7 @@
             $("#message").html("You entered focus mode");
             $("#on-off").html("On")
             $(".draggable-mode").show()
-            setTimeout(hideMessage, 1000);
+            setTimeout(hideMessage, 1500);
 
             config.updateMode(true)
             panZoom.enableMouseWheelZoom()
@@ -325,24 +325,24 @@
             $(".draggable-mode").show()
             config.updateMode(false)
             panZoom.disableMouseWheelZoom()
-            setTimeout(hideMessage, 1000);
+            setTimeout(hideMessage, 1500);
             //You exit draggable mode
         }
     }
     function panOnOff(){
         if($("#pan-on-off").html().includes("Off")){
             $("#panMessage").html("You entered pan mode");
-            $("#pan-on-off").html("pan-On")
+            $("#pan-on-off").html("Pan-On")
             $(".pan-mode").show()
-            setTimeout(hidePanMessage, 1000);
+            setTimeout(hidePanMessage, 1500);
             panZoom.enablePan()
 
         }
         else{
-            $("#panMessage").html("You exited pan mode");
-            $("#pan-on-off").html("pan-Off")
+            $("#panMessage").html("You exited - pan mode");
+            $("#pan-on-off").html("Pan-Off")
             $(".pan-mode").show()
-            setTimeout(hidePanMessage, 1000);
+            setTimeout(hidePanMessage, 1500);
             panZoom.disablePan()
         }
     }
