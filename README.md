@@ -1,8 +1,5 @@
 # Cliexa is a project which helps customer create flowchart from predefined medical questionaire. 
-
-
-
-
-
-External library:
-https://github.com/ariutta/svg-pan-zoom/blob/master/README.md
+# To start the application in localhost:
+Go to main directory, run 
++ npm install
++ npm start
