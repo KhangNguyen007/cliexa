@@ -1,6 +1,11 @@
-# Cliexa is a project which helps customer create flowchart from predefined medical questionaire. 
+# Cliexa's Compliance Algorithm
+Cliexa's Compliance Algorithm is a medical assessment tool which helps the user create a flowchart from a set of predefined medical assessment. 
+
+
+
 To start the application in localhost:
-Go to main directory, run 
++ Open your terminal or command prompt.
++ Enter the path to Cliexa's directory that contains the source code. Once in the directory, run the following commands,
 + git clone <gihthublink>
 + npm install
 + npm start
