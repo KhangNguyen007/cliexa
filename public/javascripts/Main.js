@@ -15,8 +15,6 @@ let CCM_PHQ_Boolean = false
 let save_prev = 0
 
 function populateRec(answer){
-    console.log("Index:",config.getIndex())
-    console.log("Length:",config.getRects().length -1)
     if(config.getIndex() === -1 || config.getIndex()  === config.getRects().length -1 ) {
         let index, title, progress_bar
         let Qualified_CPT

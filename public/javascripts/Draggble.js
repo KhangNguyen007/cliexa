@@ -57,7 +57,7 @@ class Draggble {
         }
         config.updateRects(rects)
         config.updateRectsSVG(rectsSVG)
-        // save the current mouse position
+        // save the current mouse position.
         this.startX = mx;
         this.startY = my;
         if(selected.isSelected){
