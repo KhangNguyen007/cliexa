@@ -1,5 +1,6 @@
 /*
-
+RectangleSVG class will responsible for directly modifying the look of the question box
+including  position, highlight.
  */
 
 class RectangleSVG{
@@ -12,13 +13,6 @@ class RectangleSVG{
 
     }
 
-    // Updates the position of the boxes
-    updatePosition(x,y,width,height){
-        this.rect.setAttributeNS(null, 'x', x.toString());
-        this.rect.setAttributeNS(null, 'y', y.toString());
-        this.rect.setAttributeNS(null, 'width', width.toString());
-        this.rect.setAttributeNS(null, 'height', height.toString());
-    }
 
     // Update without onClick -> final box
     update_boxes(x,y,width,height,fill,zIndex){
@@ -32,17 +26,7 @@ class RectangleSVG{
         this.rect.setAttributeNS(null, 'z-index', zIndex);
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
-        //this.rect.setAttributeNS(null,"class", "test1");
     }
-
-    updateText(x,y,text_fill,text_answer, onclick){
-        this.rect.setAttributeNS(null, 'x', x.toString());
-        this.rect.setAttributeNS(null, 'y', y.toString());
-        this.rect.setAttributeNS(null, 'text_fill', '#FF0000')
-        this.rect.textContent = text_answer
-        this.rect.setAttributeNS(null, 'onclick', onclick);
-    }
-
 
     // Update with onClick
     // Allows the users to select a specific questionnaire from the search box
@@ -61,14 +45,12 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"class", "answer_box_borderline");
 
 
-
         if(persistentHighLight){
             this.rect.setAttributeNS(null, "stroke", "darkblue");
             this.rect.setAttributeNS(null, "stroke-width","3.5");
             this.rect.setAttributeNS(null, "fill", "#1E99D6")
             this.rect.setAttributeNS(null, 'text-fill', "#FFFFFF")
         }
-        //this.rect.setAttributeNS(null,"className", "answer_box_borderline");
     }
 
 
@@ -83,39 +65,6 @@ class RectangleSVG{
         this.rect.setAttributeNS(null, 'text-fill', "#FFFFFF")
     }
 
-    /*
-    update_text(){
-        //console.log("This will store the highlight based on the user selection")
-        //this.rect.setAttributeNS(null, "stroke", "darkblue");
-        //this.rect.setAttributeNS(null, "stroke-width","3.5");
-        this.rect.setAttributeNS(null, "fill", "#1E99D6")
-        this.rect.setAttributeNS(null, 'text-fill', "#FFFFFF")
-        this.rect.setAttributeNS(null, 'text_color', "#FF0000")
-        this.rect.setAttributeNS(null, 'text', 'yes')
-    }*/
-
-
-    // Allows the resizing of the boxes containing the questions
-    resize(x,y,width,height,fill,zIndex){
-        this.rect.setAttributeNS(null, 'x', x.toString());
-        this.rect.setAttributeNS(null, 'y', y.toString());
-        this.rect.setAttributeNS(null, 'height', height.toString());
-        this.rect.setAttributeNS(null, 'width', width.toString());
-        this.rect.setAttributeNS(null, 'fill', fill);
-        this.rect.setAttributeNS(null, 'z-index', zIndex);
-    }
-
-    remove(){
-        this.rect.setAttributeNS(null, 'x', "0");
-        this.rect.setAttributeNS(null, 'y', "0");
-        this.rect.setAttributeNS(null, 'height',"0");
-        this.rect.setAttributeNS(null, 'width', "0");
-        this.rect.setAttributeNS(null, 'fill', "0");
-        this.rect.setAttributeNS(null, 'z-index', "0");
-        this.rect  = null
-    }
-
-
     // Will highlight the box when it is clicked by the user
     highlight(){
         this.rect.setAttributeNS(null,"stroke", "blue");
@@ -126,6 +75,5 @@ class RectangleSVG{
         this.rect.setAttributeNS(null,"stroke", "#707070");
         this.rect.setAttributeNS(null,"stroke-width", "0.5");
     }
-
 
 }

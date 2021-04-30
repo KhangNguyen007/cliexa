@@ -12,7 +12,7 @@
 
 
     <div class="topPanel" id="topPanel">
-        <a href="/"><img src="cliexa-logo.png" alt="test" width="150" height="75"></a>
+        <a href="/"><img src="cliexa-logo.png" alt="cliexa" width="150" height="75"></a>
         <div class="progress" style="position:absolute;width:50%;right:10%;bottom:14px">
             <div class="progress-bar" id="progress-bar" role="progressbar" style="width: 0;" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
@@ -307,7 +307,7 @@
         $("#DAST-10").css("height", "25%");
     });
 
-
+    //Switch from off focus mode to focus mode and vice versa
     function switchOnOff(){
         if($("#on-off").html().includes("Off")){
             $("#message").html("You entered focus mode");
@@ -329,6 +329,7 @@
             //You exit draggable mode
         }
     }
+    //Switch from off pan mode to on pan mode and vice versa
     function panOnOff(){
         if($("#pan-on-off").html().includes("Off")){
             $("#panMessage").html("You entered pan mode");
@@ -349,20 +350,17 @@
 
     let realZoom = 1
     function zoomIn(){
-        var svg = document.getElementById('svg')
         realZoom = realZoom + 0.06648778915
         realZoom = Math.min(1,realZoom)
         panZoom.zoomAtPoint(realZoom,{x:offsetX + $('#mainPanel').width()/2,y:$('#mainPanel').height()/2})
-        console.log(realZoom)
     }
     function zoomOut(){
-        var svg = document.getElementById('svg')
         realZoom -= 0.06648778915
         realZoom = Math.max(0.1,realZoom)
         panZoom.zoomAtPoint(realZoom,{x:offsetX + $('#mainPanel').width()/2,y:$('#mainPanel').height()/2})
-        console.log(realZoom)
 
     }
+
     function hideMessage(){
         $(".draggable-mode").hide()
     }

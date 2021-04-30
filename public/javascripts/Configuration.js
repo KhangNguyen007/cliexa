@@ -1,22 +1,14 @@
 /*
-Configuration class will make change to the following:
-Position of scroller
-
+Configuration class will update/change and manage to the following:
+- Scale zoom in / zoom out
+- Update question box position
+- Update Progress Bar
+- Update mode
+- Change main panel size
  */
 
-// an array of objects that define different rectangles
-
-//Rects format example
-// x: 50,
-// y: 50,
-//             width: 100,
-//             height: 100,
-//             fill: "#444444",
-//             isDragging: false,
-//             title:  $(this).html()
 class Configuration {
     constructor() {
-        this.ctrlkey = false
         this.prev = [] //To keep track of the question id
         this.rects = [];
         this.rectsSVG = [];
@@ -50,7 +42,14 @@ class Configuration {
         this.update_progress = 0
         this.level = [0]
         this.CPT_Detail_Buffer = 0
-        //this.progress_bar = 0
+        this.index = -1
+    }
+
+    setIndex(index){
+        this.index = index
+    }
+    getIndex(){
+        return this.index
     }
 
     updateCPTDetailBuffer(CPT_Detail_Buffer){
@@ -92,7 +91,6 @@ class Configuration {
     }
     popCurrentLevel(){
        this.level.pop()
-        console.log("This level:",this.level)
     }
     setMainPanel(width, height){
         $('#mainPanel').scrollLeft(width);

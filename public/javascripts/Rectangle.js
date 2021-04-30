@@ -1,5 +1,7 @@
 /*
-
+Rectangle class will update/change and manage to the following:
+- setter/getter CPT code
+- setter/getter CPT description
  */
 
 // Defaults all the box created for simplicity
@@ -17,8 +19,9 @@ class Rectangle{
         this.id = id
         this.cpt_code = null
         this.cpt_detail = null
-        this.answer = null
+
     }
+
     setCPT_Code(cpt_code){
         this.cpt_code = cpt_code
     }
@@ -31,19 +34,5 @@ class Rectangle{
     getCPT_Description(){
         return this.cpt_detail
     }
-    create_box(x,y,width,height){
-        this.x = x
-        this.y = y
-        this.width = width
-        this.height = height
-    }
-    getWidth(){
-        return this.width
-    }
-    setAnswer(answer){
-        this.answer = answer
-    }
-    getAnswer(){
-        return this.answer
-    }
+
 }

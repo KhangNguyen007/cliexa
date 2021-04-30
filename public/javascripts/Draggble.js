@@ -1,5 +1,5 @@
 /*
-Description: Draggble is a collection of functions to move/scale/translate object in SVG
+Description: Draggble is a collection of functions to move/drag/highlight question box in SVG
 Author: Khang Nguyen
  */
 class Draggble {
@@ -13,6 +13,7 @@ class Draggble {
         this.rectY = 0
     }
 
+
     // handle mousedown events
     myDown(e, svg) {
         // tell the browser we're handling this mouse event
@@ -20,6 +21,7 @@ class Draggble {
         let rectsSVG = config.getRectSVG()
         let rects = config.getRects()
         let scale_and_translate = config.getScaleTranslate()
+        let selected = {boolean: false,index:-1}
         // get the current mouse position
         var mx = Math.floor((e.clientX - ctx.left - scale_and_translate.translateX) / scale_and_translate.x_scale);
         var my = Math.floor((e.clientY - ctx.top - scale_and_translate.translateY) / scale_and_translate.y_scale);
@@ -38,9 +40,11 @@ class Draggble {
                 this.index = i
                 r.isDragging = true;
                 rectsSVG[i].highlight()
+                selected = {isSelected: true,index: i}
                 break
             } else {
                 rectsSVG[i].offHighlight()
+                selected = {isSelected: false,index: -1}
             }
         }
         if (this.dragok === false) {
@@ -56,6 +60,9 @@ class Draggble {
         // save the current mouse position
         this.startX = mx;
         this.startY = my;
+        if(selected.isSelected){
+            config.setIndex(selected.index)
+        }
     }
 
     // handle mouseup events
@@ -141,7 +148,6 @@ class Draggble {
             var dx = mx - this.startX;
             var dy = my - this.startY;
 
-            console.log("different:",dx,dy)
             //current mouse on the 4/4 quarter
             if (this.startX <= mx && this.startY <= my) {
                 selectedRectangle.update_boxes(this.startX.toString(), this.startY.toString(), dx.toString(), dy.toString(), "#FFC433", '1')
@@ -171,11 +177,10 @@ class Draggble {
     //Handle when wheeling the mouse
     //Update relative scale and translate in SVG
     myWheel(e,panZoom){
-
         let value = ($('.svg-pan-zoom_viewport').css('transform'));
         let matrix = value.substring(value.lastIndexOf("(") + 1, value.lastIndexOf(")")).split(',')
         config.setScaleTranslate(matrix[0],matrix[3],matrix[4],matrix[5])
-        realZoom =panZoom.getSizes().realZoom
+        realZoom = panZoom.getSizes().realZoom
      }
 
 }

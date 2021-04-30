@@ -1,5 +1,8 @@
+/*
 
-// Contains the two questionnaires given to us by Cliexa.
+Questionaire file will be responsible for add or remove questionaire in this file.
+
+ */
 let data =[
     // Smoking questionnaire (Smoking)
     {id:0,q:"Are you a current smoker?",yes:1,no:16}, // The starting code for smoking
@@ -77,4 +80,3 @@ let data =[
     {id:59,q:"We are finalizing your result for the drug assessment.",loading:48}
 ]
 
-// Call from search question
