@@ -5,7 +5,7 @@ Cliexa's Compliance Algorithm is a medical assessment tool which helps the user 
 
 To start the application in localhost:
 + Open your terminal or command prompt.
-+ Enter the path to Cliexa's directory that contains the source code. Once in the directory, run the following commands,
++ Open up a directory and enter the following commands:
 + git clone https://github.com/KhangNguyen007/cliexa.git <gihthublink>
 + npm install
 + npm start
