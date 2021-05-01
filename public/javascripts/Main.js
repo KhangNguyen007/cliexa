@@ -15,7 +15,7 @@ let CCM_PHQ_Boolean = false
 let save_prev = 0
 
 function populateRec(answer){
-    if(config.getIndex() === -1 || config.getIndex()  === config.getRects().length -1 ) {
+    {
         let index, title, progress_bar
         let Qualified_CPT
         let NotQualified_CPT = "You are not qualified for a CPT Code."
@@ -551,7 +551,7 @@ class Main{
 
     // Update the final box.
     insertTheFinalBox(title,cptcode_,cpt_description){
-        if(config.getIndex() === -1 || config.getIndex()  === config.getRects().length -1 ) {
+       {
             let width = Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
             let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
             let shape_width = width - 0.1 * width
@@ -590,7 +590,7 @@ class Main{
         // Sets up the size of the rectangle
         //Get the index back
 
-        if(config.getIndex() === -1 || config.getIndex()  === config.getRects().length -1 ) {
+       {
 
             //Get in here")
             let width = Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
