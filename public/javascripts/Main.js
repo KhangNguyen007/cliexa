@@ -93,7 +93,7 @@ function populateRec(answer){
             //console.log("INDEX:", index)
         } else { // If the user selects no, go to the next question corresponding to no
             index = data[config.getQuestionPosition()].no
-            console.log("NEW_INDEX:", index)
+            //console.log("NEW_INDEX:", index)
             if (index === undefined) {
                 index = data[config.getQuestionPosition()].goto
             }
@@ -162,7 +162,11 @@ function populateRec(answer){
             //console.log("Current level:",config.getCurrentLevel())
             $('#progress-bar').width(config.getCurrentLevel() + '%')
             $('#progress-bar').text(config.getCurrentLevel() + '%')
-            if (score > 4) {
+
+            // Gets the qualification for the assessment from configuration.js
+            let qualified_smoking = config.getSmokingQualification()
+            //console.log("Smoking",qualified_smoking)
+            if (score > qualified_smoking) {
                 main.insertTheFinalBox(title, Qualified_CPT, cptDetail)
             } else {
                 main.insertTheFinalBox(title, NotQualified_CPT, noCPT)
@@ -193,7 +197,9 @@ function populateRec(answer){
             $('#progress-bar').width(config.getCurrentLevel() + '%')
             $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-            if (score > 3) {
+            // Gets the qualification for the assessment from configuration.js
+            let qualified_ccm = config.getCCMQualification()
+            if (score > qualified_ccm) {
                 main.insertTheFinalBox(title, Qualified_CPT, cptDetail)
             } else {
                 main.insertTheFinalBox(title, NotQualified_CPT, noCPT)
@@ -222,7 +228,9 @@ function populateRec(answer){
             $('#progress-bar').width(config.getCurrentLevel() + '%')
             $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-            if (score > 4) {
+            // Gets the qualification for the assessment from configuration.js
+            let qualified_depression = config.getDepressionQualification()
+            if (score > qualified_depression) {
                 main.insertTheFinalBox(title, Qualified_CPT, cptDetail)
             } else {
                 main.insertTheFinalBox(title, NotQualified_CPT, noCPT)
@@ -252,7 +260,9 @@ function populateRec(answer){
             $('#progress-bar').width(config.getCurrentLevel() + '%')
             $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-            if (score > 4) {
+            // Gets the qualification for the assessment from configuration.js
+            let qualified_anxiety = config.getAnxietyQualification()
+            if (score > qualified_anxiety) {
                 main.insertTheFinalBox(title, Qualified_CPT, cptDetail)
             } else {
                 main.insertTheFinalBox(title, NotQualified_CPT, noCPT)
@@ -284,7 +294,9 @@ function populateRec(answer){
             $('#progress-bar').width(config.getCurrentLevel() + '%')
             $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-            if (score > 5) {
+            // Gets the qualification for the assessment from configuration.js
+            let qualified_alcohol = config.getAlcoholQualification()
+            if (score > qualified_alcohol) {
                 main.insertTheFinalBox(title, Qualified_CPT, cptDetail)
             } else {
                 main.insertTheFinalBox(title, NotQualified_CPT, noCPT)
@@ -313,7 +325,9 @@ function populateRec(answer){
             $('#progress-bar').width(config.getCurrentLevel() + '%')
             $('#progress-bar').text(config.getCurrentLevel() + '%')
 
-            if (score > 5) {
+            // Gets the qualification for the assessment from configuration.js
+            let qualified_drug = config.getDrugQualification()
+            if (score > qualified_drug) {
                 main.insertTheFinalBox(title, Qualified_CPT, cptDetail)
             } else {
                 main.insertTheFinalBox(title, NotQualified_CPT, noCPT)
@@ -336,7 +350,7 @@ function populateRec(answer){
                     if (index == 16 && CCM_Assessment == true) {
                         progress_bar = config.getCurrentLevel() + config.update_progress
                         config.setLevel(progress_bar)
-                        console.log("THIS IS VERY TRUE")
+                        //console.log("THIS IS VERY TRUE")
                     } else {
                         progress_bar = 0
                         config.setLevel(progress_bar)
@@ -365,8 +379,8 @@ function populateRec(answer){
             }
         }
         config.updateQuestionPosition(index)
-        console.log("Question link:", config.getQuestionPosition())
-        console.log("CCM:", CCM_Assessment)
+        //console.log("Question link:", config.getQuestionPosition())
+        //console.log("CCM:", CCM_Assessment)
     }
 }
 
@@ -526,7 +540,7 @@ class Main{
 
                 $('#mainPanel').scrollLeft(left + $('#mainPanel').width());
                 offsetX = $('#mainPanel').scrollLeft()
-                console.log("Scroll left:",$('#mainPanel').scrollLeft())
+                //console.log("Scroll left:",$('#mainPanel').scrollLeft())
             }
             else if(slide === 1){
                 $('#mainPanel').scrollLeft(0);
@@ -578,7 +592,7 @@ class Main{
 
         if(config.getIndex() === -1 || config.getIndex()  === config.getRects().length -1 ) {
 
-            console.log("Get in here")
+            //Get in here")
             let width = Math.floor(config.getMainPanelWidth() - $("#leftPanel").width() - $("#rightPanel").width());
             let height = Math.floor(config.getMainPanelHeight() - $("#topPanel").height());
             let x = 0.05 * width

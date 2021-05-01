@@ -43,7 +43,47 @@ class Configuration {
         this.level = [0]
         this.CPT_Detail_Buffer = 0
         this.index = -1
+
+
+        // Below will contain the amount of yes answers needed to be qualified for treatment
+        // This will vary depending on the assessment.
+        this.qualified_smoking = 4
+        this.qualified_ccm = 3
+        this.qualified_anxiety = 4
+        this.qualified_alcohol = 4
+        this.qualified_depression = 5
+        this.qualified_drug = 5
+
+        // This can be easily modified and added for future questionnaires
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////// Gets the amount of yes' needed to qualify for treatment ///////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
+    getSmokingQualification(qualified_smoking){
+        return this.qualified_smoking
+    }
+    getCCMQualification(qualified_ccm){
+        return this.qualified_ccm
+    }
+    getAnxietyQualification(qualified_anxiety){
+        return this.qualified_anxiety
+    }
+    getAlcoholQualification(qualified_alcohol){
+        return this.qualified_alcohol
+    }
+    getDepressionQualification(qualified_depression){
+        return this.qualified_depression
+    }
+    getDrugQualification(qualified_drug){
+        return this.qualified_drug
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+    ////////////// Gets the amount of yes' needed to qualify for treatment ///////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////////////
+
 
     setIndex(index){
         this.index = index
